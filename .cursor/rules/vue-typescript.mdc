@@ -1,0 +1,68 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Vue & TypeScript Standards
+
+## Component Structure
+- Always use `<script setup lang="ts">` for all components
+- Follow multi-word component naming convention
+- Group components by feature/domain
+- Keep components focused and single-responsibility
+
+## TypeScript Usage
+- Enable strict mode in all TypeScript files
+- Never use `any` or type casting with `as any`
+- Always type props and emits properly
+- Use interfaces for object shapes
+- Type all ref() when type cannot be inferred
+
+## Composition API Patterns
+- Use composables for reusable logic
+- Prefer ref() over reactive()
+- Use computed() for derived state
+- Utilize provide/inject for deep prop passing
+- Use defineModel() for v-model bindings
+
+@example-component.vue
+```vue
+<script setup lang="ts">
+interface User {
+  id: string
+  name: string
+  email: string
+}
+
+// Props with proper typing
+const props = defineProps<{
+  user: User
+}>()
+
+// Typed emits
+const emit = defineEmits<{
+  (e: 'update', user: User): void
+  (e: 'delete', id: string): void
+}>()
+
+// Properly typed refs
+const isLoading = ref<boolean>(false)
+const userData = ref<User | null>(null)
+
+// Computed properties
+const userDisplay = computed(() => 
+  userData.value ? `${userData.value.name} (${userData.value.email})` : 'No user'
+)
+</script>
+
+<template>
+  <div>
+    <h1>{{ userDisplay }}</h1>
+    <UButton 
+      :loading="isLoading"
+      @click="emit('update', props.user)"
+    >
+      Update User
+    </UButton>
+  </div>
+</template>

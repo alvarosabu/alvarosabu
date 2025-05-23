@@ -1,0 +1,48 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# VueUse Integration Standards
+
+## Preferred Composables
+- Use `useStorage()` for persistent state management
+- Use `useMediaQuery()` for responsive design
+- Use `useDark()` for dark mode implementation
+- Use `useElementSize()` for dynamic measurements
+- Import directly from @vueuse/core
+
+## Implementation Guidelines
+- Always handle cleanup in components when necessary
+- Use proper typing with VueUse composables
+- Prefer VueUse solutions over custom implementations
+
+@example-dark-mode.vue
+```vue
+<script setup lang="ts">
+import { useDark, useToggle } from '@vueuse/core'
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+
+// Persistent storage example
+const settings = useStorage('user-settings', {
+  theme: 'auto',
+  fontSize: 16
+})
+
+// Responsive design example
+const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+</script>
+
+<template>
+  <div>
+    <UButton @click="toggleDark()">
+      Toggle Dark Mode
+    </UButton>
+    
+    <div v-if="isLargeScreen">
+      Large Screen Content
+    </div>
+  </div>
+</template>

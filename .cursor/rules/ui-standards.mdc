@@ -1,0 +1,52 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# UI Standards
+
+## Components
+- Always use Nuxt UI components (@nuxt/ui) when available for consistent UI
+- Example of correct usage:
+  ```vue
+  <UButton color="primary">Click me</UButton>
+  ```
+- Avoid using raw HTML elements when Nuxt UI components are available
+- Never create custom components for functionality that Nuxt UI already provides
+
+## Theming
+- Configure all global UI settings in app.config.ts
+- Use the following color palette:
+  - primary: Main brand color
+  - neutral: Text and backgrounds
+  - success/info/warning/error: For states
+- Use --ui-radius CSS variable for consistent border radius
+- Follow Nuxt UI spacing scale
+
+## Styling
+- Prefer using ui prop for component customization
+- Use Nuxt UI slots for layout customization
+- Avoid direct CSS unless absolutely necessary
+- Always support dark mode using Nuxt UI's built-in system
+
+@example-component.vue
+```vue
+<script setup lang="ts">
+const props = defineProps<{
+  title: string
+}>()
+</script>
+
+<template>
+  <UCard>
+    <UButton
+      color="primary"
+      :ui="{ 
+        base: 'font-semibold',
+        padding: 'px-4 py-2'
+      }"
+    >
+      {{ title }}
+    </UButton>
+  </UCard>
+</template>
