@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { motion } from 'motion-v'
+
 useHead({
   title: 'Blog - AlvaroSabu',
   htmlAttrs: {
@@ -45,26 +47,73 @@ const articles = await useAsyncStoryblokStories({
   is_startpage: false,
   resolve_relations: 'article.category',
 })
+const list = {
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.3, // Stagger children by .3 seconds
+    },
+  },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: "afterChildren",
+    },
+  },
+}
 
+const item = {
+  visible: { opacity: 1, x: 0 },
+  hidden: { opacity: 0, x: -100 },
+}
 </script>
 <template>
   <UContainer>
-    <h1 class="text-4xl font-bold font-display mt-8 mb-16 md:mt-24 md:mb-32 flex items-center gap-2">{{ story?.content?.title }} <UBadge v-if="config.public.storyblokVersion === 'draft'" :label="config.public.storyblokVersion" color="primary" variant="subtle" class="mb-2" size="sm" /></h1>
-    <section v-if="articles" class="flex flex-col gap-16">
-      <template v-for="article in articles" :key="article.content.uuid">
-        <NuxtLink class="flex flex-col md:flex-row gap-4" :to="`/blog/${article.slug}`">
-          <NuxtImg :src="article.content.media.filename" class="w-full md:w-1/6 aspect-16/9 md:aspect-1/1 object-cover rounded" />
-          <div>
-            <UBadge :label="article.content.category.name" color="primary" variant="subtle" class="mb-2" size="sm" />
-            <h2 class="text-2xl font-bold mb-4">{{ article.content.title }}</h2>
-            <p class="text-gray-500 max-w-prose">{{ article.content.excerpt }}</p>
-            <footer class="flex justify-between items-center mt-4">
-              <NuxtTime :datetime="article.published_at" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" />
-            </footer>
-          </div>
-        </NuxtLink>
-        <USeparator />
+    <motion.h1
+      class="text-4xl font-bold font-display mt-8 mb-16 md:mt-24 md:mb-32 flex items-center gap-2"
+      :initial="{ opacity: 0, y: 100 }"
+      :animate="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.5 }"
+    >
+      {{ story?.content?.title }} <UBadge v-if="config.public.storyblokVersion === 'draft'" :label="config.public.storyblokVersion" color="primary" variant="subtle" class="mb-2" size="sm" />
+    </motion.h1>
+    <section v-if="articles" >
+      <Motion
+        initial="hidden"
+        class="flex flex-col gap-16"
+        while-in-view="visible"
+        :variants="list">
+        <section class="flex flex-col gap-12">
+          <Motion v-for="article in articles" :key="article.content.uuid" :variants="item">
+            <NuxtLink :to="`/blog/${article.slug}`">
+              <article class="flex flex-col md:flex-row gap-4 mb-12">
+                <NuxtImg :src="article.content.media.filename" class="w-full md:w-1/6 aspect-16/9 md:aspect-1/1 object-cover rounded" />
+                <div>
+                  <UBadge :label="article.content.category.name" color="primary" variant="subtle" class="mb-2" size="sm" />
+                  <h2 class="text-2xl font-bold mb-4">{{ article.content.title }}</h2>
+                  <p class="text-gray-500 max-w-prose">{{ article.content.excerpt }}</p>
+                  <footer class="flex justify-between items-center mt-4">
+                    <NuxtTime :datetime="article.published_at" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" />
+                  </footer>
+                </div>
+              </article>
+            </NuxtLink>
+            <USeparator />
+          </Motion>
+        </section>
+      </Motion>
+ 
+     <!--  <Motion
+    initial="hidden"
+    class="flex flex-col gap-16"
+    while-in-view="visible"
+    :variants="list">
+        <template v-for="article in articles" :key="article.content.uuid">
+        
       </template>
+      </Motion> -->
+      
     </section>
   </UContainer>
 </template>

@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@tresjs/nuxt',
     '@storyblok/nuxt',
+    'motion-v/nuxt',
     'nuxt-ssr-api-logger'
   ],
   storyblok: {

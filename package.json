@@ -19,6 +19,7 @@
     "@tresjs/nuxt": "https://pkg.pr.new/@tresjs/nuxt@59b56e4",
     "@tresjs/post-processing": "^2.4.0",
     "eslint": "^9.0.0",
+    "motion-v": "^1.1.1",
     "nuxt": "^3.17.4",
     "nuxt-ssr-api-logger": "1.4.0",
     "tailwindcss": "^4.1.7",
