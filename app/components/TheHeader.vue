@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { useScroll } from '@vueuse/core'
+import { useRoute } from 'vue-router'
 
 const items = ref<NavigationMenuItem[]>([
   {
@@ -17,10 +19,19 @@ const items = ref<NavigationMenuItem[]>([
 ])
 
 const isMobileMenuOpen = ref(false)
+
+// Track scroll position
+const { y } = useScroll(window)
+const route = useRoute()
+const hasScrolled = computed(() => y.value > 0)
+const shouldShowBackground = computed(() => hasScrolled.value && route.path !== '/')
 </script>
 
 <template>
-  <header class="flex h-[72px] fixed top-0 left-0 right-0 z-50" >
+  <header 
+    class="flex h-(--ui-header-height) fixed top-0 left-0 right-0 z-50 sticky transition-colors duration-200 transition-all duration-300"
+    :class="{ 'bg-(--ui-bg)/80 backdrop-blur-lg': shouldShowBackground, 'bg-transparent': !shouldShowBackground }"
+  >
     <UContainer class="flex items-center justify-between">
       <TheLogo />
       <UNavigationMenu :items="items" class="w-full justify-end hidden md:flex" orientation="horizontal" />

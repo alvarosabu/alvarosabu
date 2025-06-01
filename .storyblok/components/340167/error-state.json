@@ -1,0 +1,37 @@
+{
+  "name": "error-state",
+  "display_name": "Error State",
+  "description": null,
+  "created_at": "2025-05-23T15:55:18.040Z",
+  "updated_at": "2025-05-23T15:55:18.040Z",
+  "id": 7380345,
+  "schema": {
+    "title": {
+      "type": "text",
+      "translatable": true,
+      "default_value": "Oops",
+      "id": "aWBQy2htSNWhOoNqww0XPw"
+    },
+    "message": {
+      "type": "richtext",
+      "translatable": true,
+      "display_name": "Content",
+      "id": "OFkpnJvaQWSdnjr3HrR7XA"
+    }
+  },
+  "image": null,
+  "preview_field": null,
+  "is_root": false,
+  "preview_tmpl": null,
+  "is_nestable": true,
+  "all_presets": [],
+  "preset_id": null,
+  "real_name": "Error State",
+  "component_group_uuid": "c7b731ff-7b01-4c89-8edd-0ba38caea1b1",
+  "color": null,
+  "icon": null,
+  "internal_tags_list": [],
+  "internal_tag_ids": [],
+  "content_type_asset_preview": null,
+  "metadata": {}
+}

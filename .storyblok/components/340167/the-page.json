@@ -1,0 +1,40 @@
+{
+  "name": "the-page",
+  "display_name": "Page",
+  "description": null,
+  "created_at": "2025-05-23T15:55:18.095Z",
+  "updated_at": "2025-05-23T15:55:18.095Z",
+  "id": 7380346,
+  "schema": {
+    "body": {
+      "type": "bloks",
+      "pos": 1,
+      "id": "kr0zIvwYRGq038_57zNzcA"
+    },
+    "order": {
+      "type": "number",
+      "required": false,
+      "pos": 2,
+      "id": "s_Myl_LYRtWodwyoCBXqxg"
+    },
+    "model": {
+      "type": "asset",
+      "id": "vfuZquAaSDSh78NMRPAceQ"
+    }
+  },
+  "image": null,
+  "preview_field": null,
+  "is_root": true,
+  "preview_tmpl": null,
+  "is_nestable": false,
+  "all_presets": [],
+  "preset_id": null,
+  "real_name": "Page",
+  "component_group_uuid": "c3c4d72d-791b-412d-b544-4e9d840132aa",
+  "color": null,
+  "icon": null,
+  "internal_tags_list": [],
+  "internal_tag_ids": [],
+  "content_type_asset_preview": null,
+  "metadata": {}
+}

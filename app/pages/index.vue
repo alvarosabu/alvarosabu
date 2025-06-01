@@ -1,16 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const story = await useStoryblok('home', { version: 'draft' });
+</script>
 
 <template>
   <div>
-    <h1 class="text-4xl font-bold font-display">
-      Hello, I'm Alvaro
-    </h1>
-    <p class="mt-4 mb-4">
-      I'm a creative engineer.
-    </p>
-    <UButton variant="subtle" color="primary">
-      Click me
-    </UButton>
+    <TresCanvas window-size alpha :premultiplied-alpha="false">
+      <HomeExperience />
+    </TresCanvas>
+    <StoryblokComponent v-if="story" :blok="story.content" />
   </div>
 </template>
 

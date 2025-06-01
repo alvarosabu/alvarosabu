@@ -1,0 +1,100 @@
+{
+  "name": "article",
+  "display_name": "Blog Article",
+  "description": null,
+  "created_at": "2025-05-23T15:55:18.140Z",
+  "updated_at": "2025-05-23T15:55:18.140Z",
+  "id": 7380350,
+  "schema": {
+    "title": {
+      "type": "text",
+      "translatable": true,
+      "pos": 0,
+      "id": "ol7usFGATdWhwoOrjIqmdw"
+    },
+    "content": {
+      "type": "richtext",
+      "translatable": true,
+      "customize_toolbar": true,
+      "toolbar": [
+        "bold",
+        "inlinecode",
+        "code",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "list",
+        "olist",
+        "link",
+        "image",
+        "blok",
+        "paste",
+        "quote",
+        "hrule",
+        "color",
+        "paste-action"
+      ],
+      "pos": 1,
+      "restrict_type": "groups",
+      "restrict_components": true,
+      "component_group_whitelist": [
+        "df0a1da3-9d9d-4e88-a402-538d1a8d2297",
+        "c7b731ff-7b01-4c89-8edd-0ba38caea1b1"
+      ],
+      "id": "d6sidAXnRCqxR_D_CS_EQg"
+    },
+    "media": {
+      "type": "asset",
+      "filetypes": [
+        "images"
+      ],
+      "pos": 2,
+      "asset_folder_id": 176589,
+      "id": "IRhMNKCcTrW_wRwMp7DyyA"
+    },
+    "excerpt": {
+      "type": "textarea",
+      "translatable": true,
+      "max_length": 250,
+      "pos": 3,
+      "id": "fojJsE9JQEG7bMPhgDolhw"
+    },
+    "category": {
+      "type": "option",
+      "use_uuid": true,
+      "pos": 4,
+      "source": "internal_stories",
+      "filter_content_type": [
+        "category"
+      ],
+      "id": "Ok1akDNERmiIxfBZVX69oQ"
+    },
+    "tab-747fe110-178e-4e64-b713-5720a1473e20": {
+      "display_name": "Content",
+      "keys": [
+        "content"
+      ],
+      "pos": 6,
+      "type": "tab",
+      "id": "dH_hEBeOTmS3E1cgoUc-IA"
+    }
+  },
+  "image": null,
+  "preview_field": null,
+  "is_root": true,
+  "preview_tmpl": null,
+  "is_nestable": false,
+  "all_presets": [],
+  "preset_id": null,
+  "real_name": "Blog Article",
+  "component_group_uuid": "c3c4d72d-791b-412d-b544-4e9d840132aa",
+  "color": "#ffac00",
+  "icon": "block-text-img-l",
+  "internal_tags_list": [],
+  "internal_tag_ids": [],
+  "content_type_asset_preview": null,
+  "metadata": {}
+}

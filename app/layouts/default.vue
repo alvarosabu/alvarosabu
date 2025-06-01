@@ -1,15 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="min-h-screen noise noise-subtle pt-[72px]">
+    <div class="min-h-screen noise noise-subtle">
     <!-- Header Component -->
     <TheHeader />
     
     <!-- Main Content -->
-    <main class="py-8">
-      <UContainer>
-        <slot />
-      </UContainer>
+    <main>
+      <slot />
     </main>
   </div>
 </template>

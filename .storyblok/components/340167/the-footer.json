@@ -1,0 +1,51 @@
+{
+  "name": "the-footer",
+  "display_name": "The Footer",
+  "description": null,
+  "created_at": "2025-05-23T15:55:18.007Z",
+  "updated_at": "2025-05-23T15:55:18.007Z",
+  "id": 7380342,
+  "schema": {
+    "socialLinks": {
+      "type": "bloks",
+      "restrict_components": true,
+      "component_whitelist": [
+        "social-link"
+      ],
+      "maximum": "5",
+      "pos": 0,
+      "id": "heQTqEM8Reau9N5_C9GQpA"
+    },
+    "author": {
+      "type": "text",
+      "default_value": "By Alvaro Saburido",
+      "pos": 1,
+      "id": "Rj-syr38QjWBLiRItWjRGA"
+    },
+    "years": {
+      "type": "text",
+      "description": "2022",
+      "pos": 3,
+      "id": "cJWK9p01Qimrgg-X1cwuaA"
+    },
+    "text": {
+      "type": "richtext",
+      "id": "e5lvu_BIQSWMKxrzmkt6UQ"
+    }
+  },
+  "image": null,
+  "preview_field": null,
+  "is_root": false,
+  "preview_tmpl": null,
+  "is_nestable": true,
+  "all_presets": [],
+  "preset_id": null,
+  "real_name": "The Footer",
+  "component_group_uuid": "c7b731ff-7b01-4c89-8edd-0ba38caea1b1",
+  "color": null,
+  "icon": null,
+  "internal_tags_list": [],
+  "internal_tag_ids": [],
+  "content_type_asset_preview": null,
+  "metadata": {}
+}

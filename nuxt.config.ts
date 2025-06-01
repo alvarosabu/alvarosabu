@@ -13,6 +13,24 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/icon',
     '@nuxt/image',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@tresjs/nuxt',
+    '@storyblok/nuxt',
+    'nuxt-ssr-api-logger'
   ],
+  storyblok: {
+    accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
+  },
+  // Enable HTTPS in development
+  devServer: {
+    https: true
+  },
+  // Runtime config with environment variables
+  runtimeConfig: {
+    // Private keys are only available on the server
+    storyblokAccessToken: process.env.STORYBLOK_ACCESS_TOKEN,
+    public: {
+      storyblokVersion: process.env.STORYBLOK_VERSION || 'published',
+    }
+  },
 })

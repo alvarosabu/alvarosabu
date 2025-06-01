@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Content Types",
+    "id": 557696,
+    "uuid": "c3c4d72d-791b-412d-b544-4e9d840132aa",
+    "parent_id": null,
+    "parent_uuid": null
+  },
+  {
+    "name": "Embedables",
+    "id": 557697,
+    "uuid": "df0a1da3-9d9d-4e88-a402-538d1a8d2297",
+    "parent_id": null,
+    "parent_uuid": null
+  },
+  {
+    "name": "Global",
+    "id": 557695,
+    "uuid": "c7b731ff-7b01-4c89-8edd-0ba38caea1b1",
+    "parent_id": null,
+    "parent_uuid": null
+  },
+  {
+    "name": "Home",
+    "id": 557694,
+    "uuid": "b7c11712-34e4-4656-a0f1-eaf858061638",
+    "parent_id": null,
+    "parent_uuid": null
+  }
+]

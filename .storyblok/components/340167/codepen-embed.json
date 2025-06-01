@@ -1,0 +1,35 @@
+{
+  "name": "codepen-embed",
+  "display_name": null,
+  "description": null,
+  "created_at": "2025-05-23T15:55:18.205Z",
+  "updated_at": "2025-05-23T15:55:18.205Z",
+  "id": 7380352,
+  "schema": {
+    "penId": {
+      "type": "text",
+      "required": true,
+      "id": "g69JkZC3RL2alEFoxekUig"
+    },
+    "author": {
+      "type": "text",
+      "required": true,
+      "id": "_TpkS_GoTR6e2Kpoa2JRMQ"
+    }
+  },
+  "image": null,
+  "preview_field": null,
+  "is_root": false,
+  "preview_tmpl": null,
+  "is_nestable": true,
+  "all_presets": [],
+  "preset_id": null,
+  "real_name": "codepen-embed",
+  "component_group_uuid": "df0a1da3-9d9d-4e88-a402-538d1a8d2297",
+  "color": "#1b243f",
+  "icon": null,
+  "internal_tags_list": [],
+  "internal_tag_ids": [],
+  "content_type_asset_preview": null,
+  "metadata": {}
+}

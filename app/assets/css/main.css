@@ -1,9 +1,10 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "@nuxt/ui";
 
 @theme static {
   --font-sans: 'Inter', sans-serif;
-  --font-display: 'Gilroy', sans-serif;
+  --font-display: 'Gilroy', 'Inter', sans-serif;
   --font-mono: 'Fira Code', monospace;
 
   --color-green-50: #F1FCF8;
@@ -16,6 +17,8 @@
   --color-green-700: #1D845F;
   --color-green-800: #145A41;
   --color-green-900: #0B3023;
+
+  --ui-header-height: 72px;
 }
 
 @layer utilities {

@@ -1,0 +1,115 @@
+{
+  "name": "project",
+  "display_name": "Project",
+  "description": null,
+  "created_at": "2025-05-23T15:55:18.117Z",
+  "updated_at": "2025-05-23T15:55:18.117Z",
+  "id": 7380348,
+  "schema": {
+    "title": {
+      "type": "text",
+      "required": true,
+      "translatable": true,
+      "pos": 0,
+      "id": "ZVJ9lWPVT3q0PsuLK1L7Nw"
+    },
+    "media": {
+      "type": "asset",
+      "filetypes": [
+        "images"
+      ],
+      "required": false,
+      "pos": 1,
+      "description": "Project thumbnail",
+      "id": "TKpptA1tR-yVeZPjMesImQ"
+    },
+    "date": {
+      "type": "datetime",
+      "pos": 2,
+      "disable_time": true,
+      "id": "f1fSvGjgTOCgNH2ogHhh3A"
+    },
+    "active": {
+      "type": "boolean",
+      "pos": 3,
+      "display_name": "Still active?",
+      "id": "HhtZMWvRS36leJM975eklw"
+    },
+    "excerpt": {
+      "type": "textarea",
+      "pos": 4,
+      "max_length": 250,
+      "translatable": true,
+      "id": "VdnoKXuCQGiVOnexdnH4HA"
+    },
+    "category": {
+      "type": "option",
+      "source": "internal_stories",
+      "filter_content_type": null,
+      "folder_slug": "categories/",
+      "default_value": "Webdev",
+      "required": true,
+      "pos": 5,
+      "use_uuid": false,
+      "id": "SThh0L_IQp2_HzmpG-xkAQ"
+    },
+    "content": {
+      "type": "richtext",
+      "translatable": true,
+      "rich_markdown": true,
+      "customize_toolbar": true,
+      "pos": 6,
+      "toolbar": [
+        "code",
+        "inlinecode",
+        "bold",
+        "list",
+        "olist",
+        "link",
+        "image",
+        "blok",
+        "paste",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "h1",
+        "quote",
+        "hrule"
+      ],
+      "id": "4exLzs4aTqK-WfSND7j5Gw"
+    },
+    "featured": {
+      "type": "boolean",
+      "pos": 7,
+      "display_name": "Featured",
+      "description": "Is featured project (will be highlighted at the top of the page)",
+      "id": "fYtSdV7vSHO2Enqnby4O4A"
+    },
+    "tab-74577bda-1626-47e0-8f54-22d4dc00cf4c": {
+      "display_name": "Content",
+      "keys": [
+        "content"
+      ],
+      "pos": 8,
+      "type": "tab",
+      "id": "dFd72hYmR-CPVCLU3ADPTA"
+    }
+  },
+  "image": null,
+  "preview_field": null,
+  "is_root": true,
+  "preview_tmpl": null,
+  "is_nestable": false,
+  "all_presets": [],
+  "preset_id": null,
+  "real_name": "Project",
+  "component_group_uuid": "c3c4d72d-791b-412d-b544-4e9d840132aa",
+  "color": "#395ece",
+  "icon": "block-text-img-t-l",
+  "internal_tags_list": [],
+  "internal_tag_ids": [],
+  "content_type_asset_preview": null,
+  "metadata": {}
+}
