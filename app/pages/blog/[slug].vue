@@ -41,7 +41,7 @@ useSeoMeta({
 
 <template>
   <UContainer>
-    <header class="prose mx-auto mb-12">
+    <header class="prose mx-auto mb-12 dark:prose-invert">
       <NuxtLink to="/blog" class="flex items-center gap-2">
         <UIcon name="i-heroicons-arrow-left" />
         Back to blog
@@ -54,7 +54,7 @@ useSeoMeta({
       </div>
       <USeparator />
     </header>
-    <div class="prose mx-auto pb-24">
+    <div class="prose dark:prose-invert mx-auto pb-24">
       <StoryblokRichText v-if="article?.content?.content"  :doc="article?.content.content" />
     </div>
   </UContainer>

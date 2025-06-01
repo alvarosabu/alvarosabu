@@ -25,6 +25,18 @@ const { y } = useScroll(window)
 const route = useRoute()
 const hasScrolled = computed(() => y.value > 0)
 const shouldShowBackground = computed(() => hasScrolled.value && route.path !== '/')
+
+const colorMode = useColorMode()
+
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set(_isDark) {
+    colorMode.preference = _isDark ? 'dark' : 'light'
+  }
+})
+
 </script>
 
 <template>
@@ -34,10 +46,19 @@ const shouldShowBackground = computed(() => hasScrolled.value && route.path !== 
   >
     <UContainer class="flex items-center justify-between">
       <TheLogo />
-      <UNavigationMenu :items="items" class="w-full justify-end hidden md:flex" orientation="horizontal" />
-
+      <div class="flex items-center justify-end gap-2">
+        <UNavigationMenu :items="items" class="w-full justify-end hidden md:flex" orientation="horizontal"/>
+        <ul class="flex items-center gap-2">
+          <li>
+            <UButton icon="i-lucide-github" color="neutral" variant="ghost" to="https://github.com/alvarosabu" target="_blank" />
+          </li>
+          <li v-if="colorMode.preference !== 'system'">
+            <USwitch v-model="isDark" class="cursor-pointer" unchecked-icon="i-lucide-sun" checked-icon="i-lucide-moon" color="neutral" variant="ghost" aria-label="Change site theme" />
+          </li>
+        </ul>
         <UButton icon="i-lucide-menu" color="neutral" variant="ghost" class="md:hidden" @click="isMobileMenuOpen = !isMobileMenuOpen" />
-      </UContainer>
+      </div>
+    </UContainer>
       <Teleport to="body">
         <Transition name="fade">
           <div

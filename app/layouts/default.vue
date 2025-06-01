@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="min-h-screen noise noise-subtle">
+    <div class="min-h-screen noise noise-subtle dark:noise-minimal">
     <!-- Header Component -->
     <TheHeader />
     

@@ -41,9 +41,12 @@
     opacity: 0.5;
   }
 
-  /* Noise variants */
   .noise-subtle::before {
     opacity: 0.3;
+  }
+
+  .dark .noise-subtle::before {
+    opacity: 0.1;
   }
 
   .noise-strong::before {

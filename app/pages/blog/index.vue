@@ -49,7 +49,7 @@ const articles = await useAsyncStoryblokStories({
 </script>
 <template>
   <UContainer>
-    <h1 class="text-4xl font-bold font-display mt-8 mb-16 md:mt-24 md:mb-32">{{ story?.content?.title }} <UBadge v-if="config.public.storyblokVersion === 'draft'" :label="config.public.storyblokVersion" color="primary" variant="subtle" class="mb-2" size="sm" /></h1>
+    <h1 class="text-4xl font-bold font-display mt-8 mb-16 md:mt-24 md:mb-32 flex items-center gap-2">{{ story?.content?.title }} <UBadge v-if="config.public.storyblokVersion === 'draft'" :label="config.public.storyblokVersion" color="primary" variant="subtle" class="mb-2" size="sm" /></h1>
     <section v-if="articles" class="flex flex-col gap-16">
       <template v-for="article in articles" :key="article.content.uuid">
         <NuxtLink class="flex flex-col md:flex-row gap-4" :to="`/blog/${article.slug}`">
