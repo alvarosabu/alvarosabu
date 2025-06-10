@@ -17,14 +17,15 @@ export default defineNuxtConfig({
     '@tresjs/nuxt',
     '@storyblok/nuxt',
     'motion-v/nuxt',
-    'nuxt-ssr-api-logger'
+    'nuxt-ssr-api-logger',
+    'nuxt-shiki',
   ],
   storyblok: {
     accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
   },
   // Enable HTTPS in development
   devServer: {
-    https: true
+    // https: true
   },
   // Runtime config with environment variables
   runtimeConfig: {
@@ -33,5 +34,17 @@ export default defineNuxtConfig({
     public: {
       storyblokVersion: process.env.STORYBLOK_VERSION || 'published',
     }
+  },
+  shiki: {
+    defaultTheme: 'catppuccin-macchiato',
+    bundledLangs: [
+      'typescript',
+      'javascript',
+      'html',
+      'css',
+      'json',
+      'bash',
+      'markdown',
+    ],
   },
 })

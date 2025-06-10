@@ -18,7 +18,7 @@ const resolvers = {
 
 <template>
   <UContainer class="grid grid-cols-1 md:grid-cols-2 items-center justify-center h-screen">
-    <div class="prose">
+    <div class="prose dark:prose-invert">
       <StoryblokRichText 
         v-if="blok.content" 
         class="font-display" 

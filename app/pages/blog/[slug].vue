@@ -55,7 +55,7 @@ useSeoMeta({
       <USeparator />
     </header>
     <div class="prose dark:prose-invert mx-auto pb-24">
-      <StoryblokRichText v-if="article?.content?.content"  :doc="article?.content.content" />
+      <StoryblokEnhancedRichtext v-if="article?.content?.content"  :doc="article?.content.content" />
     </div>
   </UContainer>
 </template>
