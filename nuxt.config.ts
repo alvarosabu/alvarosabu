@@ -19,13 +19,15 @@ export default defineNuxtConfig({
     'motion-v/nuxt',
     'nuxt-ssr-api-logger',
     'nuxt-shiki',
+    '@todde.tv/gltf-type-toolkit',
   ],
   storyblok: {
     accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
   },
   // Enable HTTPS in development
   devServer: {
-    // https: true
+     https: true,
+     port: 2590
   },
   // Runtime config with environment variables
   runtimeConfig: {

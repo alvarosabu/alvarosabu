@@ -41,7 +41,7 @@ const isDark = computed({
 
 <template>
   <header 
-    class="flex h-(--ui-header-height) fixed top-0 left-0 right-0 z-50 sticky transition-colors duration-200 transition-all duration-300"
+    class="flex h-(--ui-header-height) fixed top-0 left-0 right-0 z-50 transition-colors duration-200 transition-all duration-300"
     :class="{ 'bg-(--ui-bg)/80 backdrop-blur-lg': shouldShowBackground, 'bg-transparent': !shouldShowBackground }"
   >
     <UContainer class="flex items-center justify-between">

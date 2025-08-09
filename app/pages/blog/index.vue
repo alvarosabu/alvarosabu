@@ -33,12 +33,16 @@ useSeoMeta({
 
 const config = useRuntimeConfig()
 
-const story = await useAsyncStoryblok(
+const { story } = await useAsyncStoryblok(
   'blog',
   { 
-    version: config.public.storyblokVersion as 'draft' | 'published', 
-    resolve_relations: 'overview.featured_story' },
-  { resolveRelations: 'overview.featured_story' },
+    api: {
+      version: config.public.storyblokVersion as 'draft' | 'published', 
+      resolve_relations: 'overview.featured_story' 
+    },
+    bridge: { resolveRelations: 'overview.featured_story' },
+  },
+  
 )
 
 const articles = await useAsyncStoryblokStories({

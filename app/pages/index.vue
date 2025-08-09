@@ -35,11 +35,11 @@ const story = await useStoryblok('home', { version: 'draft' });
 </script>
 
 <template>
-  <div>
+  <div class="relative">
     <TresCanvas window-size alpha :premultiplied-alpha="false">
       <HomeExperience />
     </TresCanvas>
-    <StoryblokComponent v-if="story" :blok="story.content" />
+    <StoryblokComponent v-if="story" class="absolute top-0 left-0 w-full h-full" :blok="story.content" />
   </div>
 </template>
 

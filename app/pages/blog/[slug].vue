@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import type { useAsyncStoryblok } from '@storyblok/nuxt'
 const route = useRoute()
 
-const article = await useAsyncStoryblok(`blog/${route.params.slug}`, {
-  version: 'draft',
+const { story: article } = await useAsyncStoryblok(`blog/${route.params.slug}`, {
+  api: {
+    version: 'draft',
+  }
 })
 
 // Metadata

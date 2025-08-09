@@ -24,11 +24,8 @@ importers:
         specifier: 3.1.2
         version: 3.1.2(@babel/parser@7.27.2)(db0@0.3.2)(embla-carousel@8.6.0)(ioredis@5.6.1)(jwt-decode@4.0.0)(magicast@0.3.5)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.14(typescript@5.8.3)))(vue@3.5.14(typescript@5.8.3))(zod@3.25.20)
       '@storyblok/nuxt':
-        specifier: 7.0.1
-        version: 7.0.1(vue@3.5.14(typescript@5.8.3))
-      '@storyblok/richtext':
-        specifier: https://pkg.pr.new/@storyblok/richtext@c5b34bc
-        version: https://pkg.pr.new/@storyblok/richtext@c5b34bc
+        specifier: ^8.0.0
+        version: 8.0.0(vue@3.5.14(typescript@5.8.3))
       '@tresjs/cientos':
         specifier: 5.0.0-next.0
         version: 5.0.0-next.0(@tresjs/core@5.0.0-next.1(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(@types/three@0.176.0)(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
@@ -39,11 +36,14 @@ importers:
         specifier: https://pkg.pr.new/@tresjs/nuxt@59b56e4
         version: https://pkg.pr.new/@tresjs/nuxt@59b56e4(jwt-decode@4.0.0)(magicast@0.3.5)(postcss@8.5.3)(rollup@4.41.0)(three@0.176.0)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))(webpack@5.99.9(esbuild@0.25.4))(zod@3.25.20)
       '@tresjs/post-processing':
-        specifier: ^2.4.0
-        version: 2.4.0(@tresjs/core@5.0.0-next.1(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
+        specifier: https://pkg.pr.new/@tresjs/post-processing@207
+        version: https://pkg.pr.new/@tresjs/post-processing@207(@tresjs/core@5.0.0-next.1(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
       eslint:
         specifier: ^9.0.0
         version: 9.27.0(jiti@2.4.2)
+      gsap:
+        specifier: ^3.13.0
+        version: 3.13.0
       motion-v:
         specifier: ^1.1.1
         version: 1.1.1(vue@3.5.14(typescript@5.8.3))
@@ -72,6 +72,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@4.1.7)
+      '@todde.tv/gltf-type-toolkit':
+        specifier: ^1.2.0
+        version: 1.2.0(@nuxt/kit@3.17.4(magicast@0.3.5))(@nuxt/schema@3.17.4)(draco3d@1.5.7)(esbuild@0.25.4)(rollup@4.41.0)(three@0.176.0)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(yaml@2.8.0))(webpack@5.99.9(esbuild@0.25.4))
       '@types/three':
         specifier: ^0.176.0
         version: 0.176.0
@@ -650,6 +653,93 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
 
+  '@node-rs/xxhash-android-arm-eabi@1.7.6':
+    resolution: {integrity: sha512-ptmfpFZ8SgTef58Us+0HsZ9BKhyX/gZYbhLkuzPt7qUoMqMSJK85NC7LEgzDgjUiG+S5GahEEQ9/tfh9BVvKhw==}
+    engines: {node: '>= 12'}
+    cpu: [arm]
+    os: [android]
+
+  '@node-rs/xxhash-android-arm64@1.7.6':
+    resolution: {integrity: sha512-n4MyZvqifuoARfBvrZ2IBqmsGzwlVI3kb2mB0gVvoHtMsPbl/q94zoDBZ7WgeP3t4Wtli+QS3zgeTCOWUbqqUQ==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [android]
+
+  '@node-rs/xxhash-darwin-arm64@1.7.6':
+    resolution: {integrity: sha512-6xGuE07CiCIry/KT3IiwQd/kykTOmjKzO/ZnHlE5ibGMx64NFE0qDuwJbxQ4rGyUzgJ0KuN9ZdOhUDJmepnpcw==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@node-rs/xxhash-darwin-x64@1.7.6':
+    resolution: {integrity: sha512-Z4oNnhyznDvHhxv+s0ka+5KG8mdfLVucZMZMejj9BL+CPmamClygPiHIRiifRcPAoX9uPZykaCsULngIfLeF3Q==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@node-rs/xxhash-freebsd-x64@1.7.6':
+    resolution: {integrity: sha512-arCDOf3xZ5NfBL5fk5J52sNPjXL2cVWN6nXNB3nrtRFFdPBLsr6YXtshAc6wMVxnIW4VGaEv/5K6IpTA8AFyWw==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@node-rs/xxhash-linux-arm-gnueabihf@1.7.6':
+    resolution: {integrity: sha512-ndLLEW+MwLH3lFS0ahlHCcmkf2ykOv/pbP8OBBeAOlz/Xc3jKztg5IJ9HpkjKOkHk470yYxgHVaw1QMoMzU00A==}
+    engines: {node: '>= 12'}
+    cpu: [arm]
+    os: [linux]
+
+  '@node-rs/xxhash-linux-arm64-gnu@1.7.6':
+    resolution: {integrity: sha512-VX7VkTG87mAdrF2vw4aroiRpFIIN8Lj6NgtGHF+IUVbzQxPudl4kG+FPEjsNH8y04yQxRbPE7naQNgHcTKMrNw==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@node-rs/xxhash-linux-arm64-musl@1.7.6':
+    resolution: {integrity: sha512-AB5m6crGYSllM9F/xZNOQSPImotR5lOa9e4arW99Bv82S+gcpphI8fGMDOVTTCXY/RLRhvvhwzLDxmLB2O8VDg==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@node-rs/xxhash-linux-x64-gnu@1.7.6':
+    resolution: {integrity: sha512-a2A6M+5tc0PVlJlE/nl0XsLEzMpKkwg7Y1lR5urFUbW9uVQnKjJYQDrUojhlXk0Uv3VnYQPa6ThmwlacZA5mvQ==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [linux]
+
+  '@node-rs/xxhash-linux-x64-musl@1.7.6':
+    resolution: {integrity: sha512-WioGJSC1GoxQpmdQrG5l/uddSBAS4XCWczHNwXe895J5xadGQzyvmr0r17BNfihvbBUDH1H9jwouNYzDDeA6+A==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [linux]
+
+  '@node-rs/xxhash-wasm32-wasi@1.7.6':
+    resolution: {integrity: sha512-WDXXKMMFMrez+esm2DzMPHFNPFYf+wQUtaXrXwtxXeQMFEzleOLwEaqV0+bbXGJTwhPouL3zY1Qo2xmIH4kkTg==}
+    engines: {node: '>=14.0.0'}
+    cpu: [wasm32]
+
+  '@node-rs/xxhash-win32-arm64-msvc@1.7.6':
+    resolution: {integrity: sha512-qjDFUZJT/Zq0yFS+0TApkD86p0NBdPXlOoHur9yNeO9YX2/9/b1sC2P7N27PgOu13h61TUOvTUC00e/82jAZRQ==}
+    engines: {node: '>= 12'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@node-rs/xxhash-win32-ia32-msvc@1.7.6':
+    resolution: {integrity: sha512-s7a+mQWOTnU4NiiypRq/vbNGot/il0HheXuy9oxJ0SW2q/e4BJ8j0pnP6UBlAjsk+005A76vOwsEj01qbQw8+A==}
+    engines: {node: '>= 12'}
+    cpu: [ia32]
+    os: [win32]
+
+  '@node-rs/xxhash-win32-x64-msvc@1.7.6':
+    resolution: {integrity: sha512-zHOHm2UaIahRhgRPJll+4Xy4Z18aAT/7KNeQW+QJupGvFz+GzOFXMGs3R/3B1Ktob/F5ui3i1MrW9GEob3CWTg==}
+    engines: {node: '>= 12'}
+    cpu: [x64]
+    os: [win32]
+
+  '@node-rs/xxhash@1.7.6':
+    resolution: {integrity: sha512-XMisO+aQHsVpxRp/85EszTtOQTOlhPbd149P/Xa9F55wafA6UM3h2UhOgOs7aAzItnHU/Aw1WQ1FVTEg7WB43Q==}
+    engines: {node: '>= 12'}
+
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -1218,27 +1308,31 @@ packages:
     resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
 
+  '@sindresorhus/slugify@2.2.1':
+    resolution: {integrity: sha512-MkngSCRZ8JdSOCHRaYd+D01XhvU3Hjy6MGl06zhOk614hp9EOAp5gIkBeQg7wtmxpitU6eAL4kdiRMcJa2dlrw==}
+    engines: {node: '>=12'}
+
+  '@sindresorhus/transliterate@1.6.0':
+    resolution: {integrity: sha512-doH1gimEu3A46VX6aVxpHTeHrytJAG6HgdxntYnCFiIFHEM/ZGpG8KiZGBChchjQmG0XFIBL552kBTjVcMZXwQ==}
+    engines: {node: '>=12'}
+
   '@speed-highlight/core@1.2.7':
     resolution: {integrity: sha512-0dxmVj4gxg3Jg879kvFS/msl4s9F3T9UXC1InxgOf7t5NvcPD97u/WTA5vL/IxWHMn7qSxBozqrnnE2wvl1m8g==}
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
-  '@storyblok/js@4.0.0':
-    resolution: {integrity: sha512-D3EB9LQ9P9I9WTauwUaBkZ6J8qMVnpUAxPZRbarL7SdDKILD4CAVR9Bn+T6H5znu45J4Zq9P7OvxH+sQZPvgXw==}
+  '@storyblok/js@4.2.0':
+    resolution: {integrity: sha512-mZcnpwn36ZWf60Jrn1ArLYvDNfPa2EeKsmrF59za8rk1/CDnzBusvnGB+blPIe1xPBjVd8np3MxkY/KKP++QJQ==}
 
-  '@storyblok/nuxt@7.0.1':
-    resolution: {integrity: sha512-MlBw2l49xI4c8W1Zm3FjbZWTXeqjheOgAZIe3Q+lsABfjfyTYZTnFyums2piVJyePwF30pcxOumhfn4cbl2DAQ==}
+  '@storyblok/nuxt@8.0.0':
+    resolution: {integrity: sha512-NyCLPvLI/9hf1Bf9BE3T7aHz2mcshNjYQYajr2GmqgYQMZl5KdFVjUqYal0DyCdCUZ1GXAWh6gFHr1S8VoG9RQ==}
 
-  '@storyblok/richtext@3.2.0':
-    resolution: {integrity: sha512-koVGDv1HtiI5vymE5fzRB1VO1PNguj+RSfHI4zCy2+90pRoqZbsUCR8V2TaNl7Pg8R1oOkFZnbAxdt9Z4xoxDg==}
+  '@storyblok/richtext@3.5.0':
+    resolution: {integrity: sha512-uHYmoC0ytQHDPs02JYHE98Lt3cwokPkCtOvE68ArJNtDvh9O+3UlSyytKZy+uhnrhajvF4BJzkbHwo6wOuunog==}
 
-  '@storyblok/richtext@https://pkg.pr.new/@storyblok/richtext@c5b34bc':
-    resolution: {tarball: https://pkg.pr.new/@storyblok/richtext@c5b34bc}
-    version: 3.2.0
-
-  '@storyblok/vue@9.0.0':
-    resolution: {integrity: sha512-oINPI/ETfOPPJgnIzIsjC2AwYxr93bv/dr1XaCV4hoIcSyUmrxT1TPnFkXO6MveMSzEZqlbX2D+yztQ8B4sdpg==}
+  '@storyblok/vue@9.2.0':
+    resolution: {integrity: sha512-VjKQ1+bI3Tj1+cKjGbbDDd58rZ5FZUMMJZzcElKeXUW41UxUHUUEuLZdsf2E8vk6CFc64QxEgDzFaNUm6tiWTw==}
     peerDependencies:
       vue: '>=3.4'
 
@@ -1382,6 +1476,45 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
 
+  '@todde.tv/gltf-type-toolkit@1.2.0':
+    resolution: {integrity: sha512-2zzUq8CHvIf10PesQQ+h9vTcTwHjHmLD8JRoR3sFe3IIgabowaW7IVHFGulbrJGgyTPFZKJ5PdLi3yIJRElGeQ==}
+    engines: {node: '22', pnpm: '9'}
+    hasBin: true
+    peerDependencies:
+      '@farmfe/core': '>=1'
+      '@nuxt/kit': ^3
+      '@nuxt/schema': ^3
+      '@rspack/core': ^1
+      astro: '*'
+      draco3d: ^1.5.7
+      esbuild: '*'
+      rolldown: ^1.0.0-beta.3
+      rollup: ^3 || ^4
+      three: '>=0.170.0'
+      vite: '>=3'
+      webpack: ^4 || ^5
+    peerDependenciesMeta:
+      '@farmfe/core':
+        optional: true
+      '@nuxt/kit':
+        optional: true
+      '@nuxt/schema':
+        optional: true
+      '@rspack/core':
+        optional: true
+      astro:
+        optional: true
+      esbuild:
+        optional: true
+      rolldown:
+        optional: true
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+
   '@tresjs/cientos@5.0.0-next.0':
     resolution: {integrity: sha512-Sj8CyYoOpFU95MnvTUwauz2ce3T39tpHCFX15XKzgQF+WGBhWhEGfkvjh35tTgNUZFPMB8BwUeGlTN5CYolaAQ==}
     peerDependencies:
@@ -1408,10 +1541,11 @@ packages:
     peerDependencies:
       three: '>=0.133'
 
-  '@tresjs/post-processing@2.4.0':
-    resolution: {integrity: sha512-4l18DTLkn0Y/abyn+FD/gSJ6/SC01oXn+/qPgUxMgxZ8zGaw4PZbOi4yorhbSbOTp0gO4D1X7lNOvNUokqJwFw==}
+  '@tresjs/post-processing@https://pkg.pr.new/@tresjs/post-processing@207':
+    resolution: {tarball: https://pkg.pr.new/@tresjs/post-processing@207}
+    version: 2.4.0
     peerDependencies:
-      '@tresjs/core': '>=4.0'
+      '@tresjs/core': '>=5.0'
       three: '>=0.169'
       vue: '>=3.4'
 
@@ -3374,6 +3508,9 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
+  gsap@3.13.0:
+    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
+
   gzip-size@6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
     engines: {node: '>=10'}
@@ -3384,6 +3521,11 @@ packages:
 
   h3@1.15.3:
     resolution: {integrity: sha512-z6GknHqyX0h9aQaTx22VZDf6QyZn+0Nh+Ym8O/u0SGSkyF5cuTJYKlc8MkzW3Nzf9LE1ivcpmYC3FUGpywhuUQ==}
+
+  handlebars@4.7.8:
+    resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
+    engines: {node: '>=0.4.7'}
+    hasBin: true
 
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -5180,8 +5322,8 @@ packages:
   std-env@3.9.0:
     resolution: {integrity: sha512-UGvjygr6F6tpH7o2qyqR6QYpwraIjKSdtzyBdyytFOHmPZY917kwdwLG0RbOjWOnKmnm3PeHjaoLLMie7kPLQw==}
 
-  storyblok-js-client@7.0.0:
-    resolution: {integrity: sha512-00zWW3jscL4W1kek9QCrInq1jw4xwjeM0jXuKg4sa/bCT8QuLGaGU9Wn3hat/hkvZLRFC09fV4sJRxDqwsFaKQ==}
+  storyblok-js-client@7.1.0:
+    resolution: {integrity: sha512-nOCzlVbAsfUDJJBNWiiqDo1q+tUldHoMh6Lqgger/KLaq2m+2haw9S/ad+Ru8/UU5izxzSLwc083cycdNk9Gdg==}
 
   streamx@2.22.0:
     resolution: {integrity: sha512-sLh1evHOzBy/iWRiR6d1zRcLao4gGZr3C1kzNz4fopCOKJb6xD9ub8Mpi9Mr1R6id5o43S+d93fI48UC5uM9aw==}
@@ -5487,6 +5629,11 @@ packages:
   ufo@1.6.1:
     resolution: {integrity: sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA==}
 
+  uglify-js@3.19.3:
+    resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+
   ultrahtml@1.6.0:
     resolution: {integrity: sha512-R9fBn90VTJrqqLDwyMph+HGne8eqY1iPfYhPzZrvKpIfwkWZbcYlfpsb8B9dTvBfpy1/hqAD7Wi8EKfP9e8zdw==}
 
@@ -5608,6 +5755,10 @@ packages:
   unplugin@1.16.1:
     resolution: {integrity: sha512-4/u/j4FrCKdi17jaxuJA0jClGxB1AvU2hw/IuayPc4ay1XGaJs/rbb4v5WKwAjNifjmXK9PIFyuPiaK8azyR9w==}
     engines: {node: '>=14.0.0'}
+
+  unplugin@2.1.2:
+    resolution: {integrity: sha512-Q3LU0e4zxKfRko1wMV2HmP8lB9KWislY7hxXpxd+lGx0PRInE4vhMBVEZwpdVYHvtqzhSrzuIfErsob6bQfCzw==}
+    engines: {node: '>=18.12.0'}
 
   unplugin@2.3.4:
     resolution: {integrity: sha512-m4PjxTurwpWfpMomp8AptjD5yj8qEZN5uQjjGM3TAs9MWWD2tXSSNNj6jGR2FoVGod4293ytyV6SwBbertfyJg==}
@@ -5947,6 +6098,9 @@ packages:
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
+
+  wordwrap@1.0.0:
+    resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
 
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
@@ -6743,6 +6897,67 @@ snapshots:
       - encoding
       - rollup
       - supports-color
+
+  '@node-rs/xxhash-android-arm-eabi@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-android-arm64@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-darwin-arm64@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-darwin-x64@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-freebsd-x64@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-linux-arm-gnueabihf@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-linux-arm64-gnu@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-linux-arm64-musl@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-linux-x64-gnu@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-linux-x64-musl@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-wasm32-wasi@1.7.6':
+    dependencies:
+      '@napi-rs/wasm-runtime': 0.2.10
+    optional: true
+
+  '@node-rs/xxhash-win32-arm64-msvc@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-win32-ia32-msvc@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash-win32-x64-msvc@1.7.6':
+    optional: true
+
+  '@node-rs/xxhash@1.7.6':
+    optionalDependencies:
+      '@node-rs/xxhash-android-arm-eabi': 1.7.6
+      '@node-rs/xxhash-android-arm64': 1.7.6
+      '@node-rs/xxhash-darwin-arm64': 1.7.6
+      '@node-rs/xxhash-darwin-x64': 1.7.6
+      '@node-rs/xxhash-freebsd-x64': 1.7.6
+      '@node-rs/xxhash-linux-arm-gnueabihf': 1.7.6
+      '@node-rs/xxhash-linux-arm64-gnu': 1.7.6
+      '@node-rs/xxhash-linux-arm64-musl': 1.7.6
+      '@node-rs/xxhash-linux-x64-gnu': 1.7.6
+      '@node-rs/xxhash-linux-x64-musl': 1.7.6
+      '@node-rs/xxhash-wasm32-wasi': 1.7.6
+      '@node-rs/xxhash-win32-arm64-msvc': 1.7.6
+      '@node-rs/xxhash-win32-ia32-msvc': 1.7.6
+      '@node-rs/xxhash-win32-x64-msvc': 1.7.6
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -7607,28 +7822,35 @@ snapshots:
 
   '@sindresorhus/merge-streams@2.3.0': {}
 
+  '@sindresorhus/slugify@2.2.1':
+    dependencies:
+      '@sindresorhus/transliterate': 1.6.0
+      escape-string-regexp: 5.0.0
+
+  '@sindresorhus/transliterate@1.6.0':
+    dependencies:
+      escape-string-regexp: 5.0.0
+
   '@speed-highlight/core@1.2.7': {}
 
   '@standard-schema/spec@1.0.0': {}
 
-  '@storyblok/js@4.0.0':
+  '@storyblok/js@4.2.0':
     dependencies:
-      '@storyblok/richtext': 3.2.0
-      storyblok-js-client: 7.0.0
+      '@storyblok/richtext': 3.5.0
+      storyblok-js-client: 7.1.0
 
-  '@storyblok/nuxt@7.0.1(vue@3.5.14(typescript@5.8.3))':
+  '@storyblok/nuxt@8.0.0(vue@3.5.14(typescript@5.8.3))':
     dependencies:
-      '@storyblok/vue': 9.0.0(vue@3.5.14(typescript@5.8.3))
+      '@storyblok/vue': 9.2.0(vue@3.5.14(typescript@5.8.3))
     transitivePeerDependencies:
       - vue
 
-  '@storyblok/richtext@3.2.0': {}
+  '@storyblok/richtext@3.5.0': {}
 
-  '@storyblok/richtext@https://pkg.pr.new/@storyblok/richtext@c5b34bc': {}
-
-  '@storyblok/vue@9.0.0(vue@3.5.14(typescript@5.8.3))':
+  '@storyblok/vue@9.2.0(vue@3.5.14(typescript@5.8.3))':
     dependencies:
-      '@storyblok/js': 4.0.0
+      '@storyblok/js': 4.2.0
       vue: 3.5.14(typescript@5.8.3)
 
   '@stylistic/eslint-plugin@4.2.0(eslint@9.27.0(jiti@2.4.2))(typescript@5.8.3)':
@@ -7769,6 +7991,24 @@ snapshots:
       '@tanstack/virtual-core': 3.13.9
       vue: 3.5.14(typescript@5.8.3)
 
+  '@todde.tv/gltf-type-toolkit@1.2.0(@nuxt/kit@3.17.4(magicast@0.3.5))(@nuxt/schema@3.17.4)(draco3d@1.5.7)(esbuild@0.25.4)(rollup@4.41.0)(three@0.176.0)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(yaml@2.8.0))(webpack@5.99.9(esbuild@0.25.4))':
+    dependencies:
+      '@node-rs/xxhash': 1.7.6
+      '@sindresorhus/slugify': 2.2.1
+      citty: 0.1.6
+      consola: 3.4.2
+      draco3d: 1.5.7
+      handlebars: 4.7.8
+      three: 0.176.0
+      unplugin: 2.1.2
+    optionalDependencies:
+      '@nuxt/kit': 3.17.4(magicast@0.3.5)
+      '@nuxt/schema': 3.17.4
+      esbuild: 0.25.4
+      rollup: 4.41.0
+      vite: 6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(yaml@2.8.0)
+      webpack: 5.99.9(esbuild@0.25.4)
+
   '@tresjs/cientos@5.0.0-next.0(@tresjs/core@5.0.0-next.1(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(@types/three@0.176.0)(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
     dependencies:
       '@tresjs/core': 5.0.0-next.1(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
@@ -7845,7 +8085,7 @@ snapshots:
       - yup
       - zod
 
-  '@tresjs/post-processing@2.4.0(@tresjs/core@5.0.0-next.1(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
+  '@tresjs/post-processing@https://pkg.pr.new/@tresjs/post-processing@207(@tresjs/core@5.0.0-next.1(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3)))(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))':
     dependencies:
       '@tresjs/core': 5.0.0-next.1(three@0.176.0)(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))
       '@vueuse/core': 12.8.2(typescript@5.8.3)
@@ -10100,6 +10340,8 @@ snapshots:
 
   graphemer@1.4.0: {}
 
+  gsap@3.13.0: {}
+
   gzip-size@6.0.0:
     dependencies:
       duplexer: 0.1.2
@@ -10119,6 +10361,15 @@ snapshots:
       radix3: 1.1.2
       ufo: 1.6.1
       uncrypto: 0.1.3
+
+  handlebars@4.7.8:
+    dependencies:
+      minimist: 1.2.8
+      neo-async: 2.6.2
+      source-map: 0.6.1
+      wordwrap: 1.0.0
+    optionalDependencies:
+      uglify-js: 3.19.3
 
   has-flag@4.0.0: {}
 
@@ -12171,7 +12422,7 @@ snapshots:
 
   std-env@3.9.0: {}
 
-  storyblok-js-client@7.0.0: {}
+  storyblok-js-client@7.1.0: {}
 
   streamx@2.22.0:
     dependencies:
@@ -12514,6 +12765,9 @@ snapshots:
 
   ufo@1.6.1: {}
 
+  uglify-js@3.19.3:
+    optional: true
+
   ultrahtml@1.6.0: {}
 
   unconfig@7.3.2:
@@ -12714,6 +12968,11 @@ snapshots:
       - vue
 
   unplugin@1.16.1:
+    dependencies:
+      acorn: 8.14.1
+      webpack-virtual-modules: 0.6.2
+
+  unplugin@2.1.2:
     dependencies:
       acorn: 8.14.1
       webpack-virtual-modules: 0.6.2
@@ -13056,6 +13315,8 @@ snapshots:
       winston-transport: 4.9.0
 
   word-wrap@1.2.5: {}
+
+  wordwrap@1.0.0: {}
 
   wrap-ansi@7.0.0:
     dependencies:
