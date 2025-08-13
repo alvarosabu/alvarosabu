@@ -9,6 +9,16 @@ const route = useRoute()
 const { data: article } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
 })
+
+watchEffect(() => {
+  console.log(article.value)
+})
+
+const readingTime = computed(() => {
+  return article?.value?.meta?.readingTime?.text
+})
+
+
 // Metadata
 useHead({
   title: `${article?.value?.title} - AlvaroSabu`,
@@ -18,7 +28,7 @@ useHead({
   link: [
     {
       rel: 'icon',
-      type: 'image/svg+xml',
+      type: 'image/svg+xml',  
       href: '/favicon.svg',
     },
   ],
@@ -50,10 +60,12 @@ useSeoMeta({
         <UIcon name="i-heroicons-arrow-left" />
         Back to blog
       </NuxtLink>
-      <NuxtImg :src="article?.thumbnail" class="w-full my-8 aspect-16/9 object-cover rounded" />
-      <h1 class="text-4xl font-bold font-display">{{ article?.title }}</h1>
-      <div class="flex justify-between items-center my-4">
-        <NuxtTime v-if="article?.date" :datetime="article?.date" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" />
+      <NuxtImg :src="article?.thumbnail" class="w-full my-8 aspect-16/9 object-cover rounded mb-24" />
+      <h1 class="text-4xl font-bold font-display mb-8">{{ article?.title }}</h1>
+      <div class="flex items-center gap-2 my-4">
+       <NuxtTime v-if="article?.date" :datetime="article?.date" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" text="Updated at " />
+         —
+        <span class="text-sm text-gray-500 font-mono flex items-center gap-2"> <UIcon name="i-heroicons-clock" class="w-4 h-4" /> {{ readingTime }} </span>
         <USeparator orientation="vertical" />
       </div>
       <USeparator />

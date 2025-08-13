@@ -32,11 +32,5 @@ export default defineAppConfig({
       }
     }
   },
-  content: {
-    markdown: {
-      highlight: {
-        theme: 'catppuccin-frappe',
-      },
-    },
-  },
+  
 }) 

@@ -21,7 +21,18 @@ export default defineNuxtConfig({
   uiPro: {
     license: process.env.NUXT_UI_PRO_LICENSE
   },
-
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          theme: 'catppuccin-frappe',
+        },
+        remarkPlugins: {
+          'remark-reading-time': {}
+        },
+      },
+    }
+  },
   routeRules: {
     '/': { prerender: true },
   },
@@ -29,18 +40,5 @@ export default defineNuxtConfig({
   image: {
     format: ['webp', 'avif'],
   },
-  // Enable HTTPS in development
-  devServer: {
-     https: true,
-     port: 2590
-  },
-  content: {
-    build: {
-      markdown: {
-        highlight: {
-          theme: 'catppuccin-macchiato',
-        },
-      },
-    }
-  },
+  
 })
