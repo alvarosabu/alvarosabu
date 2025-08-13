@@ -35,7 +35,7 @@ useHead({
 })
 useSeoMeta({
   title: `${article?.value?.title} - AlvaroSabu`,
-  keywords: article?.value?.tag_list?.join(', '),
+  keywords: article?.value?.tags?.join(', '),
   description: article?.value?.excerpt,
   ogDescription: article?.value?.excerpt,
   ogUrl: `https://alvarosaburido.dev/blog/${route.params.slug}`,
