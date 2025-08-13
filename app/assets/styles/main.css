@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
-@import "@nuxt/ui";
+@import "@nuxt/ui-pro";
 
 @theme static {
   --font-sans: 'Inter', sans-serif;
@@ -64,5 +63,13 @@
 
   .noise-screen::before {
     mix-blend-mode: screen;
+  }
+
+  /* Breakout utility to escape container max-width */
+  .breakout {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
   }
 }

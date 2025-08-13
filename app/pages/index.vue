@@ -31,15 +31,14 @@ useSeoMeta({
   keywords: 'portfolio, frontend, developer, web, nuxt, threejs, tres, vue, javascript, typescript, creative, engineer, alvaro, saburido',
 })
 
-const story = await useStoryblok('home', { version: 'draft' });
+
 </script>
 
 <template>
   <div class="relative">
-    <TresCanvas window-size alpha :premultiplied-alpha="false">
+    <TresCanvas window-size alpha :clear-alpha="0" :premultiplied-alpha="false">
       <HomeExperience />
     </TresCanvas>
-    <StoryblokComponent v-if="story" class="absolute top-0 left-0 w-full h-full" :blok="story.content" />
   </div>
 </template>
 

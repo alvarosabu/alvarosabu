@@ -1,12 +1,12 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="min-h-screen noise noise-subtle dark:noise-minimal">
+    <div>
     <!-- Header Component -->
     <TheHeader />
     
     <!-- Main Content -->
-    <main>
+    <main class="min-h-[calc(100vh-var(--ui-header-height))] pt-36 relative">
       <slot />
     </main>
   </div>
