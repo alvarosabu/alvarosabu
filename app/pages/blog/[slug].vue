@@ -47,7 +47,12 @@ useSeoMeta({
   twitterDescription: article?.value?.excerpt,
   twitterTitle: `${article?.value?.title} - AlvaroSabu`,
   twitterImage: article?.value?.media?.filename,
-  twitterImageAlt: article?.value?.media?.alt,
+  ogImage: article?.value?.thumbnail,
+  ogImageAlt: article?.value?.thumbnailAlt,
+  twitterDescription: article?.value?.excerpt,
+  twitterTitle: `${article?.value?.title} - AlvaroSabu`,
+  twitterImage: article?.value?.thumbnail,
+  twitterImageAlt: article?.value?.thumbnailAlt,
   twitterCard: 'summary_large_image',
 })
 
