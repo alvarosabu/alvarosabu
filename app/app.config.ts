@@ -23,4 +23,20 @@ export default defineAppConfig({
       }
     }
   },
+  uiPro: {
+    prose: {
+      pre: {
+        slots: {
+          base: 'group font-mono text-sm/6 border border-muted bg-gray-600 dark:bg-muted rounded-md px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none'
+        }
+      }
+    }
+  },
+  content: {
+    markdown: {
+      highlight: {
+        theme: 'catppuccin-frappe',
+      },
+    },
+  },
 }) 

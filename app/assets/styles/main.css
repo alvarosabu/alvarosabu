@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
-@import "@nuxt/ui";
+@import "@nuxt/ui-pro";
 
 @theme static {
   --font-sans: 'Inter', sans-serif;

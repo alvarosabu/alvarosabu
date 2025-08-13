@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
+import { isDev } from '~/utils'
 
 useHead({
   title: 'Blog - AlvaroSabu',
@@ -31,9 +32,14 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-const config = useRuntimeConfig()
+const { data: articles } = await useAsyncData('blog', () =>
+  queryCollection('blog').all().then(items =>
+    items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  )
+)
+console.log(articles)
 
-const { story } = await useAsyncStoryblok(
+/* const { story } = await useAsyncStoryblok(
   'blog',
   { 
     api: {
@@ -50,7 +56,7 @@ const articles = await useAsyncStoryblokStories({
   starts_with: 'blog',
   is_startpage: false,
   resolve_relations: 'article.category',
-})
+}) */
 const list = {
   visible: {
     opacity: 1,
@@ -75,12 +81,12 @@ const item = {
 <template>
   <UContainer>
     <motion.h1
-      class="text-4xl font-bold font-display mt-8 mb-16 md:mt-24 md:mb-32 flex items-center gap-2"
+      class="text-4xl font-bold font-display pt-8 mb-16 md:pt-24 md:mb-32 flex items-center gap-2"
       :initial="{ opacity: 0, y: 100 }"
       :animate="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.5 }"
     >
-      {{ story?.content?.title }} <UBadge v-if="config.public.storyblokVersion === 'draft'" :label="config.public.storyblokVersion" color="primary" variant="subtle" class="mb-2" size="sm" />
+      Blog <UBadge v-if="isDev" label="Draft" color="primary" variant="subtle" class="mb-2" size="sm" />
     </motion.h1>
     <section v-if="articles" >
       <Motion
@@ -89,16 +95,16 @@ const item = {
         while-in-view="visible"
         :variants="list">
         <section class="flex flex-col gap-12">
-          <Motion v-for="article in articles" :key="article.content.uuid" :variants="item">
-            <NuxtLink :to="`/blog/${article.slug}`">
+          <Motion v-for="{ thumbnail, path, date, title, description } in articles" :key="path" :variants="item">
+            <NuxtLink :to="path">
               <article class="flex flex-col md:flex-row gap-4 mb-12">
-                <NuxtImg :src="article.content.media.filename" class="w-full md:w-1/6 aspect-16/9 md:aspect-1/1 object-cover rounded" />
+                <NuxtImg :src="thumbnail" class="w-full md:w-1/6 aspect-16/9 md:aspect-1/1 object-cover rounded" />
                 <div>
-                  <UBadge :label="article.content.category.name" color="primary" variant="subtle" class="mb-2" size="sm" />
-                  <h2 class="text-2xl font-bold mb-4">{{ article.content.title }}</h2>
-                  <p class="text-gray-500 max-w-prose">{{ article.content.excerpt }}</p>
+                  <!-- <UBadge :label="article.content.category.name" color="primary" variant="subtle" class="mb-2" size="sm" /> -->
+                  <h2 class="text-2xl font-bold mb-4">{{ title }}</h2>
+                  <p class="text-gray-500 max-w-prose">{{ description }}</p>
                   <footer class="flex justify-between items-center mt-4">
-                    <NuxtTime :datetime="article.published_at" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" />
+                    <NuxtTime :datetime="date" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" />
                   </footer>
                 </div>
               </article>
@@ -106,18 +112,8 @@ const item = {
             <USeparator />
           </Motion>
         </section>
+  
       </Motion>
- 
-     <!--  <Motion
-    initial="hidden"
-    class="flex flex-col gap-16"
-    while-in-view="visible"
-    :variants="list">
-        <template v-for="article in articles" :key="article.content.uuid">
-        
-      </template>
-      </Motion> -->
-      
     </section>
   </UContainer>
 </template>

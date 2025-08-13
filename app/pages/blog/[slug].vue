@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import type { useAsyncStoryblok } from '@storyblok/nuxt'
 const route = useRoute()
 
-const { story: article } = await useAsyncStoryblok(`blog/${route.params.slug}`, {
+/* const { story: article } = await useAsyncStoryblok(`blog/${route.params.slug}`, {
   api: {
     version: 'draft',
   }
+}) */
+const { data: article } = await useAsyncData(route.path, () => {
+  return queryCollection('blog').path(route.path).first()
 })
-
 // Metadata
 useHead({
-  title: `${article?.value?.content?.title} - AlvaroSabu`,
+  title: `${article?.value?.title} - AlvaroSabu`,
   htmlAttrs: {
     lang: 'en',
   },
@@ -23,42 +24,43 @@ useHead({
   ],
 })
 useSeoMeta({
-  title: `${article?.value?.content?.title} - AlvaroSabu`,
-  keywords: article?.value?.content?.tag_list?.join(', '),
-  description: article?.value?.content?.excerpt,
-  ogDescription: article?.value?.content?.excerpt,
+  title: `${article?.value?.title} - AlvaroSabu`,
+  keywords: article?.value?.tag_list?.join(', '),
+  description: article?.value?.excerpt,
+  ogDescription: article?.value?.excerpt,
   ogUrl: `https://alvarosaburido.dev/blog/${route.params.slug}`,
   ogType: 'article',
   ogSiteName: 'AlvaroSabu',
-  ogTitle: `${article?.value?.content?.title} - AlvaroSabu`,
-  ogImage: article?.value?.content?.media?.filename,
-  ogImageAlt: article?.value?.content?.media?.alt,
-  twitterDescription: article?.value?.content?.excerpt,
-  twitterTitle: `${article?.value?.content?.title} - AlvaroSabu`,
-  twitterImage: article?.value?.content?.media?.filename,
-  twitterImageAlt: article?.value?.content?.media?.alt,
+  ogTitle: `${article?.value?.title} - AlvaroSabu`,
+  ogImage: article?.value?.media?.filename,
+  ogImageAlt: article?.value?.media?.alt,
+  twitterDescription: article?.value?.excerpt,
+  twitterTitle: `${article?.value?.title} - AlvaroSabu`,
+  twitterImage: article?.value?.media?.filename,
+  twitterImageAlt: article?.value?.media?.alt,
   twitterCard: 'summary_large_image',
 })
 
 </script>
 
 <template>
-  <UContainer>
+  <UContainer class="max-w-screen-md">
     <header class="prose mx-auto mb-12 dark:prose-invert">
       <NuxtLink to="/blog" class="flex items-center gap-2">
         <UIcon name="i-heroicons-arrow-left" />
         Back to blog
       </NuxtLink>
-      <NuxtImg :src="article?.content?.media.filename" class="w-full aspect-16/9 object-cover rounded" />
-      <h1 class="text-4xl font-bold font-display">{{ article?.content?.title }}</h1>
+      <NuxtImg :src="article?.thumbnail" class="w-full my-8 aspect-16/9 object-cover rounded" />
+      <h1 class="text-4xl font-bold font-display">{{ article?.title }}</h1>
       <div class="flex justify-between items-center my-4">
-        <NuxtTime :datetime="article?.published_at" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" />
+        <NuxtTime v-if="article?.date" :datetime="article?.date" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" />
         <USeparator orientation="vertical" />
       </div>
       <USeparator />
     </header>
     <div class="prose dark:prose-invert mx-auto pb-24">
-      <StoryblokEnhancedRichtext v-if="article?.content?.content"  :doc="article?.content.content" />
+      <ContentRenderer v-if="article" :value="article" />
+      <!-- <StoryblokEnhancedRichtext v-if="article?.content?.content"  :doc="article?.content.content" /> -->
     </div>
   </UContainer>
 </template>
