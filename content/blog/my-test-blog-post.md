@@ -209,6 +209,21 @@ This text has a footnote[^1] and another one[^2].
 [^1]: This is the first footnote.
 [^2]: This is the second footnote with a [link](https://nuxt.com).
 
+## Image Carousel
+
+::image-carousel
+![Image 1](https://picsum.photos/1280/720?random=1 "Caption 1")
+![Image 2](https://picsum.photos/1280/720?random=2 "Caption 2")
+![Image 3](https://picsum.photos/1280/720?random=3 "Caption 3")
+![Image 4](https://picsum.photos/1280/720?random=4 "Caption 4")
+![Image 5](https://picsum.photos/1280/720?random=5 "Caption 5")
+![Image 6](https://picsum.photos/1280/720?random=6 "Caption 6")
+![Image 7](https://picsum.photos/1280/720?random=7 "Caption 7")
+![Image 8](https://picsum.photos/1280/720?random=8 "Caption 8")
+![Image 9](https://picsum.photos/1280/720?random=9 "Caption 9")
+![Image 10](https://picsum.photos/1280/720?random=10 "Caption 10")
+::
+
 ## Conclusion
 
 This test blog post demonstrates various markdown elements including:
