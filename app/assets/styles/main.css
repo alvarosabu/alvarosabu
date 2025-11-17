@@ -1,23 +1,14 @@
 @import "tailwindcss";
-@import "@nuxt/ui-pro";
+@import "@nuxt/ui";
 
 @theme static {
   --font-sans: 'Inter', sans-serif;
-  --font-display: 'Gilroy', 'Inter', sans-serif;
-  --font-mono: 'Fira Code', monospace;
-
-  --color-green-50: #F1FCF8;
-  --color-green-100: #DCF7ED;
-  --color-green-200: #B2EED8;
-  --color-green-300: #88E5C3;
-  --color-green-400: #5EDCAE;
-  --color-green-500: #34D399;
-  --color-green-600: #26AE7C;
-  --color-green-700: #1D845F;
-  --color-green-800: #145A41;
-  --color-green-900: #0B3023;
-
+  --font-mono: 'JetBrains Mono', monospace;
   --ui-header-height: 72px;
+  --ui-bg: #EBEBEB;
+  --ui-text: #111111;
+  --ui-text-secondary: #666666;
+  --ui-text-tertiary: #999999;
 }
 
 @layer utilities {

@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
-    '@nuxt/ui-pro',
+    '@nuxt/ui',
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/content',
@@ -18,9 +18,6 @@ export default defineNuxtConfig({
     'nuxt-shiki',
     '@todde.tv/gltf-type-toolkit',
   ],
-  uiPro: {
-    license: process.env.NUXT_UI_PRO_LICENSE
-  },
   content: {
     build: {
       markdown: {

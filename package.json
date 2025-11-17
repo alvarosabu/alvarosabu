@@ -10,31 +10,32 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/content": "^3.6.3",
-    "@nuxt/ui-pro": "3.3.0",
+    "@nuxt/content": "^3.8.2",
+    "@nuxt/ui": "^4.1.0",
     "better-sqlite3": "^12.2.0",
     "gsap": "^3.13.0",
-    "motion-v": "^1.7.0",
-    "tailwindcss": "^4.1.11"
+    "motion-v": "^1.7.4",
+    "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.73",
     "@nuxt/eslint": "1.8.0",
-    "@nuxt/icon": "1.15.0",
-    "@nuxt/image": "1.11.0",
+    "@nuxt/icon": "2.1.0",
+    "@nuxt/image": "2.0.0",
     "@todde.tv/gltf-type-toolkit": "^1.2.0",
-    "@tresjs/cientos": "5.0.0-next.4",
-    "@tresjs/core": "5.0.0-next.6",
-    "@tresjs/nuxt": "4.1.0-next.1",
-    "@tresjs/post-processing": "https://pkg.pr.new/@tresjs/post-processing@207",
-    "@types/three": "^0.179.0",
+    "@tresjs/cientos": "5.1.0",
+    "@tresjs/core": "5.1.0",
+    "@tresjs/nuxt": "5.1.0",
+    "@tresjs/post-processing": "3.1.0",
+    "@types/three": "^0.181.0",
     "eslint": "^9.0.0",
-    "nuxt": "^4.0.3",
+    "nuxt": "^4.2.1",
     "nuxt-shiki": "0.3.1",
     "nuxt-ssr-api-logger": "2.0.2",
     "remark-reading-time": "^2.0.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac",
+  "packageManager": "pnpm@10.22.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "better-sqlite3"
