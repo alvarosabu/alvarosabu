@@ -36,9 +36,7 @@ useSeoMeta({
 
 <template>
   <div class="relative">
-    <TresCanvas window-size alpha :clear-alpha="0" :premultiplied-alpha="false">
-      <HomeExperience />
-    </TresCanvas>
+   <!--  <TresCanvas window-size alpha :clear-alpha="0" :premultiplied-alpha="false" clear-color="#EBEBEB"/> -->
   </div>
 </template>
 
