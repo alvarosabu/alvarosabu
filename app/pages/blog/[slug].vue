@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'single'
+})
+
 const route = useRoute()
 
 /* const { story: article } = await useAsyncStoryblok(`blog/${route.params.slug}`, {
@@ -61,10 +65,6 @@ useSeoMeta({
 <template>
   <UContainer class="max-w-screen-md">
     <header class="prose mx-auto mb-12 dark:prose-invert">
-      <NuxtLink to="/blog" class="flex items-center gap-2">
-        <UIcon name="i-heroicons-arrow-left" />
-        Back to blog
-      </NuxtLink>
       <NuxtImg :src="article?.thumbnail" class="w-full my-8 aspect-16/9 object-cover rounded mb-24" />
       <h1 class="text-4xl font-bold font-display mb-8">{{ article?.title }}</h1>
       <div class="flex items-center gap-2 my-4">

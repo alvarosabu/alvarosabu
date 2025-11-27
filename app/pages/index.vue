@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'landing'
+})
+
 useHead({
   title: 'AlvaroSabu | Creative Engineer & Front-end Developer',
   htmlAttrs: {
@@ -35,8 +39,18 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="relative">
-   <!--  <TresCanvas window-size alpha :clear-alpha="0" :premultiplied-alpha="false" clear-color="#EBEBEB"/> -->
+  <div>
+    <!-- Shader background -->
+    <div class="fixed inset-0 -z-10">
+      <TresCanvas window-size>
+        <HomeBackgroundExperience />
+      </TresCanvas>
+    </div>
+
+    <!-- Content overlay -->
+    <div class="relative">
+      <!-- Your content goes here -->
+    </div>
   </div>
 </template>
 

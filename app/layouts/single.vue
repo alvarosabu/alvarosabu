@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const router = useRouter()
 const items: NavigationMenuItem[] = [
   {
     label: 'Blog',
@@ -41,12 +42,9 @@ const items: NavigationMenuItem[] = [
 
       <!-- Footer -->
       <footer class="flex items-end justify-between p-6 md:p-8">
-        <!-- <div class="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
-          CREATIVE<br>SOFTWARE ENGINEER
-        </div>
-        <div class="text-sm md:text-base">
-          00/07
-        </div> -->
+        <UButton color="neutral" variant="link" class="font-mono text-sm md:text-base cursor-pointer" @click="router.back()">
+          cd ../
+        </UButton>
       </footer>
     </div>
   </div>

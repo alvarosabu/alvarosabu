@@ -11,6 +11,315 @@
   --ui-text-tertiary: #999999;
 }
 
+/* Glitch effect keyframes - intermittent style */
+@keyframes glitch-1 {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+    transform: translate(0);
+  }
+  40% {
+    clip-path: inset(43% 0 1% 0);
+    transform: translate(0);
+  }
+  60% {
+    clip-path: inset(25% 0 58% 0);
+    transform: translate(0);
+  }
+  80% {
+    clip-path: inset(54% 0 7% 0);
+    transform: translate(0);
+  }
+  100% {
+    clip-path: inset(58% 0 43% 0);
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-2 {
+  0% {
+    clip-path: inset(65% 0 0 0);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: inset(45% 0 40% 0);
+    transform: translate(0);
+  }
+  40% {
+    clip-path: inset(14% 0 15% 0);
+    transform: translate(0);
+  }
+  60% {
+    clip-path: inset(76% 0 0 0);
+    transform: translate(0);
+  }
+  80% {
+    clip-path: inset(28% 0 35% 0);
+    transform: translate(0);
+  }
+  100% {
+    clip-path: inset(65% 0 15% 0);
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skew(0deg);
+  }
+  10% {
+    transform: skew(-2deg);
+  }
+  20% {
+    transform: skew(1deg);
+  }
+  30% {
+    transform: skew(3deg);
+  }
+  40% {
+    transform: skew(-1deg);
+  }
+  50% {
+    transform: skew(-3deg);
+  }
+  60% {
+    transform: skew(2deg);
+  }
+  70% {
+    transform: skew(-2deg);
+  }
+  80% {
+    transform: skew(1deg);
+  }
+  90% {
+    transform: skew(3deg);
+  }
+  100% {
+    transform: skew(0deg);
+  }
+}
+
+/* Alternative glitch keyframes using clip: rect() */
+@keyframes glitch-clip-1 {
+  0% { clip: rect(42px, 9999px, 44px, 0); }
+  5% { clip: rect(12px, 9999px, 59px, 0); }
+  10% { clip: rect(48px, 9999px, 29px, 0); }
+  15% { clip: rect(42px, 9999px, 73px, 0); }
+  20% { clip: rect(63px, 9999px, 27px, 0); }
+  25% { clip: rect(34px, 9999px, 55px, 0); }
+  30% { clip: rect(86px, 9999px, 73px, 0); }
+  35% { clip: rect(20px, 9999px, 20px, 0); }
+  40% { clip: rect(26px, 9999px, 60px, 0); }
+  45% { clip: rect(25px, 9999px, 66px, 0); }
+  50% { clip: rect(57px, 9999px, 98px, 0); }
+  55% { clip: rect(5px, 9999px, 46px, 0); }
+  60% { clip: rect(82px, 9999px, 31px, 0); }
+  65% { clip: rect(54px, 9999px, 27px, 0); }
+  70% { clip: rect(28px, 9999px, 99px, 0); }
+  75% { clip: rect(45px, 9999px, 69px, 0); }
+  80% { clip: rect(23px, 9999px, 85px, 0); }
+  85% { clip: rect(54px, 9999px, 84px, 0); }
+  90% { clip: rect(45px, 9999px, 47px, 0); }
+  95% { clip: rect(37px, 9999px, 20px, 0); }
+  100% { clip: rect(4px, 9999px, 91px, 0); }
+}
+
+@keyframes glitch-clip-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  5% { clip: rect(52px, 9999px, 74px, 0); }
+  10% { clip: rect(79px, 9999px, 85px, 0); }
+  15% { clip: rect(75px, 9999px, 5px, 0); }
+  20% { clip: rect(67px, 9999px, 61px, 0); }
+  25% { clip: rect(14px, 9999px, 79px, 0); }
+  30% { clip: rect(1px, 9999px, 66px, 0); }
+  35% { clip: rect(86px, 9999px, 30px, 0); }
+  40% { clip: rect(23px, 9999px, 98px, 0); }
+  45% { clip: rect(85px, 9999px, 72px, 0); }
+  50% { clip: rect(71px, 9999px, 75px, 0); }
+  55% { clip: rect(2px, 9999px, 48px, 0); }
+  60% { clip: rect(30px, 9999px, 16px, 0); }
+  65% { clip: rect(59px, 9999px, 50px, 0); }
+  70% { clip: rect(41px, 9999px, 62px, 0); }
+  75% { clip: rect(2px, 9999px, 82px, 0); }
+  80% { clip: rect(47px, 9999px, 73px, 0); }
+  85% { clip: rect(3px, 9999px, 27px, 0); }
+  90% { clip: rect(26px, 9999px, 55px, 0); }
+  95% { clip: rect(42px, 9999px, 97px, 0); }
+  100% { clip: rect(38px, 9999px, 49px, 0); }
+}
+
+@layer components {
+  /**
+   * Glitch Text Effect Component
+   *
+   * Creates a cyberpunk-style glitch effect with RGB channel separation.
+   * Requires data-text attribute on the element with the text content.
+   *
+   * Customizable via CSS custom properties:
+   * - --glitch-duration: Animation duration (default: 0.8s)
+   * - --glitch-offset: Horizontal offset for pseudo-elements (default: 2px)
+   * - --glitch-color-1: First color channel (default: #ff0000/red)
+   * - --glitch-color-2: Second color channel (default: #00ffff/cyan)
+   *
+   * Usage:
+   *   <span class="glitch" data-text="Glitch Text">Glitch Text</span>
+   *   <span class="glitch glitch-slow" data-text="Slower">Slower</span>
+   *   <span class="glitch" style="--glitch-duration: 2s;" data-text="Custom">Custom</span>
+   */
+  .glitch {
+    /* Default values - can be overridden inline or with utility classes */
+    --glitch-duration: 1s;
+    --glitch-offset: 5px;
+    --glitch-color-1: #ff0000;
+    --glitch-color-2: #00ffff;
+
+    position: relative;
+    display: inline-block;
+    animation: glitch-skew var(--glitch-duration) infinite linear alternate-reverse;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Inherit stroke styles from parent */
+    -webkit-text-stroke-width: inherit;
+    -webkit-text-stroke-color: inherit;
+    color: inherit;
+    background-color: inherit;
+  }
+
+  .glitch::before {
+    animation: glitch-1 calc(var(--glitch-duration) * 2) infinite linear alternate-reverse;
+    text-shadow: calc(var(--glitch-offset) * -1) 0 var(--glitch-color-1);
+    transform: translate(calc(var(--glitch-offset) * -1), 0);
+  }
+
+  .glitch::after {
+    animation: glitch-2 calc(var(--glitch-duration) * 2) infinite linear alternate-reverse;
+    text-shadow: var(--glitch-offset) 0 var(--glitch-color-2);
+    transform: translate(var(--glitch-offset), 0);
+  }
+
+  /* Preset timing variations */
+  .glitch-fast {
+    --glitch-duration: 0.6s;
+  }
+
+  .glitch-slow {
+    --glitch-duration: 2s;
+  }
+
+  .glitch-slower {
+    --glitch-duration: 4s;
+  }
+
+  /* Preset color variations */
+  .glitch-purple {
+    --glitch-color-1: #ff00ff;
+    --glitch-color-2: #00ff00;
+  }
+
+  .glitch-blue {
+    --glitch-color-1: #0000ff;
+    --glitch-color-2: #ffff00;
+  }
+
+  .glitch-monochrome {
+    --glitch-color-1: #ffffff;
+    --glitch-color-2: #000000;
+  }
+
+  /* Intensity variations */
+  .glitch-subtle {
+    --glitch-offset: 2px;
+  }
+
+  .glitch-intense {
+    --glitch-offset: 8px;
+  }
+
+  /**
+   * Alternative Glitch Effect (Classic clip rect style)
+   *
+   * A more chaotic glitch effect using clip: rect() with precise pixel-based clipping.
+   * Works well with solid backgrounds and creates more erratic, random glitching.
+   *
+   * Customizable via CSS custom properties:
+   * - --glitch-duration: Base animation duration (default: 4s)
+   * - --glitch-offset: Horizontal offset for pseudo-elements (default: 4px)
+   * - --glitch-color-1: First color channel (default: #ffa800/orange)
+   * - --glitch-color-2: Second color channel (default: #00d8ff/cyan)
+   * - --glitch-bg: Background color (default: transparent, but should match parent bg)
+   *
+   * Usage:
+   *   <span class="glitch-2" data-text="Glitch Text">Glitch Text</span>
+   */
+  .glitch-2 {
+    --glitch-duration: 4s;
+    --glitch-offset: 4px;
+    --glitch-color-1:rgba(255, 255, 255, 0.01);
+    --glitch-color-2: rgba(255, 255, 255, 0.02);
+    --glitch-bg: transparent;
+
+    position: relative;
+    background: var(--glitch-bg);
+  }
+
+  .glitch-2::before,
+  .glitch-2::after {
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-direction: alternate-reverse;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    clip: rect(0, 900px, 0, 0);
+    content: attr(data-text);
+    pointer-events: none;
+    background: var(--glitch-bg);
+    /* Inherit stroke styles from parent */
+    -webkit-text-stroke-width: inherit;
+    -webkit-text-stroke-color: inherit;
+    color: inherit;
+  }
+
+  .glitch-2::after {
+    animation-name: glitch-clip-1;
+    animation-duration: var(--glitch-duration);
+    left: var(--glitch-offset);
+    text-shadow: -1px 0 var(--glitch-color-1);
+  }
+
+  .glitch-2::before {
+    animation-name: glitch-clip-2;
+    animation-duration: calc(var(--glitch-duration) * 1.5);
+    left: calc(var(--glitch-offset) * -1);
+    text-shadow: 1px 0 var(--glitch-color-2);
+  }
+
+  /* Preset variations for glitch-2 */
+  .glitch-2.glitch-fast {
+    --glitch-duration: 2s;
+  }
+
+  .glitch-2.glitch-slow {
+    --glitch-duration: 6s;
+  }
+
+  .glitch-2.glitch-slower {
+    --glitch-duration: 10s;
+  }
+}
+
 @layer utilities {
   /* Noise pattern using SVG filter */
   .noise {
@@ -62,5 +371,100 @@
     margin-right: calc(50% - 50vw);
     width: 100vw;
     max-width: 100vw;
+  }
+}
+
+@layer utilities {
+  /* Text stroke width utilities */
+  .text-stroke {
+    -webkit-text-stroke-width: 1px;
+  }
+
+  .text-stroke-2 {
+    -webkit-text-stroke-width: 2px;
+  }
+
+  /* Text stroke color utilities - integrates with Tailwind's color system */
+  .text-stroke-current {
+    -webkit-text-stroke-color: currentColor;
+  }
+
+  .text-stroke-inherit {
+    -webkit-text-stroke-color: inherit;
+  }
+
+  .text-stroke-transparent {
+    -webkit-text-stroke-color: transparent;
+  }
+
+  /* Primary color utilities */
+  .text-stroke-black {
+    -webkit-text-stroke-color: black;
+  }
+
+  .text-stroke-white {
+    -webkit-text-stroke-color: white;
+  }
+
+  /* Tailwind gray scale */
+  .text-stroke-gray-50 {
+    -webkit-text-stroke-color: rgb(249 250 251);
+  }
+
+  .text-stroke-gray-100 {
+    -webkit-text-stroke-color: rgb(243 244 246);
+  }
+
+  .text-stroke-gray-200 {
+    -webkit-text-stroke-color: rgb(229 231 235);
+  }
+
+  .text-stroke-gray-300 {
+    -webkit-text-stroke-color: rgb(209 213 219);
+  }
+
+  .text-stroke-gray-400 {
+    -webkit-text-stroke-color: rgb(156 163 175);
+  }
+
+  .text-stroke-gray-500 {
+    -webkit-text-stroke-color: rgb(107 114 128);
+  }
+
+  .text-stroke-gray-600 {
+    -webkit-text-stroke-color: rgb(75 85 99);
+  }
+
+  .text-stroke-gray-700 {
+    -webkit-text-stroke-color: rgb(55 65 81);
+  }
+
+  .text-stroke-gray-800 {
+    -webkit-text-stroke-color: rgb(31 41 55);
+  }
+
+  .text-stroke-gray-900 {
+    -webkit-text-stroke-color: rgb(17 24 39);
+  }
+
+  .text-stroke-gray-950 {
+    -webkit-text-stroke-color: rgb(3 7 18);
+  }
+
+  /* Nuxt UI color system integration - using CSS custom properties */
+  .text-stroke-primary {
+    -webkit-text-stroke-color: var(--ui-primary);
+  }
+
+  .text-stroke-secondary {
+    -webkit-text-stroke-color: var(--ui-text-secondary);
+  }
+
+  .text-stroke-tertiary {
+    -webkit-text-stroke-color: var(--ui-text-tertiary);
+  }
+
+  .text-stroke-muted {
+    -webkit-text-stroke-color: var(--ui-text-muted);
   }
 }

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
-import { isDev } from '~/utils'
 
 useHead({
   title: 'Blog - AlvaroSabu',
@@ -37,7 +36,28 @@ const { data: articles } = await useAsyncData('blog', () =>
     items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   )
 )
-console.log(articles)
+
+interface ArticlesByYear {
+  year: number
+  articles: typeof articles.value
+}
+
+const articlesByYear = computed<ArticlesByYear[]>(() => {
+  if (!articles.value) return []
+
+  const grouped = articles.value.reduce((acc, article) => {
+    const year = new Date(article.date).getFullYear()
+    if (!acc[year]) {
+      acc[year] = []
+    }
+    acc[year].push(article)
+    return acc
+  }, {} as Record<number, typeof articles.value>)
+
+  return Object.entries(grouped)
+    .map(([year, articles]) => ({ year: Number(year), articles }))
+    .sort((a, b) => b.year - a.year)
+})
 
 /* const { story } = await useAsyncStoryblok(
   'blog',
@@ -77,42 +97,70 @@ const item = {
   visible: { opacity: 1, x: 0 },
   hidden: { opacity: 0, x: -100 },
 }
+
+function getRandomGlitchStyle(index: number) {
+  // Deterministic pseudo-random based on index
+  const seed = index * 2654435761 // Large prime for better distribution
+  const random = (seed % 100) / 100
+
+  // Duration: between 1s and 4s (varied glitch speed)
+  const duration = 4 + (random * 6)
+
+  // Offset: between 3px and 8px (visible but not overwhelming)
+  const offset = 3 + ((seed % 50) / 50) * 5
+
+  return {
+    '--glitch-duration': `${duration.toFixed(2)}s`,
+    '--glitch-offset': `${offset.toFixed(1)}px`,
+  }
+}
 </script>
 <template>
   <UContainer>
     <motion.h1
-      class="text-4xl font-bold font-display pt-8 mb-16 md:pt-24 md:mb-32 flex items-center gap-2"
+      class="text-4xl font-bold  pt-8 mb-16 md:pt-24 md:mb-32 flex items-center gap-2"
       :initial="{ opacity: 0, y: 100 }"
       :animate="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.5 }"
     >
-      Blog <UBadge v-if="isDev" label="Draft" color="primary" variant="subtle" class="mb-2" size="sm" />
+      some thoughts
     </motion.h1>
-    <section v-if="articles" >
+    <section v-if="articlesByYear.length" >
       <Motion
         initial="hidden"
         class="flex flex-col gap-16"
         while-in-view="visible"
         :variants="list">
-        <section class="flex flex-col gap-12">
-          <Motion v-for="{ thumbnail, path, date, title, description } in articles" :key="path" :variants="item">
+        <section v-for="({ year, articles: yearArticles }, index) in articlesByYear" :key="year" class="relative pt-6 flex flex-col gap-10">
+          <motion.span
+            class="glitch-2 text-8xl absolute -top-8 -left-10 select-none font-bold text-stroke-muted text-stroke-2 text-transparent pointer-events-none opacity-3"
+            :initial="{ opacity: 0, x: -50 }"
+            :while-in-view="{ opacity: 0.05, x: 0 }"
+            :transition="{ duration: 0.5 }"
+            :data-text="year"
+            :style="getRandomGlitchStyle(index)"
+          >
+            {{ year }}
+          </motion.span>
+
+          <Motion v-for="{ path, date, title } in yearArticles" :key="path" :variants="item">
             <NuxtLink :to="path">
-              <article class="flex flex-col md:flex-row gap-4 mb-12">
-                <NuxtImg :src="thumbnail" class="w-full md:w-1/6 aspect-16/9 md:aspect-1/1 object-cover rounded" />
-                <div>
-                  <!-- <UBadge :label="article.content.category.name" color="primary" variant="subtle" class="mb-2" size="sm" /> -->
-                  <h2 class="text-2xl font-bold mb-4">{{ title }}</h2>
-                  <p class="text-gray-500 max-w-prose">{{ description }}</p>
-                  <footer class="flex justify-between items-center mt-4">
-                    <NuxtTime :datetime="date" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" />
-                  </footer>
-                </div>
+              <article class="flex flex-col md:flex-row items-center gap-4 mb-4">
+
+                <!-- <UBadge :label="article.content.category.name" color="primary" variant="subtle" class="mb-2" size="sm" /> -->
+                <p class="font-bold">{{ title }}</p>
+                
+                <footer class="flex justify-between items-center">
+                  <NuxtTime :datetime="date" class="text-sm text-gray-500 font-mono" month="short" day="numeric" locale="en-US" />
+                </footer>
+
               </article>
             </NuxtLink>
-            <USeparator />
+          
           </Motion>
+          <USeparator v-if="index !== articlesByYear.length - 1" />
         </section>
-  
+
       </Motion>
     </section>
   </UContainer>

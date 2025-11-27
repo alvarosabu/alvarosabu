@@ -37,5 +37,8 @@ export default defineNuxtConfig({
   image: {
     format: ['webp', 'avif'],
   },
-  
+
+  tres: {
+    glsl: true,
+  },
 })

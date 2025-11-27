@@ -47,7 +47,7 @@ const isDark = computed({
     <UContainer class="flex items-center justify-between">
       <TheLogo />
       <div class="flex items-center justify-end gap-2">
-        <UNavigationMenu :items="items" class="w-full justify-end hidden md:flex" orientation="horizontal"/>
+        <UNavigationMenu color="neutral" :items="items" class="w-full justify-end hidden md:flex" orientation="horizontal"/>
         <ul class="flex items-center gap-2">
           <li>
             <UButton icon="i-lucide-github" color="neutral" variant="ghost" to="https://github.com/alvarosabu" target="_blank" />

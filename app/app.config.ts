@@ -12,13 +12,15 @@ export default defineAppConfig({
     },
   },
   ui: {
-    primary: 'green',
-    neutral: 'neutral',
+    colors: {
+      primary: 'neutral',
+      neutral: 'neutral',
+    },
     fonts: {
       default: {
         sans: 'Inter',
-        display: 'Gilroy',
-        mono: 'Fira Code',
+        display: 'Inter',
+        mono: 'JetBrains Mono',
         serif: 'Inter',
       }
     }
