@@ -318,6 +318,83 @@
   .glitch-2.glitch-slower {
     --glitch-duration: 10s;
   }
+
+  /**
+   * Bordered Container Component
+   *
+   * Creates a bordered container with segmented left border to allow
+   * fixed logo to break through without covering background effects.
+   *
+   * Customizable via CSS custom properties:
+   * - --border-color: Border color (default: rgb(31 41 55) / gray-800)
+   * - --logo-gap-start: Top position where logo gap begins (default: 1rem)
+   * - --logo-gap-end: Bottom position where logo gap ends (default: 10rem)
+   *
+   * Usage:
+   *   <div class="bordered-container">...</div>
+   */
+  .bordered-container {
+    position: relative;
+    --border-color: rgb(31 41 55); /* gray-800 */
+    --logo-gap-start: 1rem;
+    --logo-gap-end: 10rem;
+  }
+
+  /* Top border */
+  .bordered-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color);
+  }
+
+  /* Right border */
+  .bordered-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-color);
+  }
+
+  /* Bottom border */
+  .bordered-container > footer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color);
+    pointer-events: none;
+  }
+
+  /* Left border - top segment (above logo) */
+  .bordered-container > main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--logo-gap-start);
+    width: 1px;
+    background: var(--border-color);
+  }
+
+  /* Left border - bottom segment (below logo) */
+  .bordered-container > main::after {
+    content: '';
+    position: absolute;
+    top: var(--logo-gap-end);
+    left: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-color);
+  }
 }
 
 @layer utilities {

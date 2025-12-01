@@ -116,9 +116,9 @@ function getRandomGlitchStyle(index: number) {
 }
 </script>
 <template>
-  <UContainer>
+  <UContainer class="max-w-screen-md">
     <motion.h1
-      class="text-4xl font-bold  pt-8 mb-16 md:pt-24 md:mb-32 flex items-center gap-2"
+      class="text-4xl font-bold mb-16 md:mb-32 flex items-center gap-2"
       :initial="{ opacity: 0, y: 100 }"
       :animate="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.5 }"

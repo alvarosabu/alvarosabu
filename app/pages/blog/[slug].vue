@@ -5,17 +5,8 @@ definePageMeta({
 
 const route = useRoute()
 
-/* const { story: article } = await useAsyncStoryblok(`blog/${route.params.slug}`, {
-  api: {
-    version: 'draft',
-  }
-}) */
 const { data: article } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
-})
-
-watchEffect(() => {
-  console.log(article.value)
 })
 
 const readingTime = computed(() => {
@@ -65,7 +56,7 @@ useSeoMeta({
 <template>
   <UContainer class="max-w-screen-md">
     <header class="prose mx-auto mb-12 dark:prose-invert">
-      <NuxtImg :src="article?.thumbnail" class="w-full my-8 aspect-16/9 object-cover rounded mb-24" />
+      <NuxtImg v-if="article?.thumbnail" :src="article?.thumbnail" class="w-full my-8 aspect-16/9 object-cover rounded mb-24" />
       <h1 class="text-4xl font-bold font-display mb-8">{{ article?.title }}</h1>
       <div class="flex items-center gap-2 my-4">
        <NuxtTime v-if="article?.date" :datetime="article?.date" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" text="Updated at " />

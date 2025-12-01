@@ -3,7 +3,6 @@ title: Noise in Shaders
 description: Understanding different types of noise functions in GLSL and how to use them for creative effects
 status: draft
 date: 2025-11-18
-thumbnail: https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Blog_oet7tv.png
 ---
 
 Noise is fundamental to procedural generation in shaders. It allows you to create organic textures, terrain, clouds, water effects, and countless other visual phenomena without needing texture images.

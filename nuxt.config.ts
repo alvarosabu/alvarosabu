@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { transformGitHubMentions } from './utils/transform-github-mentions'
+
 export default defineNuxtConfig({
 
   compatibilityDate: '2025-05-15',
@@ -40,5 +42,15 @@ export default defineNuxtConfig({
 
   tres: {
     glsl: true,
+  },
+
+  hooks: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    'content:file:beforeParse': (ctx: any) => {
+      const { file } = ctx
+      if (file.extension === '.md') {
+        transformGitHubMentions(file)
+      }
+    }
   },
 })

@@ -15,7 +15,8 @@
     "better-sqlite3": "^12.2.0",
     "gsap": "^3.13.0",
     "motion-v": "^1.7.4",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.73",

@@ -224,6 +224,28 @@ This text has a footnote[^1] and another one[^2].
 ![Image 10](https://picsum.photos/1280/720?random=10 "Caption 10")
 ::
 
+## Inline MDC Examples
+
+This is a paragraph with a :magic-link{label="TresJS"} would it work?
+
+## GitHub Mentions Testing
+
+Single mention: {@antfu}
+
+Mention with label: {@alvarosabu | Alvaro Saburido}
+
+Multiple mentions: Thanks to {@antfu} and {@yyx990803} for Vue!
+
+Start of sentence: {@antfu} wrote this code.
+
+End of sentence: This was written by {@alvarosabu}
+
+Inside bold: **Created by {@antfu}**
+
+Whitespace variations: {@antfu|NoSpace} vs {@antfu | WithSpace}
+
+Manual mdc example: :github-mention{username="antfu"} and :magic-link{label="TresJS"}
+
 ## Conclusion
 
 This test blog post demonstrates various markdown elements including:

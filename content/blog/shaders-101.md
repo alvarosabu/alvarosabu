@@ -3,7 +3,6 @@ title: Shaders 101
 description: A guide to shaders
 status: draft
 date: 2025-11-18
-thumbnail: https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Blog_oet7tv.png
 ---
 
 # Shaders 101

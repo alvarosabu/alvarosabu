@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { PlaneGeometry} from 'three';
 import { BufferAttribute, ShaderMaterial } from 'three'
+import { BlendFunction } from 'postprocessing'
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
 
@@ -41,4 +42,12 @@ onBeforeRender(({ delta }) => {
     <TresPlaneGeometry ref="planeGeometry" :args="[2, 2, 32, 32]" />
     <primitive :object="material" />
   </TresMesh>
+  <Suspense>
+    <EffectComposerPmndrs>
+      <NoisePmndrs
+        premultiply
+        :blend-function="BlendFunction.SCREEN"
+      />
+    </EffectComposerPmndrs>
+  </Suspense>
 </template>

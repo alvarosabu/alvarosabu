@@ -16,7 +16,6 @@ const canScrollRight = ref(false)
 // Watch for slot content changes
 const { stop: stopSlotObserver } = watchEffect(() => {
   if (slotContent.value) {
-    console.log('slotContent', slotContent.value)
     parseImagesFromSlot()
   }
 })
@@ -38,7 +37,6 @@ function parseImagesFromSlot() {
       })
     }
   })
-  console.log('images', images)
   parsedImages.value = images
 }
 
