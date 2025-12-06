@@ -333,11 +333,22 @@
    * Usage:
    *   <div class="bordered-container">...</div>
    */
+
+  .dark .bordered-container {
+    --border-color: rgb(249 250 251);
+  }
+
   .bordered-container {
     position: relative;
     --border-color: rgb(31 41 55); /* gray-800 */
     --logo-gap-start: 1rem;
-    --logo-gap-end: 10rem;
+    --logo-gap-end: 7.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .bordered-container {
+      --logo-gap-end: 10rem;
+    }
   }
 
   /* Top border */
@@ -349,6 +360,7 @@
     right: 0;
     height: 1px;
     background: var(--border-color);
+    display: none;
   }
 
   /* Right border */
@@ -360,6 +372,7 @@
     bottom: 0;
     width: 1px;
     background: var(--border-color);
+    display: none;
   }
 
   /* Bottom border */
@@ -372,6 +385,7 @@
     height: 1px;
     background: var(--border-color);
     pointer-events: none;
+    display: none;
   }
 
   /* Left border - top segment (above logo) */
@@ -383,6 +397,7 @@
     height: var(--logo-gap-start);
     width: 1px;
     background: var(--border-color);
+    display: none;
   }
 
   /* Left border - bottom segment (below logo) */
@@ -394,6 +409,17 @@
     bottom: 0;
     width: 1px;
     background: var(--border-color);
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .bordered-container::before,
+    .bordered-container::after,
+    .bordered-container > footer::after,
+    .bordered-container > main::before,
+    .bordered-container > main::after {
+      display: block;
+    }
   }
 }
 

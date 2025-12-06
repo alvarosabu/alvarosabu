@@ -12,6 +12,10 @@ export default defineAppConfig({
     },
   },
   ui: {
+    icons: {
+      light: 'i-iconoir-sun-light',
+      dark: 'i-iconoir-half-moon',
+    },
     colors: {
       primary: 'neutral',
       neutral: 'neutral',

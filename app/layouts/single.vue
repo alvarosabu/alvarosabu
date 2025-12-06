@@ -3,7 +3,7 @@ const router = useRouter()
 </script>
 
 <template>
-  <div class="p-4 md:p-8 lg:p-16 min-h-screen">
+  <div class="p-4 md:p-8 xl:p-16 min-h-screen">
     <div class="bordered-container min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-8rem)] flex flex-col">
       <TheHeader />
       
