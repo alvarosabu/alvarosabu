@@ -4,9 +4,8 @@ import { transformGitHubMentions } from './utils/transform-github-mentions'
 export default defineNuxtConfig({
 
   compatibilityDate: '2025-05-15',
-  devtools: { enabled: true },
   css: ['~/assets/styles/main.css'],
-
+  declare: ['*.glsl'],
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
@@ -41,6 +40,7 @@ export default defineNuxtConfig({
   },
 
   tres: {
+    devtools: true,
     glsl: true,
   },
 

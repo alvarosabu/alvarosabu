@@ -3,7 +3,7 @@
 
 <template>
   <div class="p-4 md:p-8 xl:p-16 min-h-screen">
-    <div class="bordered-container min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-8rem)] flex flex-col">
+    <div class="bordered-container relative z-1 min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-8rem)] flex flex-col">
       <TheHeader />
 
 
@@ -13,7 +13,7 @@
       </main>
 
       <!-- Footer -->
-      <footer class="flex items-end justify-between p-6 md:p-8">
+      <footer class="flex items-end justify-between p-6 md:p-8 z-1">
         <div class="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
           <MutatingText text="CREATIVE" /><br><MutatingText text="SOFTWARE ENGINEER" />
         </div>

@@ -41,12 +41,9 @@ useSeoMeta({
 <template>
   <div>
     <!-- Shader background -->
-    <div class="fixed inset-0 z-10">
-      <TresCanvas window-size :clear-color="'#f5f5f5'">
-        <HomeBackgroundExperience />
-      </TresCanvas>
+    <div class="fixed inset-0">
+      <HomeMorphingParticles />
     </div>
-
     <!-- Content overlay -->
     <div class="relative">
       <!-- Your content goes here -->

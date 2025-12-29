@@ -343,6 +343,7 @@
     --border-color: rgb(31 41 55); /* gray-800 */
     --logo-gap-start: 1rem;
     --logo-gap-end: 7.5rem;
+ 
   }
 
   @media (min-width: 768px) {
@@ -361,6 +362,7 @@
     height: 1px;
     background: var(--border-color);
     display: none;
+    z-index: 1;
   }
 
   /* Right border */
@@ -373,6 +375,7 @@
     width: 1px;
     background: var(--border-color);
     display: none;
+    z-index: 1;
   }
 
   /* Bottom border */
@@ -398,6 +401,7 @@
     width: 1px;
     background: var(--border-color);
     display: none;
+    z-index: 1;
   }
 
   /* Left border - bottom segment (below logo) */

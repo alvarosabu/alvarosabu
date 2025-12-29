@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxt/content": "^3.10.0",
     "@nuxt/ui": "^4.3.0",
+    "@tresjs/leches": "^1.1.2",
     "better-sqlite3": "^12.5.0",
     "gsap": "^3.14.2",
     "motion-v": "^1.7.4",
