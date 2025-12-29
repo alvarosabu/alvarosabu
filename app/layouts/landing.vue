@@ -15,7 +15,7 @@
       <!-- Footer -->
       <footer class="flex items-end justify-between p-6 md:p-8">
         <div class="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
-          CREATIVE<br>SOFTWARE ENGINEER
+          <MutatingText text="CREATIVE" /><br><MutatingText text="SOFTWARE ENGINEER" />
         </div>
         <div class="text-sm md:text-base">
           00/07
