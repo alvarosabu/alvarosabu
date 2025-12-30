@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { BufferGeometry, PerspectiveCamera } from 'three';
-import { BufferAttribute, Color, Float32BufferAttribute, Uniform, Vector2 } from 'three'
-import gsap from 'gsap';
+import { BufferAttribute, Color, Float32BufferAttribute, NormalBlending, AdditiveBlending, Uniform, Vector2 } from 'three'
 import { BlendFunction } from 'postprocessing';
+import gsap from 'gsap';
 import vertexShader from './shaders/vertex.glsl';
 import fragmentShader from './shaders/fragment.glsl';
+
+// Dark Mode Colors
+const { isDark, colors } = useDarkMode()
 
 const { sizes } = useTresContext()
 
@@ -17,9 +20,23 @@ const uniforms = {
   uResolution: new Uniform(resolution.value),
   uSize: new Uniform(0.05),
   uProgress: new Uniform(0.0),
-  uColorA: new Uniform(new Color('#0a0a0a')),
-  uColorB: new Uniform(new Color('#141414')),
+  uColorA: new Uniform(new Color(colors.DARK)),
+  uColorB: new Uniform(new Color(colors.DARK_STROKE)),
 }
+
+watch(isDark, (newIsDark) => {
+  if (newIsDark) {
+    uniforms.uColorA.value = new Color(colors.LIGHT)
+    uniforms.uColorB.value = new Color(colors.LIGHT_STROKE)
+  } else {
+    uniforms.uColorA.value = new Color(colors.DARK)
+    uniforms.uColorB.value = new Color(colors.DARK_STROKE)
+  }
+}, { immediate: true })
+
+const blendingMode = computed(() => {
+  return isDark.value ? AdditiveBlending : NormalBlending
+})
 
 // Model configuration - add or remove models here
 const modelConfigs = [
@@ -169,10 +186,16 @@ function morphParticles() {
 watch(() => particles.positions.length, (length) => {
   if (length > 0) {
     nextTick(() => {
-      setInterval(() => {
+      // Delay first morph to let users enjoy initial model
+      setTimeout(() => {
         morphParticles()
-        currentIndex.value = (currentIndex.value + 1) % particles.positions.length
-      }, 6000)
+
+        // Then set up interval for subsequent morphs
+        setInterval(() => {
+          currentIndex.value = (currentIndex.value + 1) % particles.positions.length
+          morphParticles()
+        }, 6000)
+      }, 3000)
     })
   }
 }, { once: true })
@@ -191,8 +214,8 @@ watch(() => particles.positions.length, (length) => {
   <TresPoints v-if="particles.positions.length > 0">
     <TresBufferGeometry
       ref="geometryRef"
-      :position="[particles.positions[0]?.array, 3]"
-      :a-position-target="[particles.positions[1]?.array, 3]"
+      :position="[particles.positions[currentIndex]?.array, 3]"
+      :a-position-target="[particles.positions[targetIndex]?.array, 3]"
       :a-size="[particles.sizes?.array, 1]"
     />
     <TresShaderMaterial
@@ -201,11 +224,13 @@ watch(() => particles.positions.length, (length) => {
       :uniforms="uniforms"
       :transparent="true"
       :depth-write="false"
+      :blending="blendingMode"
     />
   </TresPoints>
   <Suspense>
     <EffectComposerPmndrs>
       <ChromaticAberrationPmndrs
+        v-if="!isDark"
         :offset="new Vector2(0.001, 0.001)"
         :blend-function="BlendFunction.SCREEN"
         radial-modulation
