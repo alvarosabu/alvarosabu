@@ -1,7 +1,27 @@
 <script setup lang="ts">
+import HomeMorphingParticles from '~/components/home/morphing-particles/index.vue'
+import HomeFlowField from '~/components/home/flow-field/index.vue'
+
 definePageMeta({
   layout: 'landing'
 })
+
+// Shader components available
+const shaderComponents = [
+  HomeMorphingParticles,
+  HomeFlowField
+] as const
+
+// Development override: uncomment and set index to test specific shader
+const devShaderIndex = 1 // 0: MorphingParticles, 1: FlowField
+
+const selectedShaderIndex = ref(
+  typeof devShaderIndex !== 'undefined'
+    ? devShaderIndex
+    : Math.floor(Math.random() * shaderComponents.length)
+)
+
+const currentShader = computed(() => shaderComponents[selectedShaderIndex.value])
 
 useHead({
   title: 'AlvaroSabu | Creative Engineer & Front-end Developer',
@@ -42,7 +62,7 @@ useSeoMeta({
   <div>
     <!-- Shader background -->
     <div class="fixed inset-0">
-      <HomeMorphingParticles />
+      <component :is="currentShader" />
     </div>
     <!-- Content overlay -->
     <div class="relative">
