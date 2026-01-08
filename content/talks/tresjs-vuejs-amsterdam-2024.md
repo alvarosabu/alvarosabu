@@ -2,12 +2,14 @@
 title: "The Subtle Art of 3D Scroll-telling & Product configuration with TresJS"
 description: "Meet TresJS, a Vue custom renderer that brings the magic of 3D in a declarative way by using components and composables."
 date: "2024-03-28"
-url: "https://youtu.be/4H9S7IVQql?si=DvS-eYgHpbKuQhTG&t=30144"
+url: "https://youtu.be/xa1EZ9DPfMo?si=eVTxEU4a6Wt6pDct"
 event:
-  name: "VueJS Amsterdam"
+  name: "VueJS Amsterdam 2024"
   url: "https://vuejs.amsterdam/"
+location: "Amsterdam, Netherlands"
 media: "tresjs-vuejsamsterdam-2024.jpeg"
 slides: ""
+pdf: ""
 tags: ["TresJS", "Vue", "3D", "WebGL", "ThreeJS", "Scrollytelling"]
 ---
 
@@ -23,4 +25,4 @@ This talk is open to everybody, from complete beginners to experienced developer
 
 **Event:** VueJS Amsterdam  
 **Date:** March 28, 2024  
-**Video:** [Watch on YouTube](https://youtu.be/4H9S7IVQql?si=DvS-eYgHpbKuQhTG&t=30144)
+**Video:** [Watch on YouTube](https://youtu.be/xa1EZ9DPfMo?si=eVTxEU4a6Wt6pDct)

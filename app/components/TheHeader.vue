@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { useWindowScroll } from '@vueuse/core'
+
+const { y } = useWindowScroll()
+const isVisible = computed(() => {
+  return  y.value < 10
+})
+
+const toggleDarkModeEnabled = useState('toggleDarkModeEnabled')
 
 const headerLinks: NavigationMenuItem[] = [
   {
@@ -10,14 +18,14 @@ const headerLinks: NavigationMenuItem[] = [
     label: 'Talks',
     to: '/talks',
   },
-  {
+  /* {
     label: 'Projects',
     to: '/projects',
   },
   {
     label: 'Photography',
     to: '/photography',
-  },
+  }, */
 ]
 </script>
 
@@ -32,10 +40,10 @@ const headerLinks: NavigationMenuItem[] = [
     <template #title>
       <TheLogo />
     </template>
-    <UNavigationMenu :items="headerLinks" />
+    <UNavigationMenu v-if="isVisible" :items="headerLinks" />
 
     <template #right>
-      <UColorModeButton />
+      <UColorModeButton v-if="toggleDarkModeEnabled" />
 
 <!--       <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
         <UButton
