@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  const experimentNumber = useState('experimentNumber', () => 0)
 </script>
 
 <template>
@@ -17,8 +18,8 @@
         <div class="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight">
           <MutatingText text="CREATIVE" /><br><MutatingText text="SOFTWARE ENGINEER" />
         </div>
-        <div class="text-sm md:text-base">
-          00/07
+        <div class="text-sm md:text-base font-mono">
+          0{{ experimentNumber }}/07
         </div>
       </footer>
     </div>

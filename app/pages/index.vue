@@ -2,6 +2,7 @@
 import HomeMorphingParticles from '~/components/home/morphing-particles/index.vue'
 import HomeFlowField from '~/components/home/flow-field/index.vue'
 import HomeRagingSea from '~/components/home/raging-sea/index.vue'
+
 definePageMeta({
   layout: 'landing'
 })
@@ -13,12 +14,14 @@ const shaderComponents = [
   HomeRagingSea
 ] as const
 
+const experimentNumber = useState('experimentNumber')
+
 // Development override: uncomment and set index to test specific shader
-const devShaderIndex = 2 // 0: MorphingParticles, 1: FlowField
+experimentNumber.value = 2 // 0: MorphingParticles, 1: FlowField
 
 const selectedShaderIndex = ref(
-  typeof devShaderIndex !== 'undefined'
-    ? devShaderIndex
+  typeof experimentNumber.value !== 'undefined'
+    ? experimentNumber.value
     : Math.floor(Math.random() * shaderComponents.length)
 )
 

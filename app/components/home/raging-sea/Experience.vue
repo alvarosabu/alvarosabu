@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import vertexShader from './shaders/vertex.glsl'
-import fragmentShader from './shaders/fragment.glsl'
 import type { SphereGeometry} from 'three';
 import { Color, DoubleSide, Uniform, Vector2 } from 'three'
-import { usePointer } from '@vueuse/core'
+import { useBreakpoints, usePointer, breakpointsTailwind } from '@vueuse/core'
 import { BlendFunction, ToneMappingMode } from 'postprocessing'
+import vertexShader from './shaders/vertex.glsl'
+import fragmentShader from './shaders/fragment.glsl'
 
 const { x, y } = usePointer()
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const isMobile = breakpoints.smaller('sm') // < 640px
 
 // Normalize mouse coordinates to -1 to 1 range
 const normalizedMouse = computed(() => {
@@ -52,7 +54,7 @@ watch(geometryRef, (newGeometry) => {
 
 </script>
 <template>
-  <TresPerspectiveCamera :position="[0,0,7]" />
+  <TresPerspectiveCamera :position="[0,0, isMobile ? 9 : 7]" />
 
   <TresMesh>
     <TresSphereGeometry ref="geometryRef" :args="[2, 512, 512]" />
