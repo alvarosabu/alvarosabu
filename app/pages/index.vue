@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HomeMorphingParticles from '~/components/home/morphing-particles/index.vue'
 import HomeFlowField from '~/components/home/flow-field/index.vue'
-
+import HomeRagingSea from '~/components/home/raging-sea/index.vue'
 definePageMeta({
   layout: 'landing'
 })
@@ -9,11 +9,12 @@ definePageMeta({
 // Shader components available
 const shaderComponents = [
   HomeMorphingParticles,
-  HomeFlowField
+  HomeFlowField,
+  HomeRagingSea
 ] as const
 
 // Development override: uncomment and set index to test specific shader
-const devShaderIndex = 1 // 0: MorphingParticles, 1: FlowField
+const devShaderIndex = 2 // 0: MorphingParticles, 1: FlowField
 
 const selectedShaderIndex = ref(
   typeof devShaderIndex !== 'undefined'
