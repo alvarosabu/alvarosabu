@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor'
-import { useMonacoGLSL } from './composables/useMonacoGLSL'
 
 interface Props {
   modelValue: string
@@ -10,7 +9,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   readonly: false,
-  showLineNumbers: true,
+  showLineNumbers: false,
 })
 
 const emit = defineEmits<{
@@ -42,6 +41,7 @@ onMounted(() => {
     fontSize: 14,
     scrollBeyondLastLine: false,
     padding: { top: 8, bottom: 8 },
+    overviewRulerLanes: 0,
   })
 
   // Listen for content changes

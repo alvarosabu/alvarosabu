@@ -1,6 +1,7 @@
 import * as monaco from 'monaco-editor'
+import { createSharedComposable } from '@vueuse/core'
 
-export function useMonacoGLSL() {
+function _useMonacoGLSL() {
   const isRegistered = ref(false)
 
   function registerGLSLLanguage() {
@@ -92,3 +93,5 @@ export function useMonacoGLSL() {
     isRegistered,
   }
 }
+
+export const useMonacoGLSL = createSharedComposable(_useMonacoGLSL)

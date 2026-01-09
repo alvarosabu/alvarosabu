@@ -16,7 +16,7 @@ export function useShaderCompiler() {
   }
 
   function validateShaderSyntax(code: string): CompilationResult {
-    // Basic syntax validation before WebGL compilation
+    // Basic syntax validation
     if (!code.includes('void main()')) {
       return {
         success: false,
