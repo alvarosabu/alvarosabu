@@ -4,10 +4,15 @@ definePageMeta({
 })
 
 const route = useRoute()
+const { isPostVisible, isDev } = useBlogPosts()
 
 const { data: article } = await useAsyncData(route.path, () => {
   return queryCollection('blog').path(route.path).first()
 })
+
+if (article.value && !isPostVisible(article.value.status)) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
 
 const readingTime = computed(() => {
   return article?.value?.meta?.readingTime?.text
@@ -57,7 +62,10 @@ useSeoMeta({
   <UContainer class="max-w-screen-md">
     <header class="prose mx-auto mb-12 dark:prose-invert">
       <NuxtImg v-if="article?.thumbnail" :src="article?.thumbnail" class="w-full my-8 aspect-16/9 object-cover rounded mb-24" />
-      <h1 class="text-4xl font-bold font-display mb-8">{{ article?.title }}</h1>
+      <div class="flex items-center gap-3 mb-8">
+        <h1 class="text-4xl font-bold font-display">{{ article?.title }}</h1>
+        <UBadge v-if="isDev && article?.status === 'draft'" label="Draft" color="warning" variant="subtle" />
+      </div>
       <div class="flex items-center gap-2 my-4">
        <NuxtTime v-if="article?.date" :datetime="article?.date" class="text-sm text-gray-500 font-mono" month="long" day="numeric" year="numeric" locale="en-US" text="Updated at " />
          —

@@ -31,8 +31,10 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
+const { filterByStatus, isDev } = useBlogPosts()
+
 const { data: articles } = await useAsyncData('blog', () =>
-  queryCollection('blog').all().then(items =>
+  filterByStatus(queryCollection('blog')).all().then(items =>
     items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   )
 )
@@ -143,11 +145,11 @@ function getRandomGlitchStyle(index: number) {
             {{ year }}
           </motion.span>
 
-          <Motion v-for="{ path, date, title } in yearArticles" :key="path" :variants="item">
+          <Motion v-for="{ path, date, title, status } in yearArticles" :key="path" :variants="item">
             <NuxtLink :to="path">
               <article class="flex flex-col md:flex-row items-center gap-4 mb-4">
 
-                <!-- <UBadge :label="article.content.category.name" color="primary" variant="subtle" class="mb-2" size="sm" /> -->
+                <UBadge v-if="isDev && status === 'draft'" label="Draft" color="warning" variant="subtle" size="xs" />
                 <p class="font-bold">{{ title }}</p>
                 
                 <footer class="flex justify-between items-center">

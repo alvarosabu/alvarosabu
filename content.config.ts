@@ -11,6 +11,7 @@ export default defineContentConfig({
         thumbnail: z.string(),
         tags: z.array(z.string()).optional(),
         date: z.string(),
+        status: z.enum(['draft', 'published']).default('draft'),
       }),
     }),
     talks: defineCollection({
