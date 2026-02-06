@@ -19,27 +19,23 @@ function unescapeShaderCode(code: string): string {
     .replace(/\\\\r/g, '\r')
 }
 
-// Recursively extract text content from vnodes
-function extractTextFromVNode(vnode: any): string {
-  // Check if this is a code block (ProseCode component)
+// Recursively extract text content from vnodes with depth limit to prevent infinite loops
+function extractTextFromVNode(vnode: any, depth = 0): string {
+  if (!vnode || depth > 10) return ''
+
+  // ProseCode stores the code in props.code
   if (vnode.type?.name === 'ProseCode' || vnode.type?.__name === 'ProseCode') {
-    // ProseCode stores the code in props.code
-    if (vnode.props?.code) {
-      return vnode.props.code
-    }
+    if (vnode.props?.code) return vnode.props.code
   }
 
   // Check for pre > code structure
   if (vnode.type === 'pre' || vnode.type?.name === 'pre') {
-    // Look for code child
     if (Array.isArray(vnode.children)) {
       for (const child of vnode.children) {
         if (child.type === 'code' || child.type?.name === 'code') {
-          if (typeof child.children === 'string') {
-            return child.children
-          }
+          if (typeof child.children === 'string') return child.children
           if (Array.isArray(child.children)) {
-            return child.children.map(extractTextFromVNode).join('')
+            return child.children.map((c: any) => extractTextFromVNode(c, depth + 1)).join('')
           }
         }
       }
@@ -47,47 +43,53 @@ function extractTextFromVNode(vnode: any): string {
   }
 
   // Direct text node
-  if (typeof vnode.children === 'string') {
-    return vnode.children
-  }
+  if (typeof vnode.children === 'string') return vnode.children
 
-  // Text vnode type
-  if (vnode.type === Text || typeof vnode.type === 'symbol') {
-    return String(vnode.children || '')
-  }
+  // Text/Symbol vnode type
+  if (typeof vnode.type === 'symbol') return String(vnode.children ?? '')
 
   // Array of children
   if (Array.isArray(vnode.children)) {
-    return vnode.children.map(extractTextFromVNode).join('')
+    return vnode.children.map((c: any) => extractTextFromVNode(c, depth + 1)).join('')
   }
 
   // Object children (slot content)
   if (vnode.children && typeof vnode.children === 'object' && vnode.children.default) {
-    const childVNodes = typeof vnode.children.default === 'function'
-      ? vnode.children.default()
-      : vnode.children.default
-    return Array.isArray(childVNodes)
-      ? childVNodes.map(extractTextFromVNode).join('')
-      : extractTextFromVNode(childVNodes)
+    try {
+      const childVNodes = typeof vnode.children.default === 'function'
+        ? vnode.children.default()
+        : vnode.children.default
+      if (Array.isArray(childVNodes)) {
+        return childVNodes.map((c: any) => extractTextFromVNode(c, depth + 1)).join('')
+      }
+      return extractTextFromVNode(childVNodes, depth + 1)
+    }
+    catch {
+      return ''
+    }
   }
 
   return ''
 }
 
-// Extract text content from slot if available (computed to be reactive)
+// Extract text content from slot if available
 const slotContent = computed(() => {
   if (!slots.default) return null
 
-  const vnodes = slots.default()
-  if (!vnodes || vnodes.length === 0) return null
+  try {
+    const vnodes = slots.default()
+    if (!vnodes || vnodes.length === 0) return null
 
-  // Recursively extract all text content
-  const content = vnodes
-    .map(extractTextFromVNode)
-    .join('')
-    .trim()
+    const content = vnodes
+      .map((v: any) => extractTextFromVNode(v))
+      .join('')
+      .trim()
 
-  return content || null
+    return content || null
+  }
+  catch {
+    return null
+  }
 })
 
 // Use slot content if available, otherwise use prop or default

@@ -2,6 +2,7 @@
 import HomeMorphingParticles from '~/components/home/morphing-particles/index.vue'
 import HomeFlowField from '~/components/home/flow-field/index.vue'
 import HomeRagingSea from '~/components/home/raging-sea/index.vue'
+import HomeDomainWarp from '~/components/home/domain-warp/index.vue'
 
 definePageMeta({
   layout: 'landing'
@@ -11,13 +12,14 @@ definePageMeta({
 const shaderComponents = [
   HomeMorphingParticles,
   HomeFlowField,
-  HomeRagingSea
+  HomeRagingSea,
+  HomeDomainWarp,
 ] as const
 
 const experimentNumber = useState('experimentNumber')
 
 // Development override: uncomment and set index to test specific shader
-experimentNumber.value = 2 // 0: MorphingParticles, 1: FlowField
+experimentNumber.value = 3 // 0: MorphingParticles, 1: FlowField, 2: RagingSea, 3: DomainWarp
 
 const selectedShaderIndex = ref(
   typeof experimentNumber.value !== 'undefined'
