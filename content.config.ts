@@ -2,6 +2,21 @@ import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 
 export default defineContentConfig({
   collections: {
+    me: defineCollection({
+      type: 'page',
+      source: 'me.md',
+      schema: z.object({
+        socials: z.array(z.object({
+          platform: z.string(),
+          url: z.string(),
+        })),
+        sponsors: z.object({
+          github: z.string().optional(),
+          tresjs: z.string().optional(),
+          opencollective: z.string().optional(),
+        }).optional(),
+      }),
+    }),
     blog: defineCollection({
       type: 'page',
       source: 'blog/**/*.md',

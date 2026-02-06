@@ -18,6 +18,10 @@ const headerLinks: NavigationMenuItem[] = [
     label: 'Talks',
     to: '/talks',
   },
+  {
+    label: 'Me',
+    to: '/me',
+  },
   /* {
     label: 'Projects',
     to: '/projects',
