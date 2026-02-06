@@ -70,6 +70,8 @@ useSeoMeta({
     <div class="fixed inset-0">
       <component :is="currentShader" />
     </div>
+    <!-- Cursor tracker -->
+    <CursorTracker />
     <!-- Content overlay -->
     <div class="relative">
       <!-- Your content goes here -->
