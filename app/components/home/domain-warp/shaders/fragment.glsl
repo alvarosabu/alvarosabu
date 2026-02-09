@@ -83,8 +83,14 @@ void main() {
   // Blur texture: alpha mask for the soft circle shape
   // Aspect correction keeps the circle round at any viewport ratio
   float aspect = uResolution.x / uResolution.y;
-  vec2 blurUv = (uv - 0.5) * vec2(aspect, 1.0) * 2.0 / max(aspect, 1.0) + 0.5;
-  float blurAlpha = texture2D(blurTex, blurUv).a;
+  vec2 aspectScale = vec2(aspect, 1.0) * 2.0 / max(aspect, 1.0);
+  // Bottom-right blob: shift center toward bottom-right
+  vec2 blurUv1 = (uv - 0.5 + vec2(0.2, -0.2)) * aspectScale + 0.5;
+  float blurAlpha1 = texture2D(blurTex, blurUv1).a;
+  // Top-left blob: mirror offset
+  vec2 blurUv2 = (uv - 0.5 + vec2(-0.2, 0.2)) * aspectScale + 0.5;
+  float blurAlpha2 = texture2D(blurTex, blurUv2).a;
+  float blurAlpha = max(blurAlpha1, blurAlpha2);
 
   // Grain-based polar UV displacement
   float gr = pow(grainColor.r, 1.5) + 0.5 * (1.0 - blurAlpha);

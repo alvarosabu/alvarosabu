@@ -83,7 +83,7 @@ onBeforeRender(({ elapsed }) => {
 
 <template>
   <TresOrthographicCamera :position="[0, 0, 20]" />
-  <TresMesh :position="[0.5, -0.7, 1]">
+  <TresMesh>
     <TresPlaneGeometry :args="[3, 3]" />
     <TresShaderMaterial
       :vertex-shader="vertexShader"

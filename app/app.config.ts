@@ -26,6 +26,7 @@ export default defineAppConfig({
         display: 'Inter',
         mono: 'JetBrains Mono',
         serif: 'Inter',
+        pixel: 'Geist Pixel',
       }
     }
   },

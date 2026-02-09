@@ -1,14 +1,25 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+@font-face {                                                                                                 
+  font-family: 'Geist Pixel';                                                                                
+  src: url('/GeistPixel-Square.woff2') format('woff2');                                                      
+  font-display: swap;                                                                                        
+}
+
 @theme static {
-  --font-sans: 'Inter', sans-serif;
+  --font-sans: 'Geist', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-pixel: 'Geist Pixel', monospace;
   --ui-header-height: 72px;
   --ui-bg: #EBEBEB;
   --ui-text: #111111;
   --ui-text-secondary: #666666;
   --ui-text-tertiary: #999999;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-pixel;
 }
 
 /* Glitch effect keyframes - intermittent style */

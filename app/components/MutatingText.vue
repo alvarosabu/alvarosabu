@@ -81,5 +81,5 @@ function replaceAt(s: string, index: number, replacement: string) {
 </script>
 
 <template>
-  <span>{{ displayText }}</span>
+  <span class="font-pixel">{{ displayText }}</span>
 </template>

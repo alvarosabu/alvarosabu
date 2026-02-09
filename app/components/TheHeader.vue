@@ -44,7 +44,7 @@ const headerLinks: NavigationMenuItem[] = [
     <template #title>
       <TheLogo />
     </template>
-    <UNavigationMenu v-if="isVisible" :items="headerLinks" />
+    <UNavigationMenu v-if="isVisible" :items="headerLinks" class="font-pixel" />
 
     <template #right>
       <UColorModeButton v-if="toggleDarkModeEnabled" />
