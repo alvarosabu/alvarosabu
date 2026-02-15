@@ -47,7 +47,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <UContainer class="max-w-screen-md py-16">
+  <UContainer class="max-w-screen-md">
     <motion.article
       class="prose prose-lg dark:prose-invert mx-auto"
       :initial="{ opacity: 0, y: 20 }"
