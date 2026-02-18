@@ -61,7 +61,7 @@ useSeoMeta({
 <template>
   <UContainer class="max-w-screen-md">
     <header class="prose mx-auto mb-12 dark:prose-invert">
-      <NuxtImg v-if="article?.thumbnail" :src="article?.thumbnail" class="w-full my-8 aspect-16/9 object-cover rounded mb-24" />
+     
       <div class="flex items-center gap-3 mb-8">
         <h1 class="text-4xl font-bold font-display">{{ article?.title }}</h1>
         <UBadge v-if="isDev && article?.status === 'draft'" label="Draft" color="warning" variant="subtle" />

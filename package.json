@@ -35,6 +35,7 @@
     "nuxt": "^4.3.0",
     "nuxt-shiki": "0.3.2",
     "nuxt-ssr-api-logger": "2.0.2",
+    "nuxt-studio": "1.3.2",
     "remark-reading-time": "^2.0.2",
     "typescript": "^5.9.3"
   },

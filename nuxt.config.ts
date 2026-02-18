@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { transformColorMentions } from './utils/transform-color-mentions'
 import { transformGitHubMentions } from './utils/transform-github-mentions'
 
 export default defineNuxtConfig({
@@ -18,6 +19,7 @@ export default defineNuxtConfig({
     'nuxt-ssr-api-logger',
     'nuxt-shiki',
     '@todde.tv/gltf-type-toolkit',
+    'nuxt-studio'
   ],
   content: {
     build: {
@@ -49,6 +51,7 @@ export default defineNuxtConfig({
     'content:file:beforeParse': (ctx: any) => {
       const { file } = ctx
       if (file.extension === '.md') {
+        transformColorMentions(file)
         transformGitHubMentions(file)
       }
     }
