@@ -27,13 +27,13 @@ const normalizedY = computed(() => (y.value / height.value).toFixed(3))
   >
     <!-- Crosshair brackets -->
     <div class="relative h-8 w-8">
-      <span class="absolute top-0 left-0 h-2 w-2 border-t-2 border-l-2 border-white" />
-      <span class="absolute top-0 right-0 h-2 w-2 border-t-2 border-r-2 border-white" />
-      <span class="absolute bottom-0 left-0 h-2 w-2 border-b-2 border-l-2 border-white" />
-      <span class="absolute bottom-0 right-0 h-2 w-2 border-b-2 border-r-2 border-white" />
+      <span class="absolute top-0 left-0 h-2 w-2 border-t-2 border-l-2 border-default" />
+      <span class="absolute top-0 right-0 h-2 w-2 border-t-2 border-r-2 border-default" />
+      <span class="absolute bottom-0 left-0 h-2 w-2 border-b-2 border-l-2 border-default" />
+      <span class="absolute bottom-0 right-0 h-2 w-2 border-b-2 border-r-2 border-default" />
     </div>
     <!-- Coordinates -->
-    <p class="mt-1 text-center font-mono text-xs text-white">
+    <p class="mt-1 text-center font-mono text-xs text-default">
       {{ normalizedX }}, {{ normalizedY }}
     </p>
   </div>

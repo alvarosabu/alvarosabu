@@ -81,5 +81,15 @@ function replaceAt(s: string, index: number, replacement: string) {
 </script>
 
 <template>
-  <span class="font-pixel">{{ displayText }}</span>
+  <span class="font-pixel">
+    <template v-for="(char, i) in displayText" :key="i">
+      <span
+        v-if="char === C"
+        class="inline-block bg-current"
+        style="width: 1ch; height: 1em; vertical-align: middle;"
+        aria-hidden="true"
+      />
+      <template v-else>{{ char }}</template>
+    </template>
+  </span>
 </template>
