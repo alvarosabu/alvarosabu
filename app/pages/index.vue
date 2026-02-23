@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
+
 import HomeMorphingParticles from '~/components/home/morphing-particles/index.vue'
 import HomeFlowField from '~/components/home/flow-field/index.vue'
 import HomeRagingSea from '~/components/home/raging-sea/index.vue'
@@ -17,9 +19,11 @@ const shaderComponents = [
 ] as const
 
 const experimentNumber = useState('experimentNumber')
-
+const shaderComponentsLength = useState('shaderComponentsLength')
+shaderComponentsLength.value = shaderComponents.length
 // Development override: uncomment and set index to test specific shader
-experimentNumber.value = 3 // 0: MorphingParticles, 1: FlowField, 2: RagingSea, 3: DomainWarp
+/* experimentNumber.value = 3  */// 0: MorphingParticles, 1: FlowField, 2: RagingSea, 3: DomainWarp
+experimentNumber.value = Math.floor(Math.random() * shaderComponentsLength.value)
 
 const selectedShaderIndex = ref(
   typeof experimentNumber.value !== 'undefined'
@@ -29,36 +33,33 @@ const selectedShaderIndex = ref(
 
 const currentShader = computed(() => shaderComponents[selectedShaderIndex.value])
 
-useHead({
-  title: 'AlvaroSabu | Creative Engineer & Front-end Developer',
-  htmlAttrs: {
-    lang: 'en',
-  },
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/svg+xml',
-      href: '/favicon.svg',
-    },
-  ],
-})
+const site = useSiteConfig()
+const title = 'Portfolio'
+
+/* useHead({
+  title: `${title} | ${description}`,
+}) */
 
 useSeoMeta({
-  title: 'AlvaroSabu | Creative Engineer',
-  description: 'Welcome to my 3D planet. Alvaro Saburido personal portfolio',
-  ogDescription: 'Welcome to my 3D planet. Alvaro Saburido personal portfolio',
-  ogUrl: 'https://alvarosaburido.dev/',
-  ogType: 'website',
-  ogSiteName: 'AlvaroSabu',
-  ogTitle: 'AlvaroSabu | Creative Engineer',
-  ogImage: 'https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Home_oxyn5k.png',
-  ogImageAlt: 'AlvaroSabu | Creative Engineer',
-  twitterDescription: 'Welcome to my 3D planet. Alvaro Saburido personal portfolio',
-  twitterTitle: 'AlvaroSabu | Creative Engineer',
-  twitterImage: 'https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Home_oxyn5k.png',
-  twitterImageAlt: 'AlvaroSabu | Creative Engineer',
-  twitterCard: 'summary_large_image',
-  keywords: 'portfolio, frontend, developer, web, nuxt, threejs, tres, vue, javascript, typescript, creative, engineer, alvaro, saburido',
+  title,
+  ogImage: joinURL(site.url, '/og.png'),
+  ogImageAlt: 'Alvaro Saburido\'s Portfolio',
+  ogTitle: title,
+  ogDescription: site.description,
+  ogUrl: site.url,
+  twitterTitle: title,
+  twitterDescription: site.description,
+  twitterImage: joinURL(site.url, '/og.png'),
+  twitterImageAlt: 'Alvaro Saburido\'s Portfolio',
+/*   description: site.description,
+  ogTitle: title,
+  ogDescription: description,
+  ogImage: '/og.png',
+  ogUrl: site.url,
+  twitterTitle: title,
+  twitterDescription: description, */
+ /*  twitterImage: joinURL(site.url, '/og.png'),
+  twitterCard: 'summary_large_image', */
 })
 
 

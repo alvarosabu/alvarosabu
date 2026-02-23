@@ -196,7 +196,7 @@ material.colorNode = mix(bottomColor, topColor, factor)
 `colorNode` isn't the only output node you can drive. `positionNode` lets you displace vertices directly on the GPU:
 
 ```ts [custom-material.ts]
-import { normalLocal, positionLocal, sin, time } from 'three/tsl'
+import { cos, positionLocal, sin, time, vec3 } from 'three/tsl'
 import { MeshStandardNodeMaterial } from 'three/webgpu'
 
 const material = new MeshStandardNodeMaterial()

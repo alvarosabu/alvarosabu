@@ -1,34 +1,8 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
 
-useHead({
-  title: 'Blog - AlvaroSabu',
-  htmlAttrs: {
-    lang: 'en',
-  },
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/svg+xml',
-      href: '/favicon.svg',
-    },
-  ],
-})
-useSeoMeta({
-  title: 'Blog - AlvaroSabu',
-  description: 'A collection of articles about web development, design, 3D, and other topics.',
-  ogDescription: 'A collection of articles about web development, design, 3D, and other topics.',
-  ogUrl: 'https://alvarosaburido.dev/blog/',
-  ogType: 'website',
-  ogSiteName: 'AlvaroSabu',
-  ogTitle: 'Blog - AlvaroSabu',
-  ogImage: 'https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Blog_oet7tv.png',
-  ogImageAlt: 'Blog - AlvaroSabu',
-  twitterDescription: 'A collection of articles about web development, design, 3D, and other topics.',
-  twitterTitle: 'Blog - AlvaroSabu',
-  twitterImage: 'https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Blog_oet7tv.png',
-  twitterImageAlt: 'Blog - AlvaroSabu',
-  twitterCard: 'summary_large_image',
+definePageMeta({
+  title: 'Blog',
 })
 
 const { filterByStatus, isDev } = useBlogPosts()

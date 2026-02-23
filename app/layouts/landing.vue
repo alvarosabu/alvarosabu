@@ -1,5 +1,6 @@
 <script setup lang="ts">
   const experimentNumber = useState('experimentNumber', () => 0)
+  const shaderComponentsLength = useState('shaderComponentsLength', () => 0)
 </script>
 
 <template>
@@ -19,7 +20,7 @@
           <MutatingText text="CREATIVE" /><br><MutatingText text="SOFTWARE ENGINEER" />
         </div>
         <div class="text-sm md:text-base font-mono">
-          0{{ experimentNumber }}/07
+          0{{ experimentNumber }}/0{{ shaderComponentsLength }}
         </div>
       </footer>
     </div>
