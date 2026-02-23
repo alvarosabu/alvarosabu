@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
+
 definePageMeta({
   layout: 'single'
 })
@@ -18,6 +20,7 @@ const readingTime = computed(() => {
   return article?.value?.meta?.readingTime?.text
 })
 
+const site = useSiteConfig()
 
 // Metadata
 useHead({
@@ -33,26 +36,29 @@ useHead({
     },
   ],
 })
+useSchemaOrg([
+  defineArticle({
+    headline: article.value?.title,
+    description: article.value?.description,
+    datePublished: article.value?.date,
+    keywords: article.value?.tags,
+    image: article.value?.thumbnail,
+  }),
+])
+
 useSeoMeta({
   title: `${article?.value?.title} - AlvaroSabu`,
   keywords: article?.value?.tags?.join(', '),
-  description: article?.value?.excerpt,
-  ogDescription: article?.value?.excerpt,
-  ogUrl: `https://alvarosaburido.dev/blog/${route.params.slug}`,
+  description: article?.value?.description,
+  ogDescription: article?.value?.description,
+  ogUrl: joinURL(site.url, `/blog/${route.params.slug}`),
   ogType: 'article',
   ogSiteName: 'AlvaroSabu',
   ogTitle: `${article?.value?.title} - AlvaroSabu`,
-  ogImage: article?.value?.media?.filename,
-  ogImageAlt: article?.value?.media?.alt,
-  twitterDescription: article?.value?.excerpt,
-  twitterTitle: `${article?.value?.title} - AlvaroSabu`,
-  twitterImage: article?.value?.media?.filename,
   ogImage: article?.value?.thumbnail,
-  ogImageAlt: article?.value?.thumbnailAlt,
-  twitterDescription: article?.value?.excerpt,
+  twitterDescription: article?.value?.description,
   twitterTitle: `${article?.value?.title} - AlvaroSabu`,
   twitterImage: article?.value?.thumbnail,
-  twitterImageAlt: article?.value?.thumbnailAlt,
   twitterCard: 'summary_large_image',
 })
 

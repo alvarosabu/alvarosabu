@@ -1,7 +1,7 @@
 ---
 title: Intro to TSL
 date: 2026-02-15
-description: .
+description: A short introduction to TSL, how to get started and why is a great tool for creative web developers.
 navigation:
   title: Intro to TSL
 status: draft
