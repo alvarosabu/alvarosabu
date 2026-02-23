@@ -11,15 +11,14 @@ tags:
   - shaders
 thumbnail: https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Blog_oet7tv.png
 readingTime:
-  text: 3 min read
-  minutes: 2.535
-  time: 152100
-  words: 507
+  text: 4 min read
+  minutes: 3.66
+  time: 219600
+  words: 732
 ---
 
-::SceneWrapper
- ::BlogTSLCube
- ::
+::scene-wrapper
+:blog-tsl-cube
 ::
 
 Creating shaders has always been challenging, even seasoned developers have never wrote GLSL code by themselves. If you've spent time fighting with `onBeforeCompile()` or rebuilding entire rendering pipelines with `ShaderMaterial` you know what I'm talking about.
@@ -47,7 +46,7 @@ items:
 
 ## GLSL limitations
 
-If you ever wanted to customize a material in {@Threejs} beyond what the built-in properties offered, you had two relative painful options:
+If you ever wanted to customize a material in :github-mention{username="Threejs"} beyond what the built-in properties offered, you had two relative painful options:
 
 **Option 1**: `onBeforeCompile()`  hack to replace the shader string before the material compiles:
 
@@ -138,7 +137,7 @@ The magic behind TSL is the concept of **nodes** — Objects that represent sha
 
 Why nodes? Because node-based shading is already the standard in the 3D and game industry. Blender's Editor, Unreal's Material Editor, Unity's Shader Graph all work this way. TSL brings that same mental model to the web.
 
-To visualize it better, lets take the gradient between {@#6366f1} and {@#ec4899} shader example we used before and replicate it in Blender:
+To visualize it better, lets take the gradient between :magic-color{value="#6366f1"} and :magic-color{value="#ec4899"} shader example we used before and replicate it in Blender:
 
 ![Blender Shading Nodes](/blog/intro-to-tsl/blender-shading-nodes.png)
 
@@ -163,3 +162,73 @@ If we look closely, we can do a 1:1 mapping with our TSL code:
 | Principled BSDF → Base Color                   | `material.colorNode =`               |
 
 ![One to one mapping between Blender and TSL](/blog/intro-to-tsl/one-to-one-mapping.png)
+
+## Animating with TSL
+
+::scene-wrapper
+:blog-tsl-animated-cube
+::
+
+Here's where things get really fun.
+
+TSL has built-in time utilities, so adding animation is just... adding a node.
+
+```ts [custom-material.ts]
+import { mix, positionLocal, sin, time, uniform } from 'three/tsl'
+import { Color, MeshStandardNodeMaterial } from 'three/webgpu'
+
+const material = new MeshStandardNodeMaterial()
+
+const topColor = uniform(new Color('#6366f1'))
+const bottomColor = uniform(new Color('#ec4899'))
+
+const t = time.mul(0.8)
+// Animate the gradient factor
+const factor = sin(positionLocal.y.add(t).mul(0.5).add(0.5))
+
+material.colorNode = mix(bottomColor, topColor, factor)
+```
+
+`time` is a built-in node that updates with elapsed time automatically. No `requestAnimationFrame` loop, no manually pushing uniform values every frame. The shader handles it.
+
+## Displacing vertices
+
+`colorNode` isn't the only output node you can drive. `positionNode` lets you displace vertices directly on the GPU:
+
+```ts [custom-material.ts]
+import { normalLocal, positionLocal, sin, time } from 'three/tsl'
+import { MeshStandardNodeMaterial } from 'three/webgpu'
+
+const material = new MeshStandardNodeMaterial()
+
+const t = time.mul(0.8)
+const freq = positionLocal.y.mul(Math.PI)
+
+material.positionNode = vec3(
+  positionLocal.x.add(sin(freq.add(t)).mul(0.1)),
+  positionLocal.y,
+  positionLocal.z.add(cos(freq.add(t)).mul(0.1)),
+)
+```
+
+Each vertex wobbles on the XZ plane — `sin` drives X, `cos` drives Z at 90° offset, so the motion traces a circular path. No geometry rebuild, no CPU loop. Pure GPU.
+
+A few other output nodes worth knowing:
+
+- `emissiveNode` — self-illumination color
+- `roughnessNode` — per-pixel roughness
+- `normalNode` — custom normals
+
+## Does it work without WebGPU?
+
+Good news — yes.
+
+TSL compiles to **WGSL** when using `WebGPURenderer` and falls back to **GLSL** when using `WebGLRenderer`. Same node graph, both renderers. You write it once, Three.js figures out the rest.
+
+::note
+**Heads up** ☝
+
+:br
+
+Import from `three/webgpu` (not `three`) to get the node-aware versions of renderers and materials. `WebGPURenderer` handles the fallback to WebGL automatically if the browser doesn't support WebGPU.
+::
