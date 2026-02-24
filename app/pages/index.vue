@@ -2,7 +2,6 @@
 import { joinURL } from 'ufo'
 
 import HomeMorphingParticles from '~/components/home/morphing-particles/index.vue'
-import HomeFlowField from '~/components/home/flow-field/index.vue'
 import HomeRagingSea from '~/components/home/raging-sea/index.vue'
 import HomeDomainWarp from '~/components/home/domain-warp/index.vue'
 
@@ -13,7 +12,6 @@ definePageMeta({
 // Shader components available
 const shaderComponents = [
   HomeMorphingParticles,
-  HomeFlowField,
   HomeRagingSea,
   HomeDomainWarp,
 ] as const
