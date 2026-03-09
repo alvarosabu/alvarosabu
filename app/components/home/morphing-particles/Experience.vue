@@ -182,9 +182,12 @@ function morphParticles() {
   updateCamera()
 }
 
+const isExperienceReady = useState('homeExperienceReady', () => false)
+
 // Trigger first morph when particles are ready
 watch(() => particles.positions.length, (length) => {
   if (length > 0) {
+    isExperienceReady.value = true
     nextTick(() => {
       // Delay first morph to let users enjoy initial model
       setTimeout(() => {

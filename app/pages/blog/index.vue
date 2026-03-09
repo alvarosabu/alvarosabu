@@ -1,8 +1,27 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
+import { joinURL } from 'ufo'
+
+const title = 'Blog'
 
 definePageMeta({
   title: 'Blog',
+})
+
+const site = useSiteConfig()
+const ogImage = joinURL(site.url, '/blog-og.png')
+
+useSeoMeta({
+  title,
+  ogImage,
+  ogImageAlt: 'Alvaro Saburido\'s Blog',
+  ogTitle: title,
+  ogDescription: site.description,
+  ogUrl: site.url,
+  twitterTitle: title,
+  twitterDescription: site.description,
+  twitterImage: ogImage,
+  twitterImageAlt: 'Alvaro Saburido\'s Blog',
 })
 
 const { filterByStatus, isDev } = useBlogPosts()
@@ -90,6 +109,8 @@ function getRandomGlitchStyle(index: number) {
     '--glitch-offset': `${offset.toFixed(1)}px`,
   }
 }
+
+
 </script>
 <template>
   <UContainer class="max-w-screen-md">

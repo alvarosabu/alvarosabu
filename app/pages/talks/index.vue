@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
+import { joinURL } from 'ufo'
 
 useHead({
   title: 'Talks - AlvaroSabu',
@@ -15,22 +16,28 @@ useHead({
   ],
 })
 
-useSeoMeta({
-  title: 'Talks - AlvaroSabu',
-  description: 'A collection of talks and presentations about web development, 3D, Vue.js, and TresJS.',
-  ogDescription: 'A collection of talks and presentations about web development, 3D, Vue.js, and TresJS.',
-  ogUrl: 'https://alvarosaburido.dev/talks/',
-  ogType: 'website',
-  ogSiteName: 'AlvaroSabu',
-  ogTitle: 'Talks - AlvaroSabu',
-  ogImage: 'https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Blog_oet7tv.png',
-  ogImageAlt: 'Talks - AlvaroSabu',
-  twitterDescription: 'A collection of talks and presentations about web development, 3D, Vue.js, and TresJS.',
-  twitterTitle: 'Talks - AlvaroSabu',
-  twitterImage: 'https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Blog_oet7tv.png',
-  twitterImageAlt: 'Talks - AlvaroSabu',
-  twitterCard: 'summary_large_image',
+const title = 'Talks'
+
+definePageMeta({
+  title: 'Talks',
 })
+
+const site = useSiteConfig()
+const ogImage = joinURL(site.url, '/talks-og.png')
+
+useSeoMeta({
+  title,
+  ogImage,
+  ogImageAlt: 'Alvaro Saburido\'s Public Speaking',
+  ogTitle: title,
+  ogDescription: 'A collection of talks and presentations about web development, 3D, Vue.js, and TresJS.',
+  ogUrl: site.url,
+  twitterTitle: title,
+  twitterDescription: 'A collection of talks and presentations about web development, 3D, Vue.js, and TresJS.',
+  twitterImage: ogImage,
+  twitterImageAlt: 'Alvaro Saburido\'s Public Speaking',
+})
+
 
 const { data: talks } = await useAsyncData('talks', () =>
   queryCollection('talks').all()

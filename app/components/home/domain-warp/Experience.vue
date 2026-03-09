@@ -41,6 +41,8 @@ const uniforms = {
   uResolution: new Uniform(resolution.value),
 }
 
+const isExperienceReady = useState('homeExperienceReady', () => false)
+
 watch([grainTex, blurTex], () => {
   if (grainTex.value) {
     grainTex.value.minFilter = NearestFilter
@@ -54,6 +56,9 @@ watch([grainTex, blurTex], () => {
   }
   uniforms.grainTex.value = grainTex.value
   uniforms.blurTex.value = blurTex.value
+  if (grainTex.value && blurTex.value) {
+    isExperienceReady.value = true
+  }
 }, { immediate: true })
 
 // Theme switching with GSAP transition

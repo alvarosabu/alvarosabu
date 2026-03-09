@@ -37,6 +37,12 @@ watch(normalizedMouse, (newMouse) => {
   uniforms.uMouse.value = newMouse
 })
 
+const isExperienceReady = useState('homeExperienceReady', () => false)
+
+onMounted(() => {
+  isExperienceReady.value = true
+})
+
 const { onBeforeRender } = useLoop()
 
 onBeforeRender(({ elapsed }) => {

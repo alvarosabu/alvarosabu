@@ -1,5 +1,28 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
+import { joinURL } from 'ufo'
+
+const title = 'About Me'
+
+definePageMeta({
+  title: 'About Me',
+})
+
+const site = useSiteConfig()
+const ogImage = joinURL(site.url, '/me-og.png')
+
+useSeoMeta({
+  title,
+  ogImage,
+  ogImageAlt: 'Alvaro Saburido\'s About Me',
+  ogTitle: title,
+  ogDescription: 'A brief introduction to who I am and what I do.',
+  ogUrl: site.url,
+  twitterTitle: title,
+  twitterDescription: 'A brief introduction to who I am and what I do.',
+  twitterImage: ogImage,
+  twitterImageAlt: 'Alvaro Saburido\'s About Me',
+})
 
 const { data: page } = await useAsyncData('me', () =>
   queryCollection('me').first()
@@ -28,22 +51,6 @@ useHead({
   ],
 })
 
-useSeoMeta({
-  title: 'About Me - AlvaroSabu',
-  description: 'Creative Software Engineer. Enabling developers to build creative stuff they dream of but never thought was possible.',
-  ogDescription: 'Creative Software Engineer. Enabling developers to build creative stuff they dream of but never thought was possible.',
-  ogUrl: 'https://alvarosaburido.dev/me',
-  ogType: 'website',
-  ogSiteName: 'AlvaroSabu',
-  ogTitle: 'About Me - AlvaroSabu',
-  ogImage: 'https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Home_oxyn5k.png',
-  ogImageAlt: 'About Me - AlvaroSabu',
-  twitterDescription: 'Creative Software Engineer. Enabling developers to build creative stuff they dream of but never thought was possible.',
-  twitterTitle: 'About Me - AlvaroSabu',
-  twitterImage: 'https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Home_oxyn5k.png',
-  twitterImageAlt: 'About Me - AlvaroSabu',
-  twitterCard: 'summary_large_image',
-})
 </script>
 
 <template>

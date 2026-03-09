@@ -9,6 +9,44 @@ definePageMeta({
   layout: 'landing'
 })
 
+// Reset synchronously before any children mount
+const isExperienceReady = useState('homeExperienceReady', () => false)
+isExperienceReady.value = false
+
+// Animated fake progress counter
+const progress = ref(0)
+const showOverlay = ref(true)
+const displayProgress = computed(() => Math.floor(progress.value).toString().padStart(3, '0'))
+
+let animFrame: number
+
+function animateProgress() {
+  if (isExperienceReady.value) {
+    // Snap to 100 quickly once experience is ready, minimum 1.5% per frame
+    progress.value += Math.max((100 - progress.value) * 0.12, 1.5)
+  }
+  else {
+    // Ease toward 85%, decelerating near the end to simulate "waiting"
+    progress.value += (85 - progress.value) * 0.025
+  }
+
+  if (progress.value >= 99.95) {
+    progress.value = 100
+    setTimeout(() => { showOverlay.value = false }, 200)
+    return
+  }
+
+  animFrame = requestAnimationFrame(animateProgress)
+}
+
+onMounted(() => {
+  progress.value = 0
+  showOverlay.value = true
+  animFrame = requestAnimationFrame(animateProgress)
+})
+
+onUnmounted(() => cancelAnimationFrame(animFrame))
+
 // Shader components available
 const shaderComponents = [
   HomeMorphingParticles,
@@ -34,10 +72,6 @@ const currentShader = computed(() => shaderComponents[selectedShaderIndex.value]
 const site = useSiteConfig()
 const title = 'Portfolio'
 
-/* useHead({
-  title: `${title} | ${description}`,
-}) */
-
 useSeoMeta({
   title,
   ogImage: joinURL(site.url, '/og.png'),
@@ -49,18 +83,7 @@ useSeoMeta({
   twitterDescription: site.description,
   twitterImage: joinURL(site.url, '/og.png'),
   twitterImageAlt: 'Alvaro Saburido\'s Portfolio',
-/*   description: site.description,
-  ogTitle: title,
-  ogDescription: description,
-  ogImage: '/og.png',
-  ogUrl: site.url,
-  twitterTitle: title,
-  twitterDescription: description, */
- /*  twitterImage: joinURL(site.url, '/og.png'),
-  twitterCard: 'summary_large_image', */
 })
-
-
 </script>
 
 <template>
@@ -69,6 +92,28 @@ useSeoMeta({
     <div class="fixed inset-0">
       <component :is="currentShader" />
     </div>
+    <!-- Loading overlay -->
+    <Transition name="fade">
+      <div
+        v-if="showOverlay"
+        class="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-(--ui-bg)"
+      >
+        <p class="flex items-center gap-2">
+          <span data-text="Loading..." class="font-pixel glitch glitch-slow">Loading...</span>
+          <span
+            class="font-pixel"
+            :data-text="`${displayProgress}%`"
+          >{{ displayProgress }}%</span>
+        </p>
+        <div class="relative w-40 h-px">
+          <div class="absolute inset-0 h-1 bg-(--ui-text) opacity-20" />
+          <div
+            class="absolute inset-y-0 left-0 h-1 bg-(--ui-text)"
+            :style="{ width: `${progress}%` }"
+          />
+        </div>
+      </div>
+    </Transition>
     <!-- Cursor tracker -->
     <CursorTracker />
     <!-- Content overlay -->
@@ -78,4 +123,11 @@ useSeoMeta({
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.fade-leave-active {
+  transition: opacity 0.8s ease;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
