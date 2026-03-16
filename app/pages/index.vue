@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { joinURL } from 'ufo'
 
-import HomeMorphingParticles from '~/components/home/morphing-particles/index.vue'
-import HomeRagingSea from '~/components/home/raging-sea/index.vue'
-import HomeDomainWarp from '~/components/home/domain-warp/index.vue'
+const HomeMorphingParticles = defineAsyncComponent(() => import('~/components/home/morphing-particles/index.vue'))
+const HomeRagingSea = defineAsyncComponent(() => import('~/components/home/raging-sea/index.vue'))
+const HomeDomainWarp = defineAsyncComponent(() => import('~/components/home/domain-warp/index.vue'))
 
 definePageMeta({
   layout: 'landing'
@@ -47,19 +47,29 @@ onMounted(() => {
 
 onUnmounted(() => cancelAnimationFrame(animFrame))
 
-// Shader components available
+// Shader components with weighted probabilities
 const shaderComponents = [
-  HomeMorphingParticles,
-  HomeRagingSea,
-  HomeDomainWarp,
+  { component: HomeDomainWarp, weight: 0.45 },
+  { component: HomeMorphingParticles, weight: 0.35 },
+  { component: HomeRagingSea, weight: 0.2 },
 ] as const
+
+function pickWeightedIndex(): number {
+  const roll = Math.random()
+  let cumulative = 0
+  for (let i = 0; i < shaderComponents.length; i++) {
+    cumulative += shaderComponents[i].weight
+    if (roll < cumulative) return i
+  }
+  return shaderComponents.length - 1
+}
 
 const experimentNumber = useState('experimentNumber')
 const shaderComponentsLength = useState('shaderComponentsLength')
 shaderComponentsLength.value = shaderComponents.length
 // Development override: uncomment and set index to test specific shader
-/* experimentNumber.value = 3  */// 0: MorphingParticles, 1: FlowField, 2: RagingSea, 3: DomainWarp
-experimentNumber.value = Math.floor(Math.random() * shaderComponentsLength.value)
+/* experimentNumber.value = 0  */// 0: DomainWarp, 1: MorphingParticles, 2: RagingSea
+experimentNumber.value = pickWeightedIndex()
 
 const selectedShaderIndex = ref(
   typeof experimentNumber.value !== 'undefined'
@@ -67,7 +77,7 @@ const selectedShaderIndex = ref(
     : Math.floor(Math.random() * shaderComponents.length)
 )
 
-const currentShader = computed(() => shaderComponents[selectedShaderIndex.value])
+const currentShader = computed(() => shaderComponents[selectedShaderIndex.value].component)
 
 const site = useSiteConfig()
 const title = 'Portfolio'

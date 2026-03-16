@@ -6,6 +6,6 @@ const { isDark, colors } = useDarkMode()
 
 <template>
   <TresCanvas window-size :clear-color="isDark ? colors.DARK : colors.LIGHT" :tone-mapping="NoToneMapping">
-    <HomeDomainWarpExperience />
+    <LazyHomeDomainWarpExperience />
   </TresCanvas>
 </template>

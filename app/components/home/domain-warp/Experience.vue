@@ -72,7 +72,7 @@ watch(isDark, (dark) => {
 }, { immediate: true })
 
 watch(normalizedMouse, (mouse) => {
-  uniforms.uMouse.value.copy(mouse)
+  gsap.to(uniforms.uMouse.value, { x: mouse.x, y: mouse.y, duration: 0.5, overwrite: true })
 })
 
 watch(resolution, (res) => {

@@ -2,10 +2,11 @@
 import { definePerson } from 'nuxt-schema-org/schema'
 import { transformColorMentions } from './utils/transform-color-mentions'
 import { transformGitHubMentions } from './utils/transform-github-mentions'
+import { createResolver } from '@nuxt/kit'
+
+const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-
-  compatibilityDate: '2025-05-15',
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://alvarosabu.dev',
     name: 'AlvaroSabu',
@@ -75,14 +76,14 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/content',
-
     '@tresjs/nuxt',
     'motion-v/nuxt',
     'nuxt-ssr-api-logger',
     'nuxt-shiki',
     '@todde.tv/gltf-type-toolkit',
     '@nuxtjs/seo',
-    'nuxt-studio'
+    'nuxt-studio',
+    '@nuxt/hints',
   ],
   content: {
     build: {
@@ -119,4 +120,10 @@ export default defineNuxtConfig({
       }
     }
   },
+  icon: {
+    customCollections: [{
+      prefix: 'as',
+      dir: resolve('./app/assets/icons')
+    }],
+  }
 })
