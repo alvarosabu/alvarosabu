@@ -33,7 +33,7 @@ I believe the web should be a canvas for creativity. My goal is enabling develop
 
 ---
 
-I'm a public speaker, you can check some of my talks [here](/talks). I also write [blog posts](/blog) about creative web development and my personal journey. Occasionally, I create content at  :magic-link{label="AlvaroDevLabs"} about creative web development and my personal journey.
+I'm a public speaker, you can check some of [my talks](/talks). I also write [blog posts](/blog) about creative web development and my personal journey. Occasionally, I create content at  :magic-link{label="AlvaroDevLabs"} about creative web development and my personal journey.
 
 When not coding, I enjoy everything that can be considered creative. I'm a big fan of photography (currently learning), videography, gaming. If not that, you can find me scuba diving 🤿, carving down snowy mountains 🏂, or getting lost in :magic-link{label="Blender"} building 3D worlds.
 
