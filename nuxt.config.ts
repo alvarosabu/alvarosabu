@@ -101,6 +101,10 @@ export default defineNuxtConfig({
     '/': { prerender: true },
   },
 
+  sitemap: {
+    zeroRuntime: true,
+  },
+
   image: {
     format: ['webp', 'avif'],
   },
@@ -125,5 +129,16 @@ export default defineNuxtConfig({
       prefix: 'as',
       dir: resolve('./app/assets/icons')
     }],
-  }
+  },
+  $production: {
+    studio: false,
+  },
+  studio: {
+    repository: {
+      provider: 'github',
+      owner: 'alvarosabu',
+      repo: 'alvarosabu',
+      branch: 'main' // Optional, defaults to 'main'
+    }
+  },
 })

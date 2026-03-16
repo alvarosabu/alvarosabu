@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LabTSLExperience from './Experience.vue'
+import LabTSLExperience from '~/components/lab/tsl/Experience.vue'
 
 import { WebGPURenderer, MeshStandardNodeMaterial } from 'three/webgpu'
 import type { TresRendererSetupContext } from '@tresjs/core'
