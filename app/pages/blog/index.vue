@@ -114,14 +114,7 @@ function getRandomGlitchStyle(index: number) {
 </script>
 <template>
   <UContainer class="max-w-screen-md">
-    <motion.h1
-      class="text-4xl font-bold mb-16 md:mb-32 text-center md:text-left"
-      :initial="{ opacity: 0, y: 100 }"
-      :animate="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.5 }"
-    >
-      some thoughts
-    </motion.h1>
+    <PageTitle title="some thoughts" />
     <section v-if="articlesByYear.length" >
       <Motion
         initial="hidden"

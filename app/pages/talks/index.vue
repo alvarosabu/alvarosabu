@@ -110,14 +110,7 @@ function formatDate(dateString: string) {
 
 <template>
   <UContainer class="max-w-screen-md">
-    <motion.h1
-      class="text-4xl font-bold mb-16 md:mb-32 text-center md:text-left"
-      :initial="{ opacity: 0, x: -100 }"
-      :animate="{ opacity: 1, x: 0 }"
-      :transition="{ duration: 0.5 }"
-    >
-      talks
-    </motion.h1>
+    <PageTitle title="talks" />
 
     <section v-if="talksByTitle.length">
       <Motion
