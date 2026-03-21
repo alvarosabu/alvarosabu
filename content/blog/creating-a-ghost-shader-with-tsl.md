@@ -13,9 +13,9 @@ tags:
 thumbnail: /blog/creating-a-ghost-shader-with-tsl/creating-a-ghost-shader-with-tsl.png
 readingTime:
   text: 4 min read
-  minutes: 3.41
-  time: 204600
-  words: 682
+  minutes: 3.49
+  time: 209400
+  words: 698
 ---
 
 ::scene-wrapper{caption="Ghost shader I made for my rpg-like game"}
