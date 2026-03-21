@@ -92,7 +92,11 @@ export default defineNuxtConfig({
           theme: 'catppuccin-frappe',
         },
         remarkPlugins: {
-          'remark-reading-time': {}
+          'remark-reading-time': {},
+          'remark-math': {},
+        },
+        rehypePlugins: {
+          'rehype-katex': {},
         },
       },
     }

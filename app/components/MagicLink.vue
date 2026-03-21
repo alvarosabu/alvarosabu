@@ -16,6 +16,8 @@ const linksMap: Record<string, string> = {
   'Porsche Digital': 'https://www.porsche.digital',
   'Netcentric': 'https://www.netcentric.biz',
   'Blender': 'https://www.blender.org',
+  'Divinity Original Sin 2': 'https://divinity.com/original-sin-ii',
+  "Baldur's Gate 3": 'https://baldursgate3.game',
   'alvarosabu': 'https://github.com/alvarosabu',
   'AlvaroDevLabs': 'https://www.youtube.com/@AlvaroDevLabs',
 }

@@ -1,13 +1,20 @@
 <script setup lang="ts">
-// Simple wrapper for components without controls
+defineProps<{
+  caption?: string
+}>()
 </script>
 
 <template>
-  <div class="w-full relative rounded-lg overflow-hidden border-1 border-muted dark:border-transparent">
-    <ClientOnly>
-      <div class="aspect-video">
-        <slot/>
-      </div>
-    </ClientOnly>
-  </div>
+  <figure class="w-full">
+    <div class="relative rounded-lg overflow-hidden border-1 border-muted dark:border-transparent">
+      <ClientOnly>
+        <div class="aspect-video">
+          <slot />
+        </div>
+      </ClientOnly>
+    </div>
+    <figcaption v-if="caption" class="mt-2 text-center text-sm text-muted">
+      {{ caption }}
+    </figcaption>
+  </figure>
 </template>

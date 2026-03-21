@@ -115,10 +115,10 @@ useSeoMeta({
             :data-text="`${displayProgress}%`"
           >{{ displayProgress }}%</span>
         </p>
-        <div class="relative w-40 h-px">
-          <div class="absolute inset-0 h-1 bg-(--ui-text) opacity-20" />
+        <div class="relative w-40 h-[1px]">
+          <div class="absolute inset-0 h-[1px] bg-(--ui-text) opacity-20" />
           <div
-            class="absolute inset-y-0 left-0 h-1 bg-(--ui-text)"
+            class="absolute inset-y-0 left-0 h-[1px] bg-(--ui-text)"
             :style="{ width: `${progress}%` }"
           />
         </div>

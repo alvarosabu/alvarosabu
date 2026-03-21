@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@import "katex/dist/katex.min.css";
 
 @font-face {                                                                                                 
   font-family: 'Geist Pixel';                                                                                

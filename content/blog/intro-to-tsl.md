@@ -4,17 +4,18 @@ date: 2026-02-15
 description: A short introduction to TSL, how to get started and why is a great tool for creative web developers.
 navigation:
   title: Intro to TSL
+  description: A short introduction to TSL, how to get started and why is a great tool for creative web developers.
 status: published
 tags:
   - webgpu
   - tsl
   - shaders
-thumbnail: https://res.cloudinary.com/alvarosaburido/image/upload/v1717241599/portfolio/og/v3/Open_Graph_-_Blog_oet7tv.png
+thumbnail: /blog/intro-to-tsl/intro-to-tsl.png
 readingTime:
   text: 4 min read
-  minutes: 3.66
-  time: 219600
-  words: 732
+  minutes: 3.765
+  time: 225900
+  words: 753
 ---
 
 ::scene-wrapper
