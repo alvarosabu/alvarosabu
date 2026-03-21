@@ -111,6 +111,19 @@ export default defineNuxtConfig({
 
   image: {
     format: ['webp', 'avif'],
+    domains: [
+      'tresjs.org',
+      'vuejs.org',
+      'directus.io',
+      'www.storyblok.com',
+      'www.porsche.digital',
+      'www.youtube.com',
+      'www.blender.org',
+      'threejs.org',
+      'nuxt.com',
+      'www.netcentric.biz',
+      'github.com',
+    ],
   },
 
   tres: {
