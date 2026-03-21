@@ -110,6 +110,7 @@ export default defineNuxtConfig({
   },
 
   image: {
+    provider: 'ipx',
     format: ['webp', 'avif'],
     domains: [
       'tresjs.org',
