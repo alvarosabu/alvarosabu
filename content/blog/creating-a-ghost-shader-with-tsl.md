@@ -55,7 +55,7 @@ Our ghost material exploits this: where the surface faces you directly, it's tra
 
 The core of the effect is a dot product between the surface normal **N** and the view direction **V**:
 
-\[\[]{.katex-mathml}\[\[\[]{.strut style="height:0.6833em;"} [F]{.mord.mathnormal style="margin-right:0.13889em;"}[]{.mspace style="margin-right:0.2778em;"}[=]{.mrel}[]{.mspace style="margin-right:0.2778em;"} ]{.base}\[\[]{.strut style="height:1em;vertical-align:-0.25em;"} [(]{.mopen}[1]{.mord}[]{.mspace style="margin-right:0.2222em;"}[−]{.mbin}[]{.mspace style="margin-right:0.2222em;"} ]{.base}\[\[]{.strut style="height:0.6861em;"} [N]{.mord.mathbf}[]{.mspace style="margin-right:0.2222em;"}[⋅]{.mbin}[]{.mspace style="margin-right:0.2222em;"} ]{.base}\[\[]{.strut style="height:1em;vertical-align:-0.25em;"} [V]{.mord.mathbf style="margin-right:0.01597em;"} \[\[)]{.mclose}\[\[\[\[\[\[]{.pstrut style="height:2.7em;"}\[\[p]{.mord.mathnormal.mtight}]{.sizing.reset-size6.size3.mtight}]{style="top:-3.063em;margin-right:0.05em;"}]{.vlist style="height:0.6644em;"}]{.vlist-r}]{.vlist-t}]{.msupsub}]{.mclose}]{.base}]{.katex-html}]{.katex}
+$$F = (1 - \mathbf{N} \cdot \mathbf{V})^p$$
 
 - **N** — the surface normal at the fragment (which way the surface is pointing)
 - **V** — the direction from the fragment toward the camera
@@ -102,7 +102,7 @@ material.side = DoubleSide
 material.opacityNode = shaped
 ```
 
-Each line maps directly to the formula \[\[]{.katex-mathml}\[\[\[]{.strut style="height:0.6833em;"} [F]{.mord.mathnormal style="margin-right:0.13889em;"}[]{.mspace style="margin-right:0.2778em;"}[=]{.mrel}[]{.mspace style="margin-right:0.2778em;"} ]{.base}\[\[]{.strut style="height:1em;vertical-align:-0.25em;"} [(]{.mopen}[1]{.mord}[]{.mspace style="margin-right:0.2222em;"}[−]{.mbin}[]{.mspace style="margin-right:0.2222em;"} ]{.base}\[\[]{.strut style="height:0.6861em;"} [N]{.mord.mathbf}[]{.mspace style="margin-right:0.2222em;"}[⋅]{.mbin}[]{.mspace style="margin-right:0.2222em;"} ]{.base}\[\[]{.strut style="height:1em;vertical-align:-0.25em;"} [V]{.mord.mathbf style="margin-right:0.01597em;"} \[\[)]{.mclose}\[\[\[\[\[\[]{.pstrut style="height:2.7em;"}\[\[p]{.mord.mathnormal.mtight}]{.sizing.reset-size6.size3.mtight}]{style="top:-3.063em;margin-right:0.05em;"}]{.vlist style="height:0.6644em;"}]{.vlist-r}]{.vlist-t}]{.msupsub}]{.mclose}]{.base}]{.katex-html}]{.katex} :
+Each line maps directly to the formula $F = (1 - \mathbf{N} \cdot \mathbf{V})^p$ :
 
 - `normalView` → **N** in the formula. The surface normal in view (camera) space.
 - `positionViewDirection` → **V** in the formula. The direction from the fragment toward the camera.
