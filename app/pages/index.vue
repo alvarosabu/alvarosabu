@@ -109,7 +109,6 @@ useSeoMeta({
         class="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-(--ui-bg)"
       >
         <p class="flex items-center gap-2">
-          <span data-text="Loading..." class="font-pixel glitch glitch-slow">Loading...</span>
           <span
             class="font-pixel"
             :data-text="`${displayProgress}%`"
