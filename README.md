@@ -1,6 +1,8 @@
+![Alvaro Saburido's Portfolio](.github/banner.png)
+
 # Alvaro Saburido's Portfolio
 
-This is my personal portfolio website, built with Nuxt, Nuxt UI, Tres, and Storyblok.
+This is my personal portfolio website, built with Nuxt, Nuxt UI, TresJS, Motion Framer Vue and TailwindCSS.
 
 ## License
 
