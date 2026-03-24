@@ -1,6 +1,6 @@
 ![Alvaro Saburido's Portfolio](.github/banner.png)
 
-# Alvaro Saburido's Portfolio
+# Alvarosabu's Portfolio
 
 This is my personal portfolio website, built with Nuxt, Nuxt UI, TresJS, Motion Framer Vue and TailwindCSS.
 
