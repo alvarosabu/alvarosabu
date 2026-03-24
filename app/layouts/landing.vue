@@ -20,7 +20,7 @@
           <MutatingText text="CREATIVE" /><br><MutatingText text="SOFTWARE ENGINEER" />
         </div>
         <div class="text-sm md:text-base font-mono">
-          0{{ experimentNumber }}/0{{ shaderComponentsLength }}
+          0{{ experimentNumber }}/0{{ shaderComponentsLength - 1}}
         </div>
       </footer>
     </div>
