@@ -8,7 +8,7 @@ definePageMeta({
 })
 
 const site = useSiteConfig()
-const ogImage = joinURL(site.url, '/blog-og.png')
+const ogImage = joinURL(site.url, '/photos-og.png')
 
 useSeoMeta({
   title,
