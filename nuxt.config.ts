@@ -103,6 +103,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': { prerender: true },
+    '/photos': { prerender: true },
   },
 
   sitemap: {

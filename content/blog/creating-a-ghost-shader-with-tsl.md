@@ -154,6 +154,46 @@ bloomPass.strength.value = 0.5
 bloomPass.threshold.value = 0.1
 ```
 
+### Step 5: Ethereal Noise
+
+The ghost looks clean — *too* clean. Real spectral energy isn't uniform; it flickers and shifts. We can break up the perfect Fresnel rim with animated fractal noise using TSL's built-in `mx_fractal_noise_float` node.
+
+```ts
+import { mix, mx_fractal_noise_float, positionLocal, time, uniform } from 'three/tsl'
+
+const noiseScale = uniform(float(1.5))
+const noiseSpeed = uniform(float(0.3))
+const noiseIntensity = uniform(float(0.5))
+
+const animatedPos = positionLocal.add(time.mul(noiseSpeed))
+const noiseValue = mx_fractal_noise_float(animatedPos.mul(noiseScale), 3, 2, 0.5)
+const noiseFactor = mix(
+  float(1.0),
+  noiseValue.remapClamp(float(-1), float(1), float(0), float(1)),
+  noiseIntensity,
+)
+const shapedWithNoise = shaped.mul(noiseFactor)
+```
+
+Here's what each piece does:
+
+- `positionLocal.add(time.mul(noiseSpeed))` — offsets the noise sample position over time so the pattern drifts slowly across the surface.
+- `mx_fractal_noise_float(..., 3, 2, 0.5)` — generates multi-octave fractal noise. The `3` octaves add detail layers, `2` is the lacunarity (frequency multiplier per octave), and `0.5` is the diminishment (amplitude reduction per octave).
+- `remapClamp(-1, 1, 0, 1)` — the raw noise outputs `[-1, 1]`; this maps it to `[0, 1]` so it can modulate opacity without going negative.
+- `mix(1.0, remapped, noiseIntensity)` — blends between "no noise" (1.0) and the noise value. At `0.5` intensity, you get subtle variation without losing the Fresnel shape entirely.
+
+Then replace `shaped` with `shapedWithNoise` in both `opacityNode` and `emissiveNode`:
+
+```ts
+material.opacityNode = shapedWithNoise
+material.emissiveNode = color('#88ccff').mul(shapedWithNoise).mul(12.0)
+```
+
+::scene-wrapper{caption="Step 5: Fractal noise breaks up the uniform rim"}
+  :::blog-fresnel-step-demo{:step='5'}
+  :::
+::
+
 ## The Complete Material
 
 Putting it all together in a reusable function:
@@ -162,29 +202,50 @@ Putting it all together in a reusable function:
 import {
   color,
   dot,
-  normalView,
   float,
+  mix,
+  mx_fractal_noise_float,
+  normalView,
+  positionLocal,
   positionViewDirection,
-  vec3,
   pow,
-  sub,
   smoothstep,
+  sub,
+  time,
+  vec3,
 } from 'three/tsl'
-import { DoubleSide } from 'three'
-import { MeshPhysicalNodeMaterial } from 'three/webgpu'
+import { DoubleSide, MeshPhysicalNodeMaterial } from 'three/webgpu'
+
+const GHOST_COLOR = '#88ccff'
+const GLOW_STRENGTH = 12.0
+const FRESNEL_POWER = 1.5
+const NOISE_SCALE = 1.5
+const NOISE_SPEED = 0.3
+const NOISE_INTENSITY = 0.5
 
 export function ghostMaterial() {
+  // Fresnel: edges bright, core dark
   const NdotV = dot(normalView, positionViewDirection).abs()
-  const fresnelFactor = pow(sub(float(1.0), NdotV), float(1.5)).mul(0.9)
+  const fresnelFactor = pow(sub(float(1.0), NdotV), float(FRESNEL_POWER)).mul(0.9)
   const shaped = smoothstep(float(0.0), float(1.0), fresnelFactor)
+
+  // Ethereal noise
+  const animatedPos = positionLocal.add(time.mul(float(NOISE_SPEED)))
+  const noiseValue = mx_fractal_noise_float(animatedPos.mul(float(NOISE_SCALE)), 3, 2, 0.5)
+  const noiseFactor = mix(
+    float(1.0),
+    noiseValue.remapClamp(float(-1), float(1), float(0), float(1)),
+    float(NOISE_INTENSITY),
+  )
+  const shapedWithNoise = shaped.mul(noiseFactor)
 
   const material = new MeshPhysicalNodeMaterial()
   material.transparent = true
   material.depthWrite = false
   material.side = DoubleSide
   material.colorNode = vec3(0, 0, 0)
-  material.opacityNode = shaped
-  material.emissiveNode = color('#88ccff').mul(shaped).mul(12.0)
+  material.opacityNode = shapedWithNoise
+  material.emissiveNode = color(GHOST_COLOR).mul(shapedWithNoise).mul(GLOW_STRENGTH)
   return material
 }
 ```
