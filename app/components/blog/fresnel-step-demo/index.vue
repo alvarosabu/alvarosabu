@@ -24,7 +24,7 @@ function createWebGPURenderer(ctx: TresRendererSetupContext) {
     <BlogFresnelStepDemoSphere :step="step" />
     <OrbitControls :target="[0, 1, 0]" />
     <BlogTslGhostDemoBloom
-      v-if="step === 4"
+      v-if="step >= 4"
       :bloom="{ strength: 0.5, radius: 0.1, threshold: 0.1, smoothWidth: 0.01 }"
     />
   </TresCanvas>

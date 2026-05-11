@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { color, dot, normalView, float, positionViewDirection, vec3, pow, sub, smoothstep } from 'three/tsl'
+import { color, dot, normalView, float, mix, mx_fractal_noise_float, positionLocal, positionViewDirection, vec3, pow, sub, smoothstep, time } from 'three/tsl'
 import { DoubleSide, SphereGeometry } from 'three'
 import { MeshPhysicalNodeMaterial } from 'three/webgpu'
 
@@ -19,11 +19,21 @@ function ghostMaterial(step: number): MeshPhysicalNodeMaterial {
   material.transparent = true
   material.depthWrite = false
   material.side = DoubleSide
-  material.opacityNode = shaped
+
+  // Step 5: apply fractal noise to break up the uniform rim
+  let opacity = shaped
+  if (step >= 5) {
+    const animatedPos = positionLocal.add(time.mul(float(0.3)))
+    const noiseValue = mx_fractal_noise_float(animatedPos.mul(float(1.5)), 3, 2, 0.5)
+    const noiseFactor = mix(float(1.0), noiseValue.remapClamp(float(-1), float(1), float(0), float(1)), float(0.5))
+    opacity = shaped.mul(noiseFactor)
+  }
+
+  material.opacityNode = opacity
 
   if (step >= 3) {
     material.colorNode = vec3(0, 0, 0)
-    material.emissiveNode = color('#88ccff').mul(shaped).mul(12.0)
+    material.emissiveNode = color('#88ccff').mul(opacity).mul(12.0)
   }
 
   return material

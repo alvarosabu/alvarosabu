@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { color, dot, normalView, float, positionViewDirection, vec3, pow, sub, smoothstep, time, sin, mix } from "three/tsl";
+import { color, dot, normalView, float, mix, mx_fractal_noise_float, positionLocal, positionViewDirection, vec3, pow, sub, smoothstep, time, sin } from "three/tsl";
 import { AnimationClip, DoubleSide, Mesh, MeshPhysicalNodeMaterial } from "three/webgpu";
 
 function ghostMaterial() {
@@ -10,15 +10,21 @@ function ghostMaterial() {
     // S-curve shaping (approximates the RGB Curves node)
     const shaped = smoothstep(float(0.0), float(1.0), fresnelFactor)
 
+    // Ethereal noise
+    const animatedPos = positionLocal.add(time.mul(float(0.3)))
+    const noiseValue = mx_fractal_noise_float(animatedPos.mul(float(1.5)), 3, 2, 0.5)
+    const noiseFactor = mix(float(1.0), noiseValue.remapClamp(float(-1), float(1), float(0), float(1)), float(0.5))
+    const shapedWithNoise = shaped.mul(noiseFactor)
+
     const material = new MeshPhysicalNodeMaterial()
     material.transparent = true
     material.depthWrite = true
     material.side = DoubleSide
     material.colorNode = vec3(0, 0, 0)
-    material.opacityNode = shaped
-    // Animate emission intensity: oscillates between 8 and 16 via sin wave
+    material.opacityNode = shapedWithNoise
+    // Animate emission intensity: oscillates between 2 and 6 via sin wave
     const emissionPulse = mix(float(2.0), float(6.0), sin(time).mul(0.5).add(0.5))
-    material.emissiveNode = color('#88ccff').mul(shaped).mul(emissionPulse)
+    material.emissiveNode = color('#88ccff').mul(shapedWithNoise).mul(emissionPulse)
     return material
 }
 
