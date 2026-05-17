@@ -93,11 +93,21 @@ async function readExifMeta(filePath: string) {
   }
 }
 
-async function processOne(filePath: string): Promise<PhotoSidecar | null> {
+interface SlugInfo {
+  original: Buffer
+  date: Date
+  slug: string
+}
+
+async function computeSlug(filePath: string): Promise<SlugInfo> {
   const original = await readFile(filePath)
   const date = await readDateFromExif(filePath)
   const hash = shortHash(original)
-  const slug = `p-${dateToSlugPrefix(date)}-${hash}`
+  return { original, date, slug: `p-${dateToSlugPrefix(date)}-${hash}` }
+}
+
+async function processOne(filePath: string, slugInfo: SlugInfo): Promise<PhotoSidecar | null> {
+  const { original, date, slug } = slugInfo
 
   const displayOut = join(OUT_DIR, `${slug}.jpg`)
   const fullOut = join(OUT_DIR, `${slug}.full.jpg`)
@@ -160,18 +170,39 @@ async function cleanupOrphans(currentSlugs: Set<string>) {
   return removed
 }
 
+async function loadExistingManifest(): Promise<Map<string, PhotoSidecar>> {
+  try {
+    const raw = await readFile(MANIFEST_PATH, 'utf8')
+    const entries = JSON.parse(raw) as PhotoSidecar[]
+    return new Map(entries.map(e => [e.slug, e]))
+  }
+  catch {
+    return new Map()
+  }
+}
+
 async function main() {
+  const force = process.argv.includes('--force')
   const raws = await fg(['*.{jpg,jpeg,png}', '*.{JPG,JPEG,PNG}'], { cwd: RAW_DIR, absolute: true })
   if (raws.length === 0) {
     console.warn('photos-raw/ is empty — nothing to do.')
     return
   }
 
-  console.log(`Processing ${raws.length} photo(s)…`)
+  const existing = await loadExistingManifest()
+  console.log(`Processing ${raws.length} photo(s)${force ? ' (force)' : ''}…`)
   const currentSlugs = new Set<string>()
   const manifest: PhotoSidecar[] = []
   for (const raw of raws) {
-    const result = await processOne(raw)
+    const info = await computeSlug(raw)
+    const cached = existing.get(info.slug)
+    if (!force && cached) {
+      currentSlugs.add(cached.slug)
+      manifest.push(cached)
+      console.log(`  ↩ ${cached.slug} (skipped)`)
+      continue
+    }
+    const result = await processOne(raw, info)
     if (result) {
       currentSlugs.add(result.slug)
       manifest.push(result)
