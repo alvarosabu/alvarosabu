@@ -76,12 +76,30 @@ function shortHash(buf: Buffer): string {
   return createHash('sha1').update(buf).digest('hex').slice(0, 8)
 }
 
+// Some cameras report a terse model in EXIF; map to a friendlier display name
+const CAMERA_OVERRIDES: Record<string, string> = {
+  X100VI: 'Fujifilm X100VI',
+  'ZV-E10M2': 'Sony ZV-E10M2',
+}
+
+function normalizeCamera(model: string | undefined): string | undefined {
+  if (!model) return model
+  return CAMERA_OVERRIDES[model] ?? model
+}
+
+// Third-party lenses report a generic "E" mount name; attribute them to the maker
+function normalizeLens(lens: string | undefined): string | undefined {
+  if (!lens) return lens
+  if (lens.includes('E 17-70mm')) return lens.replace(/^E /, 'Tamron ')
+  return lens
+}
+
 async function readExifMeta(filePath: string) {
   try {
     const tags = await ExifReader.load(filePath, { expanded: true })
     return {
-      camera: tags.exif?.Model?.description as string | undefined,
-      lens: tags.exif?.LensModel?.description as string | undefined,
+      camera: normalizeCamera(tags.exif?.Model?.description as string | undefined),
+      lens: normalizeLens(tags.exif?.LensModel?.description as string | undefined),
       focalLength: tags.exif?.FocalLength?.description as string | undefined,
       aperture: tags.exif?.FNumber?.description as string | undefined,
       shutterSpeed: tags.exif?.ExposureTime?.description as string | undefined,
