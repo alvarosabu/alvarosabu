@@ -22,46 +22,48 @@ const readingTime = computed(() => {
 
 const site = useSiteConfig()
 
-// Metadata
-useHead({
-  title: `${article?.value?.title} - AlvaroSabu`,
-  htmlAttrs: {
-    lang: 'en',
-  },
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/svg+xml',  
-      href: '/favicon.svg',
-    },
-  ],
+const articleUrl = computed(() => joinURL(site.url, `/blog/${route.params.slug}`))
+
+// Resolve the thumbnail to an absolute URL so crawlers and schema.org get a fully qualified image
+const ogImageUrl = computed(() =>
+  article.value?.thumbnail ? joinURL(site.url, article.value.thumbnail) : undefined,
+)
+
+// Metadata — title kept bare; app.vue's titleTemplate appends " - AlvaroSabu"
+useSeoMeta({
+  title: () => article.value?.title,
+  keywords: () => article.value?.tags?.join(', '),
+  description: () => article.value?.description,
+  ogType: 'article',
+  ogTitle: () => article.value?.title,
+  ogDescription: () => article.value?.description,
+  ogUrl: () => articleUrl.value,
+  ogImage: () => ogImageUrl.value,
+  ogImageAlt: () => article.value?.title,
+  articlePublishedTime: () => article.value?.date,
+  articleModifiedTime: () => article.value?.date,
+  articleAuthor: ['Alvaro Saburido'],
+  articleTag: () => article.value?.tags,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => article.value?.title,
+  twitterDescription: () => article.value?.description,
+  twitterImage: () => ogImageUrl.value,
+  twitterImageAlt: () => article.value?.title,
+  twitterCreator: '@alvarosabu',
 })
+
 useSchemaOrg([
   defineArticle({
-    headline: article.value?.title,
-    description: article.value?.description,
-    datePublished: article.value?.date,
-    keywords: article.value?.tags,
-    image: article.value?.thumbnail,
+    headline: () => article.value?.title,
+    description: () => article.value?.description,
+    datePublished: () => article.value?.date,
+    dateModified: () => article.value?.date,
+    keywords: () => article.value?.tags,
+    image: () => ogImageUrl.value,
+    inLanguage: 'en',
+    authorName: 'Alvaro Saburido',
   }),
 ])
-
-useSeoMeta({
-  title: `${article?.value?.title} - AlvaroSabu`,
-  keywords: article?.value?.tags?.join(', '),
-  description: article?.value?.description,
-  ogDescription: article?.value?.description,
-  ogUrl: joinURL(site.url, `/blog/${route.params.slug}`),
-  ogType: 'article',
-  ogSiteName: 'AlvaroSabu',
-  ogTitle: `${article?.value?.title} - AlvaroSabu`,
-  ogImage: article?.value?.thumbnail,
-  twitterDescription: article?.value?.description,
-  twitterTitle: `${article?.value?.title} - AlvaroSabu`,
-  twitterImage: article?.value?.thumbnail,
-  twitterCard: 'summary_large_image',
-})
-
 </script>
 
 <template>

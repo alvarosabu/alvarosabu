@@ -13,11 +13,12 @@ const ogImage = joinURL(site.url, '/me-og.png')
 
 useSeoMeta({
   title,
+  description: 'A brief introduction to who I am and what I do.',
   ogImage,
   ogImageAlt: 'Alvaro Saburido\'s About Me',
   ogTitle: title,
   ogDescription: 'A brief introduction to who I am and what I do.',
-  ogUrl: site.url,
+  ogUrl: joinURL(site.url, '/me'),
   twitterTitle: title,
   twitterDescription: 'A brief introduction to who I am and what I do.',
   twitterImage: ogImage,
@@ -36,20 +37,6 @@ const socialIcons: Record<string, string> = {
   discord: 'i-simple-icons-discord',
   linkedin: 'i-simple-icons-linkedin',
 }
-
-useHead({
-  title: 'About Me - AlvaroSabu',
-  htmlAttrs: {
-    lang: 'en',
-  },
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/svg+xml',
-      href: '/favicon.svg',
-    },
-  ],
-})
 
 </script>
 

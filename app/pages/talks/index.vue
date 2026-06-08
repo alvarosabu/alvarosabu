@@ -2,20 +2,6 @@
 import { motion } from 'motion-v'
 import { joinURL } from 'ufo'
 
-useHead({
-  title: 'Talks - AlvaroSabu',
-  htmlAttrs: {
-    lang: 'en',
-  },
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/svg+xml',
-      href: '/favicon.svg',
-    },
-  ],
-})
-
 const title = 'Talks'
 
 definePageMeta({
@@ -27,6 +13,7 @@ const ogImage = joinURL(site.url, '/talks-og.png')
 
 useSeoMeta({
   title,
+  description: 'A collection of talks and presentations about web development, 3D, Vue.js, and TresJS.',
   ogImage,
   ogImageAlt: 'Alvaro Saburido\'s Public Speaking',
   ogTitle: title,
