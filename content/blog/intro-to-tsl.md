@@ -233,3 +233,10 @@ TSL compiles to **WGSL** when using `WebGPURenderer` and falls back to **GLSL** 
 
 Import from `three/webgpu` (not `three`) to get the node-aware versions of renderers and materials. `WebGPURenderer` handles the fallback to WebGL automatically if the browser doesn't support WebGPU.
 ::
+
+## Prefer the video version?
+
+If you'd rather watch than read, here's the video version of this article:
+
+::video-embed{id="dlrVCxsq1tE" title="Intro to TSL"}
+::
