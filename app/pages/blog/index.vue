@@ -13,13 +13,14 @@ const ogImage = joinURL(site.url, '/blog-og.png')
 
 useSeoMeta({
   title,
+  description: 'Articles on web development, 3D on the web, WebGPU, shaders, Vue.js, and TresJS.',
   ogImage,
   ogImageAlt: 'Alvaro Saburido\'s Blog',
   ogTitle: title,
-  ogDescription: site.description,
-  ogUrl: site.url,
+  ogDescription: 'Articles on web development, 3D on the web, WebGPU, shaders, Vue.js, and TresJS.',
+  ogUrl: joinURL(site.url, '/blog'),
   twitterTitle: title,
-  twitterDescription: site.description,
+  twitterDescription: 'Articles on web development, 3D on the web, WebGPU, shaders, Vue.js, and TresJS.',
   twitterImage: ogImage,
   twitterImageAlt: 'Alvaro Saburido\'s Blog',
 })
