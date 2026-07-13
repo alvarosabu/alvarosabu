@@ -18,7 +18,7 @@ useSeoMeta({
   ogImageAlt: 'Alvaro Saburido\'s About Me',
   ogTitle: title,
   ogDescription: 'A brief introduction to who I am and what I do.',
-  ogUrl: joinURL(site.url, '/me'),
+  ogUrl: withSiteUrl('/me'),
   twitterTitle: title,
   twitterDescription: 'A brief introduction to who I am and what I do.',
   twitterImage: ogImage,

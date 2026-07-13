@@ -12,6 +12,8 @@ export default defineNuxtConfig({
     name: 'AlvaroSabu',
     description: 'Creative Software Engineer. Author of TresJS.',
     logo: '/favicon.svg',
+    // Netlify pretty URLs 301 non-slash URLs to slash; keep canonicals and sitemap in sync
+    trailingSlash: true,
   },
   schemaOrg: {
     identity: definePerson({

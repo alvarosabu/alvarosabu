@@ -22,7 +22,8 @@ const readingTime = computed(() => {
 
 const site = useSiteConfig()
 
-const articleUrl = computed(() => joinURL(site.url, `/blog/${route.params.slug}`))
+// Honors site.trailingSlash so og:url matches the canonical URL
+const articleUrl = withSiteUrl(computed(() => `/blog/${route.params.slug}`))
 
 // Resolve the thumbnail to an absolute URL so crawlers and schema.org get a fully qualified image
 const ogImageUrl = computed(() =>

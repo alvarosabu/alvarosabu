@@ -17,7 +17,7 @@ useSeoMeta({
   ogImageAlt: 'Alvaro Saburido\'s Photos',
   ogTitle: title,
   ogDescription: 'Photography by Alvaro Saburido — moments captured on the road.',
-  ogUrl: joinURL(site.url, '/photos'),
+  ogUrl: withSiteUrl('/photos'),
   twitterTitle: title,
   twitterDescription: 'Photography by Alvaro Saburido — moments captured on the road.',
   twitterImage: ogImage,

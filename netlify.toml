@@ -7,6 +7,19 @@ COREPACK_INTEGRITY_KEYS = "0"
 NODE_VERSION = "24"
 NODE_OPTIONS = "--max-old-space-size=4096"
 
+# Domain migration: applies once alvarosaburido.dev is added as a domain alias of this site
+[[redirects]]
+from = "https://alvarosaburido.dev/*"
+to = "https://alvarosabu.dev/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "https://www.alvarosaburido.dev/*"
+to = "https://alvarosabu.dev/:splat"
+status = 301
+force = true
+
 [[redirects]]
 from = "/*"
 to = "/200.html"

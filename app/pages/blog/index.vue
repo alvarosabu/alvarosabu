@@ -18,7 +18,7 @@ useSeoMeta({
   ogImageAlt: 'Alvaro Saburido\'s Blog',
   ogTitle: title,
   ogDescription: 'Articles on web development, 3D on the web, WebGPU, shaders, Vue.js, and TresJS.',
-  ogUrl: joinURL(site.url, '/blog'),
+  ogUrl: withSiteUrl('/blog'),
   twitterTitle: title,
   twitterDescription: 'Articles on web development, 3D on the web, WebGPU, shaders, Vue.js, and TresJS.',
   twitterImage: ogImage,
