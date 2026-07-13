@@ -1,0 +1,6 @@
+# Domain migration: alvarosaburido.dev is a domain alias of this site
+https://alvarosaburido.dev/* https://alvarosabu.dev/:splat 301!
+https://www.alvarosaburido.dev/* https://alvarosabu.dev/:splat 301!
+
+# SPA fallback for non-prerendered routes
+/* /200.html 200
