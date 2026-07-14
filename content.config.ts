@@ -1,4 +1,5 @@
 import { defineContentConfig, defineCollection, z } from '@nuxt/content'
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 
 export default defineContentConfig({
   collections: {
@@ -27,6 +28,17 @@ export default defineContentConfig({
         tags: z.array(z.string()).optional(),
         date: z.string(),
         status: z.enum(['draft', 'published']).default('draft'),
+        // Feeds <lastmod> to the sitemap from the article date; drafts stay out
+        sitemap: defineSitemapSchema({
+          z,
+          name: 'blog',
+          filter: entry => entry.status === 'published',
+          onUrl: (url, entry) => {
+            if (typeof entry.date === 'string') {
+              url.lastmod = entry.date
+            }
+          },
+        }),
       }),
     }),
     talks: defineCollection({
