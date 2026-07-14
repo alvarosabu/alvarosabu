@@ -22,15 +22,15 @@ readingTime:
 :blog-tsl-ghost-demo
 ::
 
-Have you ever wonder how games like :magic-link{label="Divinity Original Sin 2"} or :magic-link{label="Baldur's Gate 3"} create their spectral ghost effects? In this post I will show you how to create a similar effect using :magic-link{label="ThreeJS"} TSL, the node-based shader system that ships with Three.js's WebGPU renderer.
+Have you ever wondered how games like :magic-link{label="Divinity Original Sin 2"} or :magic-link{label="Baldur's Gate 3"} create their spectral ghost effects? In this post I'll show you how to create a similar effect using :magic-link{label="ThreeJS"} TSL, the node-based shader system that ships with Three.js's WebGPU renderer.
 
 ::div{.grid.grid-cols-2.gap-8.items-center}
   :::div
   We want a material that:
 
-  1. **Glows at the edges** — bright silhouette, transparent center
-  2. **Emits a spectral cyan light** — feels otherworldly
-  3. **Is fully transparent** — no solid surface, just energy
+  1. **Glows at the edges**: bright silhouette, transparent center
+  2. **Emits a spectral cyan light** to feel otherworldly
+  3. **Is fully transparent**: no solid surface, just energy
   4. **Renders from both sides**
   :::
 
@@ -45,9 +45,9 @@ Have you ever wonder how games like :magic-link{label="Divinity Original Sin 2"}
 
 ## The Fresnel Effect
 
-The Fresnel effect is the foundation of this shader. In the real world, surfaces reflect more light at glancing angles — think of how a lake looks transparent when you look straight down but mirrors the sky at the horizon.
+The Fresnel effect is the foundation of this shader. In the real world, surfaces reflect more light at glancing angles. Think of how a lake looks transparent when you look straight down but mirrors the sky at the horizon.
 
-Our ghost material exploits this: where the surface faces you directly, it's transparent. Where it faces away — the edges — it glows.
+Our ghost material exploits this: where the surface faces you directly, it's transparent. Where it faces away, at the edges, it glows.
 
 :blog-fresnel-diagram
 
@@ -57,21 +57,21 @@ The core of the effect is a dot product between the surface normal **N** and the
 
 $$F = (1 - \mathbf{N} \cdot \mathbf{V})^p$$
 
-- **N** — the surface normal at the fragment (which way the surface is pointing)
-- **V** — the direction from the fragment toward the camera
-- **p** — falloff sharpness; higher values tighten the glow to a thinner rim
+- **N** is the surface normal at the fragment (which way the surface is pointing)
+- **V** is the direction from the fragment toward the camera
+- **p** is the falloff sharpness; higher values tighten the glow to a thinner rim
 
-When you look head-on, N and V are nearly parallel → N·V ≈ 1 → F ≈ 0 (transparent). At grazing angles they're near-perpendicular → N·V ≈ 0 → F ≈ 1 (bright edge).
+When you look head-on, N and V are nearly parallel, so N·V is close to 1 and F drops to 0 (transparent). At grazing angles they're near-perpendicular, N·V approaches 0 and F approaches 1 (bright edge).
 
-The ghost shader uses `p = 1.5` for this intermediate value, then passes it through a `smoothstep` to reshape the curve — we'll cover that in the TSL implementation below.
+The ghost shader uses `p = 1.5`, then passes the result through a `smoothstep` to reshape the curve. We'll cover that in the TSL implementation below.
 
 ## Building It Step by Step
 
 ### Step 1: A Plain Sphere
 
-Before any shader magic, here's our starting mesh — a plain `MeshPhysicalNodeMaterial` with default settings.
+Before any shader magic, here's our starting mesh: a plain `MeshPhysicalNodeMaterial` with default settings.
 
-::scene-wrapper{caption="Step 1: Baseline — opaque sphere"}
+::scene-wrapper{caption="Step 1: Baseline, a plain opaque sphere"}
   :::blog-fresnel-step-demo{:step='1'}
   :::
 ::
@@ -104,18 +104,18 @@ material.opacityNode = shaped
 
 Each line maps directly to the formula $F = (1 - \mathbf{N} \cdot \mathbf{V})^p$ :
 
-- `normalView` → **N** in the formula. The surface normal in view (camera) space.
-- `positionViewDirection` → **V** in the formula. The direction from the fragment toward the camera.
-- `dot(normalView, positionViewDirection).abs()` → **N·V**. Gives 1 when you're looking straight at the surface, 0 at grazing angles. `.abs()` handles back faces.
-- \`sub(float(1.0), NdotV)\` → **(1 - N·V)**. Inverts it: now edges = 1, center = 0.
-- `pow(..., float(1.5))` → the exponent **p**. Controls falloff sharpness — `1.5` gives a medium rim, `3.0` tightens it, `0.5` spreads it wider.
-- `smoothstep(0, 1, fresnelFactor)` — not in the base formula, but reshapes the raw ramp with an S-curve so the transition feels organic rather than linear.
+- `normalView` is **N** in the formula, the surface normal in view (camera) space.
+- `positionViewDirection` is **V** in the formula, the direction from the fragment toward the camera.
+- `dot(normalView, positionViewDirection).abs()` computes **N·V**. It gives 1 when you're looking straight at the surface, 0 at grazing angles. `.abs()` handles back faces.
+- `sub(float(1.0), NdotV)` is **(1 - N·V)**. It inverts the value: now edges = 1, center = 0.
+- `pow(..., float(1.5))` applies the exponent **p**, which controls the falloff sharpness. `1.5` gives a medium rim, `3.0` tightens it, `0.5` spreads it wider.
+- `smoothstep(0, 1, fresnelFactor)` is not in the base formula, but it reshapes the raw ramp with an S-curve so the transition feels organic rather than linear.
 
-`depthWrite = false` is critical — without it, the transparent regions still occlude objects behind them. `DoubleSide` ensures both faces render so the sphere looks consistent from any angle.
+`depthWrite = false` is critical here: without it, the transparent regions still occlude objects behind them. `DoubleSide` ensures both faces render so the sphere looks consistent from any angle.
 
 ::scene-wrapper
 ---
-caption: "Step 2: Fresnel opacity — edges visible, center transparent"
+caption: "Step 2: Fresnel opacity, edges visible and center transparent"
 ---
   :::blog-fresnel-step-demo{:step='2'}
   :::
@@ -130,7 +130,7 @@ material.colorNode = vec3(0, 0, 0)
 material.emissiveNode = color('#88ccff').mul(shaped).mul(12.0)
 ```
 
-The `12.0` multiplier pushes the emission into HDR range — values above 1.0 will bloom when a post-processing pass is active.
+The `12.0` multiplier pushes the emission into HDR range, so values above 1.0 will bloom when a post-processing pass is active.
 
 ::scene-wrapper{caption="Step 3: Cyan emission on the edges"}
   :::blog-fresnel-step-demo{:step='3'}
@@ -156,7 +156,7 @@ bloomPass.threshold.value = 0.1
 
 ### Step 5: Ethereal Noise
 
-The ghost looks clean — *too* clean. Real spectral energy isn't uniform; it flickers and shifts. We can break up the perfect Fresnel rim with animated fractal noise using TSL's built-in `mx_fractal_noise_float` node.
+The ghost looks clean. Almost *too* clean. Real spectral energy isn't uniform, it flickers and shifts. We can break up the perfect Fresnel rim with animated fractal noise using TSL's built-in `mx_fractal_noise_float` node.
 
 ```ts
 import { mix, mx_fractal_noise_float, positionLocal, time, uniform } from 'three/tsl'
@@ -177,10 +177,10 @@ const shapedWithNoise = shaped.mul(noiseFactor)
 
 Here's what each piece does:
 
-- `positionLocal.add(time.mul(noiseSpeed))` — offsets the noise sample position over time so the pattern drifts slowly across the surface.
-- `mx_fractal_noise_float(..., 3, 2, 0.5)` — generates multi-octave fractal noise. The `3` octaves add detail layers, `2` is the lacunarity (frequency multiplier per octave), and `0.5` is the diminishment (amplitude reduction per octave).
-- `remapClamp(-1, 1, 0, 1)` — the raw noise outputs `[-1, 1]`; this maps it to `[0, 1]` so it can modulate opacity without going negative.
-- `mix(1.0, remapped, noiseIntensity)` — blends between "no noise" (1.0) and the noise value. At `0.5` intensity, you get subtle variation without losing the Fresnel shape entirely.
+- `positionLocal.add(time.mul(noiseSpeed))` offsets the noise sample position over time so the pattern drifts slowly across the surface.
+- `mx_fractal_noise_float(..., 3, 2, 0.5)` generates multi-octave fractal noise. The `3` octaves add detail layers, `2` is the lacunarity (frequency multiplier per octave), and `0.5` is the diminishment (amplitude reduction per octave).
+- `remapClamp(-1, 1, 0, 1)` maps the raw noise output from `[-1, 1]` to `[0, 1]` so it can modulate opacity without going negative.
+- `mix(1.0, remapped, noiseIntensity)` blends between "no noise" (1.0) and the noise value. At `0.5` intensity, you get subtle variation without losing the Fresnel shape entirely.
 
 Then replace `shaped` with `shapedWithNoise` in both `opacityNode` and `emissiveNode`:
 
