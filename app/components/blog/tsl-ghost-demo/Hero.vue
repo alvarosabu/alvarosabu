@@ -44,7 +44,8 @@ watch(actions, (newActions) => {
 watch(rig, (_rig) => {
   if(_rig) {
     _rig.traverse((child: Mesh) => {
-      if (child instanceof Mesh) {
+      // isMesh instead of instanceof: GLTF objects come from a different three instance than three/webgpu
+      if (child.isMesh) {
         child.material = ghostMaterial()
       }
     })

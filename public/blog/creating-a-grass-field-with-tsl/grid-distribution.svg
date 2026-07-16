@@ -1,0 +1,83 @@
+<svg viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', monospace">
+  <defs>
+  <style>
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url(data:font/woff2;base64,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) format('woff2');
+    }
+  </style>
+    <marker id="ah-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#81c8be"/>
+    </marker>
+    <marker id="ah-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#e78284"/>
+    </marker>
+    <marker id="ah-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#a6d189"/>
+    </marker>
+    <g id="cross">
+      <path d="M-9 0 H9 M0 -9 V9" fill="none" stroke-linecap="round"/>
+    </g>
+  </defs>
+
+  <rect x="1" y="1" width="798" height="558" rx="12" fill="#303446" stroke="#414559" stroke-width="2"/>
+
+  <text x="40" y="52" fill="#a5adce" font-size="17">Blade distribution: one jittered anchor per grid cell</text>
+
+  <!-- size bracket -->
+  <path d="M270 78 V90 M270 84 H640 M640 78 V90" fill="none" stroke="#a5adce" stroke-width="2"/>
+  <text x="455" y="72" text-anchor="middle" fill="#a5adce" font-size="15">size</text>
+
+  <!-- grid -->
+  <g stroke="#c6d0f5" stroke-width="2.5" opacity="0.85">
+    <path d="M270 100 H640 M270 174 H640 M270 248 H640 M270 322 H640 M270 396 H640 M270 470 H640"/>
+    <path d="M270 100 V470 M344 100 V470 M418 100 V470 M492 100 V470 M566 100 V470 M640 100 V470"/>
+  </g>
+
+  <!-- cell bracket -->
+  <path d="M270 480 V492 M270 486 H344 M344 480 V492" fill="none" stroke="#a5adce" stroke-width="2"/>
+  <text x="270" y="516" fill="#a5adce" font-size="14">size / subdivisions</text>
+
+  <!-- anchors: cell center + jitter -->
+  <g stroke="#ef9f76" stroke-width="5">
+    <use href="#cross" transform="translate(295 143) rotate(10)"/>
+    <use href="#cross" transform="translate(396 127) rotate(-15)"/>
+    <use href="#cross" transform="translate(459 151) rotate(30)"/>
+    <use href="#cross" transform="translate(513 129) rotate(5)"/>
+    <use href="#cross" transform="translate(613 141) rotate(-20)"/>
+    <use href="#cross" transform="translate(315 223) rotate(-10)"/>
+    <use href="#cross" transform="translate(367 213) rotate(20)"/>
+    <use href="#cross" transform="translate(473 199) rotate(0)"/>
+    <use href="#cross" transform="translate(531 227) rotate(-25)"/>
+    <use href="#cross" transform="translate(593 197) rotate(15)"/>
+    <use href="#cross" transform="translate(321 281) rotate(25)"/>
+    <use href="#cross" transform="translate(375 269) rotate(-5)"/>
+    <use href="#cross" transform="translate(437 295) rotate(12)"/>
+    <use href="#cross" transform="translate(541 293) rotate(-18)"/>
+    <use href="#cross" transform="translate(608 274) rotate(8)"/>
+    <use href="#cross" transform="translate(292 373) rotate(-22)"/>
+    <use href="#cross" transform="translate(390 352) rotate(18)"/>
+    <use href="#cross" transform="translate(452 344) rotate(-8)"/>
+    <use href="#cross" transform="translate(545 370) rotate(22)"/>
+    <use href="#cross" transform="translate(591 362) rotate(-12)"/>
+    <use href="#cross" transform="translate(313 420) rotate(14)"/>
+    <use href="#cross" transform="translate(364 428) rotate(-25)"/>
+    <use href="#cross" transform="translate(466 448) rotate(6)"/>
+    <use href="#cross" transform="translate(521 423) rotate(28)"/>
+    <use href="#cross" transform="translate(617 427) rotate(-16)"/>
+  </g>
+
+  <!-- axes (ground plane, seen from above) -->
+  <path d="M110 470 V392" fill="none" stroke="#81c8be" stroke-width="4.5" stroke-linecap="round" marker-end="url(#ah-teal)"/>
+  <path d="M110 470 H192" fill="none" stroke="#e78284" stroke-width="4.5" stroke-linecap="round" marker-end="url(#ah-red)"/>
+  <text x="126" y="400" fill="#81c8be" font-size="18">z</text>
+  <text x="180" y="452" fill="#e78284" font-size="18">x</text>
+
+  <!-- mini cell: center + jitter -->
+  <text x="115" y="158" text-anchor="middle" fill="#a5adce" font-size="14">one anchor per cell</text>
+  <rect x="60" y="170" width="110" height="110" fill="none" stroke="#c6d0f5" stroke-width="2" opacity="0.7"/>
+  <circle cx="115" cy="225" r="3.5" fill="#a5adce"/>
+  <path d="M120 220 L136 206" fill="none" stroke="#a6d189" stroke-width="2.5" stroke-dasharray="4 4" marker-end="url(#ah-green)"/>
+  <use href="#cross" transform="translate(146 198) rotate(15)" stroke="#ef9f76" stroke-width="5"/>
+  <text x="115" y="304" text-anchor="middle" fill="#a5adce" font-size="14">center + random jitter</text>
+</svg>

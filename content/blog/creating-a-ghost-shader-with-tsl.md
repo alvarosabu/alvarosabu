@@ -10,7 +10,7 @@ tags:
   - webgpu
   - tsl
   - shaders
-thumbnail: /blog/creating-a-ghost-shader-with-tsl/creating-a-ghost-shader-with-tsl.png
+thumbnail: /blog/creating-a-ghost-shader-with-tsl/creating-a-ghost-shader-with-tsl.jpg
 readingTime:
   text: 4 min read
   minutes: 3.49

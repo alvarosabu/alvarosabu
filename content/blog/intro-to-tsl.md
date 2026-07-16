@@ -10,7 +10,7 @@ tags:
   - webgpu
   - tsl
   - shaders
-thumbnail: /blog/intro-to-tsl/intro-to-tsl.png
+thumbnail: /blog/intro-to-tsl/intro-to-tsl.jpg
 readingTime:
   text: 4 min read
   minutes: 3.765
@@ -140,7 +140,7 @@ Why nodes? Because node-based shading is already the standard in the 3D and game
 
 To visualize it better, lets take the gradient between :magic-color{value="#6366f1"} and :magic-color{value="#ec4899"} shader example we used before and replicate it in Blender:
 
-![Blender Shading Nodes](/blog/intro-to-tsl/blender-shading-nodes.png)
+![Blender Shading Nodes](/blog/intro-to-tsl/blender-shading-nodes.webp)
 
 ::note
 **Heads up** ☝
@@ -162,7 +162,7 @@ If we look closely, we can do a 1:1 mapping with our TSL code:
 | Mix → Factor                                   | `mix(bottomColor, topColor, factor)` |
 | Principled BSDF → Base Color                   | `material.colorNode =`               |
 
-![One to one mapping between Blender and TSL](/blog/intro-to-tsl/one-to-one-mapping.png)
+![One to one mapping between Blender and TSL](/blog/intro-to-tsl/one-to-one-mapping.webp)
 
 ## Animating with TSL
 
