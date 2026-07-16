@@ -5,7 +5,7 @@ description: Rendering thousands of stylized grass blades with Three.js TSL, sta
 navigation:
   title: Creating a Grass Field with TSL 🌱
   description: Rendering thousands of stylized grass blades with Three.js TSL, starting from a naive triangle-per-blade approach and rebuilding it with instancing and a diffuse map.
-status: draft
+status: published
 tags:
   - webgpu
   - tsl
