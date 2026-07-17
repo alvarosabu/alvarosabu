@@ -33,6 +33,11 @@ export default defineAppConfig({
     // Shiki uses a single theme, so token colors are fixed dark-theme pastels; the surfaces
     // below match the frappe palette so contrast holds regardless of the site color mode.
     prose: {
+      // Links brighter than body text (text-highlighted) and underlined; hover:border-transparent
+      // cancels the default border-b hover so it doesn't double up with the underline
+      a: {
+        base: 'text-highlighted underline underline-offset-4 decoration-1 hover:decoration-2 hover:border-transparent',
+      },
       pre: {
         slots: {
           base: 'group font-mono text-sm/6 border border-[#414559] bg-[#303446] text-[#C6D0F5] rounded-md px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none',
