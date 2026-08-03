@@ -5,7 +5,7 @@ description: Part 2 of the TSL grass series. Adding a noise-driven wind field to
 navigation:
   title: Animating Grass with Wind in TSL 🌬️
   description: Part 2 of the TSL grass series. Adding a noise-driven wind field to an instanced grass field, with per-blade sway and the arc-length trick that makes blades bend instead of stretch.
-status: draft
+status: published
 tags:
   - webgpu
   - tsl
