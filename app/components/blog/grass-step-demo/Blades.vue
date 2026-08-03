@@ -5,6 +5,7 @@ import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise.js'
 import { atan, attribute, cameraPosition, Fn, mix, mx_noise_float, PI, positionGeometry, positionWorld, rotateUV, step, texture, uniform, uniformArray, uv, varying, vec2, vec3, vertexIndex } from 'three/tsl'
 import { MeshBasicNodeMaterial } from 'three/webgpu'
 import type { Node } from 'three/webgpu'
+import { useLoop } from '@tresjs/core'
 
 // Steps:
 // 1: v1 static triangles, flat color
@@ -13,6 +14,8 @@ import type { Node } from 'three/webgpu'
 // 4: + camera billboard (v1 complete)
 // 5: v2 instanced 5-vertex blade + per-blade yaw
 // 6: + diffuse map sampled at the blade anchor
+// 7: + wind sway (windWeight-weighted xz offset — blade stretches)
+// 8: + arc-length droop so the blade bends instead of stretching
 const props = defineProps<{ step: number, wireframe?: boolean }>()
 
 const FIELD_SIZE = 15
@@ -28,6 +31,25 @@ const bladeLean = uniform(0.3) // max static pitch in radians (~17°)
 const shadowIntensity = uniform(0.5)
 const colorA = uniform(new Color('#4f8a3d'))
 const colorB = uniform(new Color('#b8cc48'))
+
+// wind: a shared direction plus two scrolled noise octaves, advanced in the loop below
+const WIND_ANGLE = Math.PI * 0.6
+const windDirection = uniform(new Vector2(Math.sin(WIND_ANGLE), Math.cos(WIND_ANGLE)))
+const windPositionFrequency = uniform(0.5)
+const windStrength = uniform(0.45)
+const windTimeFrequency = uniform(0.5)
+const windLocalTime = uniform(0)
+
+// two octaves at different frequency AND time scale so the field doesn't read as
+// one marching wave; +0.4 is a downwind lean, so wind bows the grass instead of
+// only oscillating it around rest pose
+const windOffset = Fn(([worldXZ]: [Node]) => {
+  const p = worldXZ.mul(windPositionFrequency)
+  const n1 = mx_noise_float(p.mul(0.2).add(windDirection.mul(windLocalTime)))
+  const n2 = mx_noise_float(p.mul(0.1).add(windDirection.mul(windLocalTime.mul(0.2)))).mul(0.5)
+  const intensity = n1.add(n2).add(0.4)
+  return windDirection.mul(intensity).mul(windStrength)
+})
 
 // v1 blade: one triangle expanded in the vertex stage, (x, y) pairs: tip, bottom-right, bottom-left
 const bladeShape = uniformArray([
@@ -206,6 +228,7 @@ function createV2Material(stage: number, diffuseMap: Texture | null): MeshBasicN
     const height = bladeHeight
       .mul(mix(1, random, bladeHeightRandomness))
       .mul(attribute('heightNoise', 'float'))
+      .toVar()
 
     // unit blade → world scale, spun around its own base by the per-blade yaw
     const local = vec3(
@@ -217,7 +240,25 @@ function createV2Material(stage: number, diffuseMap: Texture | null): MeshBasicN
     local.yz.assign(rotateUV(local.yz, attribute('lean', 'float').mul(bladeLean), vec2(0)))
     local.xz.assign(rotateUV(local.xz, yaw, vec2(0)))
 
-    return vec3(local.x.add(anchor.x), local.y, local.z.add(anchor.y))
+    const pos = vec3(local.x.add(anchor.x), local.y, local.z.add(anchor.y)).toVar()
+
+    if (stage >= 7) {
+      // tipness doubles as the wind weight: base planted (0), tip travels furthest (1),
+      // so the blade curves along its length instead of hinging at the root.
+      // taller blades sway more → × height
+      const windVec = windOffset(anchor).mul(height).mul(2).toVar()
+      pos.addAssign(vec3(windVec.x.mul(tipness), 0, windVec.y.mul(tipness)))
+
+      if (stage >= 8) {
+        // arc-length approximation |w|²/2h keeps the blade a constant length:
+        // as the tip leans out it drops. clamp so gusts don't flatten it,
+        // weight² so the tip drops most
+        const droop = windVec.dot(windVec).div(height.mul(2)).min(height.mul(0.35))
+        pos.y.subAssign(droop.mul(tipness).mul(tipness))
+      }
+    }
+
+    return pos
   })()
 
   material.colorNode = Fn(() => {
@@ -250,6 +291,12 @@ onMounted(async () => {
   const tex = await new TextureLoader().loadAsync(DIFFUSE_URL)
   tex.colorSpace = SRGBColorSpace
   diffuseMap.value = tex
+})
+
+// localTime scaled by strength so wind speed tracks the strength slider
+const { onBeforeRender } = useLoop()
+onBeforeRender(({ delta }) => {
+  windLocalTime.value += delta * windTimeFrequency.value * windStrength.value
 })
 
 const v1SparseGeometry = createV1Geometry(SPARSE_SUBDIVISIONS)
