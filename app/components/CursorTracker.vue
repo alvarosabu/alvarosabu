@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { useMouse, useWindowSize, useTimeoutFn } from '@vueuse/core'
+import { useMouse, useWindowSize, useTimeoutFn, useMediaQuery } from '@vueuse/core'
+
+// Touch devices have no persistent pointer, so the crosshair would stick where the last tap was
+const hasFinePointer = useMediaQuery('(pointer: fine)')
 
 const { x, y } = useMouse()
 const { width, height } = useWindowSize()
@@ -21,6 +24,7 @@ const normalizedY = computed(() => (y.value / height.value).toFixed(3))
 
 <template>
   <div
+    v-if="hasFinePointer"
     class="pointer-events-none fixed z-50 -translate-x-1/4 -translate-y-1/3 transition-opacity duration-700 ease-in"
     :class="isMoving ? 'opacity-50' : 'opacity-0'"
     :style="{ left: `${x}px`, top: `${y}px` }"
