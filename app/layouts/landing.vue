@@ -32,7 +32,7 @@
           <MutatingText text="CREATIVE" /><br><MutatingText text="SOFTWARE ENGINEER" />
         </div>
         <div
-          class="flex items-center justify-between gap-3 md:justify-end text-sm md:text-base font-mono"
+          class="flex items-center justify-end gap-3 text-sm md:text-base font-mono"
           :class="[revealTransition, 'delay-[240ms]', isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1']"
         >
           <div

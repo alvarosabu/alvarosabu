@@ -51,6 +51,8 @@ onUnmounted(() => cancelAnimationFrame(animFrame))
 interface ShaderEntry {
   component: Component
   weight: number
+  /** Skip this entry when the browser has no WebGPU. See `hasWebGPU`. */
+  requiresWebGPU?: boolean
   /**
    * How long after the loading overlay hides the landing chrome fades in.
    * Defaults to DEFAULT_REVEAL_DELAY. Use 'manual' when the shader has its own
@@ -63,17 +65,35 @@ interface ShaderEntry {
 const shaderComponents: ShaderEntry[] = [
   { component: HomeDomainWarp, weight: 0.45 },
   { component: HomeMorphingParticles, weight: 0.25 },
-  { component: HomeSoundShape, weight: 0.24 },
+  { component: HomeSoundShape, weight: 0.30, requiresWebGPU: true },
 ]
 
+/**
+ * `three/webgpu` reads `GPUShaderStage` at module scope, so importing it on a
+ * browser without WebGPU throws before any error boundary can catch it and the
+ * whole page turns into a 500. Plain-http origins count as "without": no secure
+ * context, no `navigator.gpu`, which is what LAN testing from a phone hits.
+ */
+function hasWebGPU(): boolean {
+  return typeof navigator !== 'undefined' && 'gpu' in navigator
+}
+
 function pickWeightedIndex(): number {
-  const roll = Math.random()
-  let cumulative = 0
-  for (let i = 0; i < shaderComponents.length; i++) {
-    cumulative += shaderComponents[i].weight
-    if (roll < cumulative) return i
+  // Indices stay tied to the full list so the footer counter keeps naming the
+  // same experiment; a skipped entry just drops out of the roll.
+  const eligible = shaderComponents
+    .map((entry, index) => ({ entry, index }))
+    .filter(({ entry }) => !entry.requiresWebGPU || hasWebGPU())
+
+  const totalWeight = eligible.reduce((total, { entry }) => total + entry.weight, 0)
+  let roll = Math.random() * totalWeight
+
+  for (const { entry, index } of eligible) {
+    roll -= entry.weight
+    if (roll < 0) { return index }
   }
-  return shaderComponents.length - 1
+
+  return eligible[eligible.length - 1].index
 }
 
 const experimentNumber = useState('experimentNumber')
