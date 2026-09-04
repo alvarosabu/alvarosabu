@@ -2,8 +2,9 @@
 import { joinURL } from 'ufo'
 
 const HomeMorphingParticles = defineAsyncComponent(() => import('~/components/home/morphing-particles/index.vue'))
-const HomeRagingSea = defineAsyncComponent(() => import('~/components/home/raging-sea/index.vue'))
+/* const HomeRagingSea = defineAsyncComponent(() => import('~/components/home/raging-sea/index.vue')) */
 const HomeDomainWarp = defineAsyncComponent(() => import('~/components/home/domain-warp/index.vue'))
+const HomeSoundShape = defineAsyncComponent(() => import('~/components/home/sound-shape/index.vue'))
 
 definePageMeta({
   layout: 'landing'
@@ -47,12 +48,23 @@ onMounted(() => {
 
 onUnmounted(() => cancelAnimationFrame(animFrame))
 
+interface ShaderEntry {
+  component: Component
+  weight: number
+  /**
+   * How long after the loading overlay hides the landing chrome fades in.
+   * Defaults to DEFAULT_REVEAL_DELAY. Use 'manual' when the shader has its own
+   * cue and calls `reveal()` from `useHomeReveal()` itself.
+   */
+  revealDelay?: number | 'manual'
+}
+
 // Shader components with weighted probabilities
-const shaderComponents = [
+const shaderComponents: ShaderEntry[] = [
   { component: HomeDomainWarp, weight: 0.45 },
-  { component: HomeMorphingParticles, weight: 0.35 },
-  { component: HomeRagingSea, weight: 0.2 },
-] as const
+  { component: HomeMorphingParticles, weight: 0.25 },
+  { component: HomeSoundShape, weight: 0.24 },
+]
 
 function pickWeightedIndex(): number {
   const roll = Math.random()
@@ -68,7 +80,7 @@ const experimentNumber = useState('experimentNumber')
 const shaderComponentsLength = useState('shaderComponentsLength')
 shaderComponentsLength.value = shaderComponents.length
 // Development override: uncomment and set index to test specific shader
-/* experimentNumber.value = 0  */// 0: DomainWarp, 1: MorphingParticles, 2: RagingSea
+/* experimentNumber.value = 0  */// 0: DomainWarp, 1: MorphingParticles, 2: RagingSea, 3: SoundShape
 experimentNumber.value = pickWeightedIndex()
 
 const selectedShaderIndex = ref(
@@ -77,7 +89,20 @@ const selectedShaderIndex = ref(
     : Math.floor(Math.random() * shaderComponents.length)
 )
 
-const currentShader = computed(() => shaderComponents[selectedShaderIndex.value].component)
+const currentShader = computed(() => shaderComponents[selectedShaderIndex.value]?.component)
+
+// The shader gets the first moment on its own; the landing chrome follows.
+const { isRevealed, revealAfter } = useHomeReveal()
+isRevealed.value = false
+
+watch(showOverlay, (visible) => {
+  if (visible) { return }
+
+  const revealDelay = shaderComponents[selectedShaderIndex.value]?.revealDelay
+  if (revealDelay === 'manual') { return }
+
+  revealAfter(revealDelay)
+})
 
 const site = useSiteConfig()
 const title = 'Portfolio'

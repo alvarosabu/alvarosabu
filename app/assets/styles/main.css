@@ -437,6 +437,34 @@ h1, h2, h3, h4, h5, h6 {
       display: block;
     }
   }
+
+
+  .bordered-container-reveal::before,
+  .bordered-container-reveal::after,
+  .bordered-container-reveal > footer::after,
+  .bordered-container-reveal > main::before,
+  .bordered-container-reveal > main::after {
+    opacity: 0;
+    transition: opacity 700ms ease-out;
+  }
+
+  .bordered-container-reveal[data-revealed]::before,
+  .bordered-container-reveal[data-revealed]::after,
+  .bordered-container-reveal[data-revealed] > footer::after,
+  .bordered-container-reveal[data-revealed] > main::before,
+  .bordered-container-reveal[data-revealed] > main::after {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bordered-container-reveal::before,
+    .bordered-container-reveal::after,
+    .bordered-container-reveal > footer::after,
+    .bordered-container-reveal > main::before,
+    .bordered-container-reveal > main::after {
+      transition: none;
+    }
+  }
 }
 
 @layer utilities {
