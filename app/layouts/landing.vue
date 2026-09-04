@@ -8,11 +8,11 @@
 </script>
 
 <template>
-  <div class="p-4 md:p-8 xl:p-16 min-h-screen">
+  <div class="p-4 md:p-8 xl:p-16 min-h-svh flex flex-col">
     <div
-      class="bordered-container bordered-container-reveal relative z-1 min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-8rem)] flex flex-col"
+      class="bordered-container bordered-container-reveal relative z-1 flex-1 flex flex-col"
       :data-revealed="isRevealed ? '' : undefined"
-    >x
+    >
       <div
         class="relative z-50"
         :class="[revealTransition, 'delay-[120ms]', isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1']"
@@ -24,7 +24,7 @@
       <main class="flex-1 overflow-auto">
         <slot />
       </main>
-      <footer class="flex items-end justify-between p-6 md:p-8 z-1">
+      <footer class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between p-6 md:p-8 z-1">
         <div
           class="text-2xl md:text-3xl lg:text-4xl font-normal leading-tight"
           :class="[revealTransition, 'delay-[240ms]', isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1']"
@@ -32,7 +32,7 @@
           <MutatingText text="CREATIVE" /><br><MutatingText text="SOFTWARE ENGINEER" />
         </div>
         <div
-          class="flex items-center gap-3 text-sm md:text-base font-mono"
+          class="flex items-center justify-between gap-3 md:justify-end text-sm md:text-base font-mono"
           :class="[revealTransition, 'delay-[240ms]', isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1']"
         >
           <div
