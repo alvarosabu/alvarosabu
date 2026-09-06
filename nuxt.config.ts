@@ -25,7 +25,7 @@ export default defineNuxtConfig({
       worksFor: {
         '@type': 'Organization',
         name: 'Directus',
-        url: 'https://directus.io',
+        url: 'https://directus.com',
       },
       memberOf: {
         '@type': 'Organization',
