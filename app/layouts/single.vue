@@ -9,7 +9,7 @@ const router = useRouter()
       
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 overflow-auto @container">
         <slot />
       </main>
 
