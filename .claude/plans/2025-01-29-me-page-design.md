@@ -94,7 +94,7 @@ I share my life in Terrassa, Barcelona with two cats: **Geralt** (yes, the Witch
 
 Add to linksMap:
 ```ts
-'Directus': 'https://directus.io',
+'Directus': 'https://directus.com',
 'Blender': 'https://www.blender.org',
 ```
 
