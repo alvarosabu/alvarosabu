@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Scene, Camera } from 'three'
-import { PostProcessing, WebGPURenderer } from 'three/webgpu'
+import { RenderPipeline } from 'three/webgpu'
 import { NoToneMapping } from 'three'
+import { useTres } from '@tresjs/core/webgpu'
 import { pass, renderOutput } from 'three/tsl'
 import { bloom } from 'three/addons/tsl/display/BloomNode.js'
 
@@ -23,20 +24,20 @@ const props = withDefaults(defineProps<{
   }),
 })
 
-const { renderer, scene, camera } = useTresContext()
-const postProcessing = shallowRef<PostProcessing | null>(null)
+const { renderer, scene, camera } = useTres()
+const { render } = useLoop()
+const postProcessing = shallowRef<RenderPipeline | null>(null)
 
 watch(
-  [scene, camera.activeCamera],
+  [scene, camera],
   ([currentScene, currentCamera]) => {
     if (!currentScene || !currentCamera) return
     if (postProcessing.value) return
 
-    const webgpuRenderer = renderer.instance as unknown as WebGPURenderer
     const sceneObj = currentScene as unknown as Scene
     const cameraObj = currentCamera as unknown as Camera
 
-    const renderPipeline = new PostProcessing(webgpuRenderer)
+    const renderPipeline = new RenderPipeline(renderer)
     const scenePass = pass(sceneObj, cameraObj)
     const scenePassColor = scenePass.getTextureNode('output')
 
@@ -60,7 +61,7 @@ watch(
 
     let outputNode = scenePassColor.add(bloomPass)
 
-    const rendererToneMapping = webgpuRenderer.toneMapping
+    const rendererToneMapping = renderer.toneMapping
     if (rendererToneMapping !== NoToneMapping) {
       renderPipeline.outputColorTransform = false
       outputNode = renderOutput(outputNode, rendererToneMapping)
@@ -68,7 +69,7 @@ watch(
 
     renderPipeline.outputNode = outputNode
     postProcessing.value = renderPipeline
-    renderer.replaceRenderFunction((notifySuccess) => {
+    render((notifySuccess) => {
       renderPipeline.render()
       notifySuccess()
     })

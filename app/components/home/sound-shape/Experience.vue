@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { MeshBasicNodeMaterial, PostProcessing } from 'three/webgpu'
-import type { Renderer } from 'three/webgpu'
+import { MeshBasicNodeMaterial, RenderPipeline } from 'three/webgpu'
+import { useTres } from '@tresjs/core/webgpu'
 import { pass } from 'three/tsl'
 import { bloom } from 'three/examples/jsm/tsl/display/BloomNode.js'
 import { createSoundShapeNodes, MORPH_CYCLE, MORPH_STOPS } from './raymarch'
@@ -49,7 +49,7 @@ onBeforeRender(({ elapsed }) => {
 
 const isExperienceReady = useState('homeExperienceReady', () => false)
 
-let postProcessing: PostProcessing | null = null
+let postProcessing: RenderPipeline | null = null
 let bloomPass: ReturnType<typeof bloom> | null = null
 
 // TresJS renders the scene directly; swap in a bloom composite.
@@ -61,7 +61,7 @@ render((notifySuccess) => {
     const scenePass = pass(scene.value, activeCamera).getTextureNode('output')
     bloomPass = bloom(scenePass, BLOOM_STRENGTH, BLOOM_RADIUS, BLOOM_THRESHOLD)
 
-    postProcessing = new PostProcessing(renderer as Renderer)
+    postProcessing = new RenderPipeline(renderer)
     // the shader already applies its own gamma
     postProcessing.outputColorTransform = false
     postProcessing.outputNode = scenePass.add(bloomPass)
