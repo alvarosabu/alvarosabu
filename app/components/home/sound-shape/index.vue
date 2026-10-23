@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { LinearSRGBColorSpace, NoToneMapping } from 'three'
-import { WebGPURenderer } from 'three/webgpu'
-import type { TresRendererSetupContext } from '@tresjs/core'
+import { TresCanvas } from '@tresjs/core/webgpu'
 import type { DropdownMenuItem } from '@nuxt/ui'
 import { LOOP_DURATION } from './engines/kit'
 import { SOUND_SOURCES } from './sources'
@@ -15,18 +14,6 @@ const { isDark, colors } = useDarkMode()
 
 const sound = useSoundSource()
 provide(soundSourceKey, sound)
-
-function createWebGPURenderer(ctx: TresRendererSetupContext) {
-  const renderer = new WebGPURenderer({
-    canvas: toValue(ctx.canvas),
-    antialias: true,
-  })
-
-  // the shader does its own 1/2.2 gamma, so don't convert twice
-  renderer.outputColorSpace = LinearSRGBColorSpace
-
-  return renderer
-}
 
 const isExperienceReady = useState('homeExperienceReady', () => false)
 
@@ -62,10 +49,11 @@ const sourceItems = computed<DropdownMenuItem[]>(() =>
 </script>
 
 <template>
+  <!-- the shader does its own 1/2.2 gamma, so the linear output space stops a double conversion -->
   <TresCanvas
     window-size
     :dpr="PIXEL_RATIO_RANGE"
-    :renderer="createWebGPURenderer"
+    :output-color-space="LinearSRGBColorSpace"
     :clear-color="isDark ? colors.DARK : colors.LIGHT"
     :tone-mapping="NoToneMapping"
     class="transition-[filter,scale] duration-[900ms] ease-out motion-reduce:transition-none"
