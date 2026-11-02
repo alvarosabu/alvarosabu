@@ -7,6 +7,7 @@ import { createResolver } from '@nuxt/kit'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
+  compatibilityDate: '2025-07-15',
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://alvarosabu.dev',
     name: 'AlvaroSabu',

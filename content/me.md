@@ -1,4 +1,6 @@
 ---
+title: Hey, I'm Alvaro
+description: Creative Software Engineer
 socials:
   - platform: github
     url: https://github.com/alvarosabu
@@ -15,11 +17,16 @@ socials:
 sponsors:
   github: https://github.com/sponsors/alvarosabu
   tresjs: https://github.com/sponsors/Tresjs
+readingTime:
+  text: 1 min read
+  minutes: 0.715
+  time: 42900
+  words: 143
 ---
 
 # Hey, I'm Alvaro
 
-Creative Software Engineer
+Design Engineer · Product
 
 Working at :magic-link{label="Directus"}
 
@@ -29,7 +36,7 @@ Previously at :magic-link{label="Storyblok"}, :magic-link{label="Porsche Digital
 
 ---
 
-I believe the web should be a canvas for creativity. My goal is enabling developers to build the creative stuff they dream of but never thought was possible. 
+I believe the web should be a canvas for creativity. My goal is enabling developers to build the creative stuff they dream of but never thought was possible.
 
 ---
 
